@@ -1,0 +1,14 @@
+{
+  "kind": "simple",
+  "name": "PROVA - Panell Sandwich Huurre Facana 50 mm PIR Premium 5-5 Gris Antracita",
+  "desc": "Producte de prova per validar cataleg Holded. Familia: Facana. Gruix: 50 mm. Espuma: PIR Premium. Chapa: 5/5. Acabat: Gris Antracita.",
+  "price": 0,
+  "cost": 0,
+  "purchasePrice": 0,
+  "taxes": ["s_iva_21"],
+  "sku": "TEST-HUR-FAC-050-PIR-P-55-GA",
+  "hasStock": false,
+  "forSale": 1,
+  "forPurchase": 1,
+  "tags": ["prova-api", "cataleg-huurre", "panell-sandwich"]
+}

@@ -1,0 +1,9 @@
+{
+  "kind": "simple",
+  "name": "Servei demo",
+  "desc": "Servei creat des de la integracio API",
+  "price": 100,
+  "tax": 21,
+  "sku": "SERV-DEMO",
+  "tags": ["api", "demo"]
+}

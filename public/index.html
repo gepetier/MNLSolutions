@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MNLSavior</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-shell">
+      <div>
+        <p class="eyebrow">MNL internal tools</p>
+        <h1>MNLSavior</h1>
+      </div>
+      <div class="header-actions">
+        <label class="switch">
+          <input id="developerMode" type="checkbox" />
+          Mode desenvolupador
+        </label>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Vistes principals">
+      <button class="tab active" type="button" data-tab="home">Hub</button>
+      <button class="tab" type="button" data-tab="catalog"><span class="tab-symbol catalog-symbol" aria-hidden="true"></span>Cataleg</button>
+      <button class="tab" type="button" data-tab="edit">Edicio</button>
+      <button class="tab" type="button" data-tab="sync">Sincronitzacio Holded</button>
+      <button class="tab" type="button" data-tab="budget">Pressupostador</button>
+    </nav>
+
+    <main>
+      <section id="homeTab" class="tab-panel active">
+        <section class="home-panel">
+          <div class="home-copy">
+            <p class="eyebrow">Hub MNL</p>
+            <h2>Eines internes per treballar mes rapid amb Holded</h2>
+            <p>Pricing, pressupostos i operativa comercial en un sol lloc.</p>
+          </div>
+
+          <div class="tool-grid" aria-label="Eines MNLSavior">
+            <button class="tool-card active-tool" type="button" data-open-tab="catalog">
+              <span class="tool-icon"><span class="catalog-symbol large" aria-hidden="true"></span></span>
+              <span>
+                <strong>Cataleg</strong>
+                <small>Pricing i sincronitzacio amb Holded</small>
+              </span>
+            </button>
+            <button class="tool-card" type="button" data-open-tab="budget">
+              <span class="tool-icon quote-mark">€</span>
+              <span>
+                <strong>Pressupostador</strong>
+                <small>Crear o modificar pressupostos</small>
+              </span>
+            </button>
+          </div>
+        </section>
+      </section>
+
+      <section id="catalogTab" class="tab-panel">
+        <div class="catalog-layout">
+          <section class="panel quote-panel">
+            <div class="section-title">
+              <div>
+                <h2>Configurador de linia</h2>
+                <p>Selecciona el panell i calcula el preu final abans de pressupostar.</p>
+              </div>
+              <span id="status">Carregant...</span>
+            </div>
+
+            <form id="quoteForm" class="form-grid">
+              <label>
+                Panell
+                <select name="productCode"></select>
+              </label>
+              <label>
+                Nucli
+                <select name="coreCode"></select>
+              </label>
+              <label>
+                Gruix
+                <select name="thicknessMm"></select>
+              </label>
+              <label>
+                Chapa
+                <select name="sheetCode"></select>
+              </label>
+              <label class="span-2">
+                Recobriment especial
+                <select name="coatingCode"></select>
+              </label>
+              <label>
+                m2
+                <input name="quantity" type="number" min="0.01" step="0.01" value="150" />
+              </label>
+            </form>
+
+            <div class="extras-box">
+              <div class="section-title compact">
+                <h3>Extres</h3>
+                <span>quantitat x preu unitari</span>
+              </div>
+              <div id="extrasPicker" class="extras-picker"></div>
+            </div>
+
+            <div class="quote-result">
+              <div>
+                <span>Preu m2</span>
+                <strong id="unitPrice">-</strong>
+              </div>
+              <div>
+                <span>Panell</span>
+                <strong id="panelSubtotal">-</strong>
+              </div>
+              <div>
+                <span>Extres</span>
+                <strong id="extrasSubtotal">-</strong>
+              </div>
+              <div class="total-cell">
+                <span>Total</span>
+                <strong id="subtotal">-</strong>
+              </div>
+            </div>
+
+            <pre id="quotePreview" class="dev-only"></pre>
+          </section>
+
+          <section class="panel catalog-panel">
+            <div class="section-title">
+              <div>
+                <h2>Visualitzacio del cataleg</h2>
+                <p>Preus base per panell, nucli i gruix. Les variants es calculen a la dreta.</p>
+              </div>
+              <span id="baseCount">0 bases</span>
+            </div>
+
+            <div class="filters">
+              <label>
+                Filtrar panell
+                <select id="catalogProductFilter"></select>
+              </label>
+              <label>
+                Cercar SKU o nom
+                <input id="catalogSearch" type="search" placeholder="HI-CT 40 PIR" />
+              </label>
+            </div>
+
+            <div id="catalogGroups" class="catalog-groups"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="editTab" class="tab-panel">
+        <section class="panel">
+          <div class="section-title">
+            <div>
+              <h2>Edicio controlada</h2>
+            </div>
+            <button id="openCreateFlow" type="button">Crear element</button>
+          </div>
+          <div class="editor-grid">
+            <div>
+              <h3>Panells, nuclis i gruixos</h3>
+              <div id="productEditor"></div>
+            </div>
+            <div>
+              <h3>Regles i extres</h3>
+              <div id="modifierEditor"></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="syncTab" class="tab-panel">
+        <section class="panel">
+          <div class="section-title">
+            <div>
+              <h2>Sincronitzacio amb Holded</h2>
+              <p>Preview de la nova versio de preus i diferencies amb el cataleg actual de Holded.</p>
+            </div>
+            <div class="sync-actions">
+              <div class="segmented" role="tablist" aria-label="Mode sincronitzacio">
+                <button class="segment active" type="button" data-sync-mode="base">Base</button>
+                <button class="segment" type="button" data-sync-mode="combinations">Combinacions</button>
+              </div>
+              <button id="refreshSync" type="button">Comparar amb Holded</button>
+            </div>
+          </div>
+
+          <div id="baseSyncSummary" class="sync-summary">
+            <div>
+              <span>Versio nova</span>
+              <strong id="syncVersion">-</strong>
+            </div>
+            <div>
+              <span>Crear</span>
+              <strong id="syncCreate">0</strong>
+            </div>
+            <div>
+              <span>Modificar</span>
+              <strong id="syncUpdate">0</strong>
+            </div>
+            <div>
+              <span>Sense canvis</span>
+              <strong id="syncUnchanged">0</strong>
+            </div>
+            <div>
+              <span>Nomes Holded</span>
+              <strong id="syncHoldedOnly">0</strong>
+            </div>
+          </div>
+
+          <div class="sync-note">
+            Primer genera el cataleg local. Despres compararem aquests SKU amb Holded i aplicarem canvis de forma controlada.
+          </div>
+
+          <div class="sync-step">
+            <div class="sync-step-head">
+              <div>
+                <span>Pas 1</span>
+                <h3>Generar cataleg local</h3>
+                <p>Construeix tots els articles finals des de panell, nucli, gruix, chapa i recobriment.</p>
+              </div>
+              <div class="sync-actions">
+                <button id="generateLocalCatalog" type="button">Generar cataleg local</button>
+                <button id="exportLocalCatalog" class="ghost" type="button" disabled>Exportar JSON</button>
+              </div>
+            </div>
+
+            <div class="local-catalog-summary">
+              <div>
+                <span>Estat</span>
+                <strong id="localCatalogStatus">Pendent</strong>
+              </div>
+              <div>
+                <span>Articles finals</span>
+                <strong id="localCatalogTotal">0</strong>
+              </div>
+              <div>
+                <span>Bases</span>
+                <strong id="localCatalogBases">0</strong>
+              </div>
+              <div>
+                <span>Variants</span>
+                <strong id="localCatalogVariants">0</strong>
+              </div>
+            </div>
+            <div id="localCatalogBreakdown" class="local-catalog-breakdown"></div>
+          </div>
+
+          <div id="combinationPreview" class="combination-preview" hidden>
+            <div class="section-title">
+              <div>
+                <h3>Preview de combinacions</h3>
+                <p>Articles finals que es generaran excloent extres operatius.</p>
+              </div>
+              <span id="combinationCount">0 articles</span>
+            </div>
+            <div class="filters sync-filters">
+              <label>
+                Panell
+                <select id="comboProductFilter"></select>
+              </label>
+              <label>
+                Nucli
+                <select id="comboCoreFilter"></select>
+              </label>
+              <label>
+                Chapa
+                <select id="comboSheetFilter"></select>
+              </label>
+              <label>
+                Recobriment
+                <select id="comboCoatingFilter"></select>
+              </label>
+              <label class="span-2">
+                Cercar SKU o nom
+                <input id="comboSearch" type="search" placeholder="HI-CT-060-PIR-56-POL-2C" />
+              </label>
+            </div>
+            <div id="combinationTable" class="sync-table"></div>
+          </div>
+
+          <div id="syncTable" class="sync-table"></div>
+        </section>
+      </section>
+
+      <section id="budgetTab" class="tab-panel">
+        <div class="budget-layout">
+          <section class="panel">
+            <div class="section-title">
+              <div>
+                <h2>Pressupostador</h2>
+                <p>Construeix linies amb el cataleg actual i prepara el document per Holded.</p>
+              </div>
+              <span id="budgetStatus">Esborrany local</span>
+            </div>
+
+            <div class="budget-load">
+              <label>
+                Pressupost Holded
+                <input id="holdedQuoteSearch" type="search" placeholder="Numero o ID de Holded" />
+              </label>
+              <button id="loadHoldedQuote" class="ghost" type="button">Carregar</button>
+              <button id="newBudget" type="button">Nou</button>
+            </div>
+
+            <form id="budgetLineForm" class="form-grid budget-line-form">
+              <label>
+                Panell
+                <select name="productCode"></select>
+              </label>
+              <label>
+                Nucli
+                <select name="coreCode"></select>
+              </label>
+              <label>
+                Gruix
+                <select name="thicknessMm"></select>
+              </label>
+              <label>
+                Chapa
+                <select name="sheetCode"></select>
+              </label>
+              <label>
+                Recobriment
+                <select name="coatingCode"></select>
+              </label>
+              <label>
+                m2
+                <input name="quantity" type="number" min="0.01" step="0.01" value="150" />
+              </label>
+            </form>
+
+            <div class="budget-preview">
+              <div>
+                <span>Preu linia</span>
+                <strong id="budgetLinePrice">-</strong>
+              </div>
+              <button id="addBudgetLine" type="button">Afegir linia</button>
+            </div>
+          </section>
+
+          <section class="panel budget-document">
+            <div class="section-title">
+              <div>
+                <h2>Esborrany de pressupost</h2>
+                <p>Linies preparades per generar comanda de proveidor o factura de client.</p>
+              </div>
+              <strong id="budgetTotal">0,00 €</strong>
+            </div>
+
+            <div id="budgetRows" class="budget-rows"></div>
+
+            <div class="budget-actions">
+              <button class="ghost" type="button" disabled>Comanda proveidor</button>
+              <button class="ghost" type="button" disabled>Factura client</button>
+              <button type="button" disabled>Enviar a Holded</button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="createDialog" class="modal">
+      <form id="createForm" method="dialog">
+        <div class="modal-head">
+          <div>
+            <h2>Crear element</h2>
+            <p>Construeix el cataleg pas a pas.</p>
+          </div>
+          <button class="ghost" value="cancel" type="submit">Tancar</button>
+        </div>
+
+        <div class="form-grid">
+          <label class="span-2">
+            Nom
+            <input name="name" placeholder="Panell TZ-CR PIR 30 mm" required />
+          </label>
+          <label class="span-2">
+            Que vols crear?
+            <select name="kind">
+              <option value="thickness">Article simple</option>
+              <option value="product">Familia de panell</option>
+              <option value="core">Tipus / nucli</option>
+            </select>
+          </label>
+          <label data-create-field="product">
+            Familia
+            <select name="productCode"></select>
+          </label>
+          <label data-create-field="core">
+            Tipus / nucli
+            <select name="coreCode"></select>
+          </label>
+          <label data-create-field="code">
+            Codi
+            <input name="code" placeholder="TZ-CR" />
+          </label>
+          <label data-create-field="coreName">
+            Nom tipus / nucli
+            <input name="coreName" placeholder="PIR" />
+          </label>
+          <label data-create-field="thickness">
+            Gruix
+            <div class="unit-input">
+              <input name="thicknessMm" type="number" min="1" step="1" placeholder="30" />
+              <span>mm</span>
+            </div>
+          </label>
+          <label data-create-field="price">
+            Preu base
+            <div class="unit-input">
+              <input name="basePrice" type="number" min="0" step="0.01" placeholder="15.45" />
+              <span>€/m2</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="ghost" value="cancel" type="submit">Cancelar</button>
+          <button id="createSubmit" value="default" type="button">Crear</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

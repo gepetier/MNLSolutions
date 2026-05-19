@@ -1,0 +1,13 @@
+{
+  "productCode": "HI-CT",
+  "coreCode": "PIR",
+  "thicknessMm": 40,
+  "sheetCode": "55",
+  "coatingCode": "HDS",
+  "quantity": 150,
+  "extras": {
+    "SOLAPE-FILM": 4,
+    "TAPAJUNTAS": 12,
+    "PANEL-MENOR-2M": 0
+  }
+}

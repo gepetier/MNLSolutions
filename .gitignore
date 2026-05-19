@@ -1,0 +1,9 @@
+.env
+pass.env
+node_modules/
+dist/
+release/
+tmp/
+logs/
+*.log
+audio_usb_recover.*

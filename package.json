@@ -1,0 +1,56 @@
+{
+  "name": "mnlsavior",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Automatitzacions petites per connectar una empresa amb l'API de Holded.",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "check": "node --check src/holdedClient.js && node --check src/cli.js && node --check src/catalogEngine.js && node --check src/catalogCombinations.js && node --check src/catalogStore.js && node --check src/catalogCli.js && node --check src/server.js",
+    "dev": "node src/server.js",
+    "electron": "electron .",
+    "electron:build": "electron-builder --win nsis portable",
+    "holded": "node src/cli.js",
+    "holded:ping": "node src/cli.js ping",
+    "holded:contacts": "node src/cli.js contacts:list",
+    "holded:products": "node src/cli.js products:list",
+    "holded:invoices": "node src/cli.js documents:list invoice",
+    "prices:preview": "node src/updatePrices.js --dry-run data/prices.example.csv",
+    "prices:apply": "node src/updatePrices.js data/prices.example.csv",
+    "catalog:base": "node src/catalogCli.js base:list",
+    "catalog:quote": "node src/catalogCli.js quote examples/quote.sample.json",
+    "catalog:combinations": "node src/catalogCli.js combinations:count"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.panelyacero.configuradorhuurre",
+  "productName": "MNLSavior",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "public/**/*",
+      "data/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Client Demo SL",
+  "code": "B00000000",
+  "email": "administracio@example.com",
+  "phone": "930000000",
+  "type": "client",
+  "taxOperation": "general",
+  "billAddress": {
+    "address": "Carrer Exemple 1",
+    "city": "Barcelona",
+    "postalCode": "08001",
+    "province": "Barcelona",
+    "country": "ES"
+  },
+  "tags": ["api", "demo"]
+}

@@ -1,0 +1,342 @@
+{
+  "currency": "EUR",
+  "taxKey": "s_iva_21",
+  "unit": "m2",
+  "products": [
+    {
+      "code": "HI-CT",
+      "name": "Panell HI-CT",
+      "cores": [
+        {
+          "code": "PIR",
+          "name": "PIR",
+          "thicknesses": [
+            {
+              "mm": 30,
+              "basePrice": 17.15
+            },
+            {
+              "mm": 40,
+              "basePrice": 18.45
+            },
+            {
+              "mm": 50,
+              "basePrice": 19.8
+            },
+            {
+              "mm": 60,
+              "basePrice": 21.3
+            },
+            {
+              "mm": 80,
+              "basePrice": 24.8
+            },
+            {
+              "mm": 100,
+              "basePrice": 28.3
+            },
+            {
+              "mm": 120,
+              "basePrice": 32.05
+            }
+          ]
+        },
+        {
+          "code": "PIRM",
+          "name": "PIRM",
+          "thicknesses": [
+            {
+              "mm": 30,
+              "basePrice": 18.44
+            },
+            {
+              "mm": 40,
+              "basePrice": 19.83
+            },
+            {
+              "mm": 50,
+              "basePrice": 21.29
+            },
+            {
+              "mm": 60,
+              "basePrice": 22.9
+            },
+            {
+              "mm": 80,
+              "basePrice": 26.66
+            },
+            {
+              "mm": 120,
+              "basePrice": 34.45
+            }
+          ]
+        },
+        {
+          "code": "QUADCORE",
+          "name": "QuadCore",
+          "thicknesses": [
+            {
+              "mm": 30,
+              "basePrice": 19.29
+            },
+            {
+              "mm": 40,
+              "basePrice": 20.76
+            },
+            {
+              "mm": 50,
+              "basePrice": 22.28
+            },
+            {
+              "mm": 60,
+              "basePrice": 23.96
+            },
+            {
+              "mm": 80,
+              "basePrice": 27.9
+            },
+            {
+              "mm": 120,
+              "basePrice": 36.06
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "TZ-CR",
+      "name": "Panell TZ-CR",
+      "cores": [
+        {
+          "code": "PIR",
+          "name": "PIR",
+          "thicknesses": [
+            {
+              "mm": 30,
+              "basePrice": 15.45
+            },
+            {
+              "mm": 40,
+              "basePrice": 16.75
+            },
+            {
+              "mm": 50,
+              "basePrice": 18.1
+            },
+            {
+              "mm": 60,
+              "basePrice": 19.6
+            },
+            {
+              "mm": 80,
+              "basePrice": 23.1
+            },
+            {
+              "mm": 100,
+              "basePrice": 26.6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "HI-XT",
+      "name": "Panell HI-XT",
+      "cores": [
+        {
+          "code": "PIR",
+          "name": "PIR",
+          "thicknesses": [
+            {
+              "mm": 30,
+              "basePrice": 16.35
+            },
+            {
+              "mm": 40,
+              "basePrice": 17.65
+            },
+            {
+              "mm": 50,
+              "basePrice": 19
+            },
+            {
+              "mm": 60,
+              "basePrice": 20.5
+            },
+            {
+              "mm": 80,
+              "basePrice": 24
+            },
+            {
+              "mm": 100,
+              "basePrice": 27.5
+            },
+            {
+              "mm": 120,
+              "basePrice": 31.25
+            }
+          ]
+        },
+        {
+          "code": "PIRM",
+          "name": "PIRM",
+          "thicknesses": [
+            {
+              "mm": 30,
+              "basePrice": 19.69
+            },
+            {
+              "mm": 40,
+              "basePrice": 21.15
+            },
+            {
+              "mm": 50,
+              "basePrice": 22.67
+            },
+            {
+              "mm": 60,
+              "basePrice": 24.36
+            },
+            {
+              "mm": 80,
+              "basePrice": 28.29
+            },
+            {
+              "mm": 100,
+              "basePrice": 32.23
+            },
+            {
+              "mm": 120,
+              "basePrice": 36.45
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sheetGauge": {
+    "baseGauge": 5,
+    "discountPerSideTo4": 0.75,
+    "increasePerSideTo6": 1.25,
+    "options": [
+      {
+        "code": "55",
+        "name": "5/5",
+        "outer": 5,
+        "inner": 5,
+        "default": true
+      },
+      {
+        "code": "45",
+        "name": "4/5",
+        "outer": 4,
+        "inner": 5
+      },
+      {
+        "code": "44",
+        "name": "4/4",
+        "outer": 4,
+        "inner": 4
+      },
+      {
+        "code": "56",
+        "name": "5/6",
+        "outer": 5,
+        "inner": 6
+      },
+      {
+        "code": "66",
+        "name": "6/6",
+        "outer": 6,
+        "inner": 6
+      }
+    ]
+  },
+  "coatings": [
+    {
+      "code": "NONE",
+      "name": "Sense recarrec",
+      "priceDelta": 0,
+      "default": true
+    },
+    {
+      "code": "POL-2C",
+      "name": "Poliester 2 caras",
+      "priceDelta": 1.1
+    },
+    {
+      "code": "HDS",
+      "name": "Granite HDS",
+      "priceDelta": 1.85
+    },
+    {
+      "code": "HDS-2C",
+      "name": "Granite HDS 2 caras",
+      "priceDelta": 3.1
+    },
+    {
+      "code": "HDX",
+      "name": "Granite HDX",
+      "priceDelta": 2.5
+    },
+    {
+      "code": "HDX-2C",
+      "name": "Granite HDX 2 caras",
+      "priceDelta": 4.25
+    },
+    {
+      "code": "PVDF35",
+      "name": "PVDF 35 micras",
+      "priceDelta": 2.95
+    },
+    {
+      "code": "PVDF35-2C",
+      "name": "PVDF 35 micras 2 caras",
+      "priceDelta": 4.7
+    },
+    {
+      "code": "FARM",
+      "name": "Granite Farm",
+      "priceDelta": 2.75
+    },
+    {
+      "code": "PET",
+      "name": "Stetic Clean (PET)",
+      "priceDelta": 3.5
+    },
+    {
+      "code": "ROBLE",
+      "name": "Imitacion madera Roble Claro",
+      "priceDelta": 3.5
+    },
+    {
+      "code": "CORTEN",
+      "name": "Imitacion Corten",
+      "priceDelta": 2.75
+    }
+  ],
+  "extras": [
+    {
+      "code": "SOLAPE-FILM",
+      "name": "Solape panel con film",
+      "unit": "ud",
+      "price": 1.2
+    },
+    {
+      "code": "TAPAJUNTAS",
+      "name": "Tapajuntas adicional",
+      "unit": "m.l",
+      "price": 1.35
+    },
+    {
+      "code": "PANEL-MENOR-2M",
+      "name": "Paneles inferiores a 2m",
+      "unit": "ud",
+      "price": 9.25
+    }
+  ],
+  "rounding": {
+    "unitPriceDecimals": 2,
+    "lineDecimals": 2
+  }
+}

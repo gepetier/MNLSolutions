@@ -1,0 +1,14 @@
+{
+  "kind": "simple",
+  "name": "PROVA - Panell Sandwich Huurre Frigorific 80 mm Llana Mineral RF 6-6 Blanc Pirineu",
+  "desc": "Producte de prova per validar cataleg Holded. Familia: Frigorific. Gruix: 80 mm. Espuma: Llana mineral / RF. Chapa: 6/6. Acabat: Blanc Pirineu.",
+  "price": 0,
+  "cost": 0,
+  "purchasePrice": 0,
+  "taxes": ["s_iva_21"],
+  "sku": "TEST-HUR-FRI-080-LM-RF-66-BP",
+  "hasStock": false,
+  "forSale": 1,
+  "forPurchase": 1,
+  "tags": ["prova-api", "cataleg-huurre", "panell-sandwich"]
+}
