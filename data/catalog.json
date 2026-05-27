@@ -101,7 +101,8 @@
             }
           ]
         }
-      ]
+      ],
+      "application": "coberta"
     },
     {
       "code": "TZ-CR",
@@ -137,7 +138,8 @@
             }
           ]
         }
-      ]
+      ],
+      "application": "coberta"
     },
     {
       "code": "HI-XT",
@@ -208,6 +210,141 @@
             {
               "mm": 120,
               "basePrice": 36.45
+            }
+          ]
+        }
+      ],
+      "application": "coberta"
+    },
+    {
+      "code": "HI-ST",
+      "name": "Panell HI-ST",
+      "application": "facana",
+      "cores": [
+        {
+          "code": "PIR",
+          "name": "PIR",
+          "thicknesses": [
+            {
+              "mm": 35,
+              "basePrice": 19.55
+            },
+            {
+              "mm": 40,
+              "basePrice": 20.2
+            },
+            {
+              "mm": 50,
+              "basePrice": 21.55
+            },
+            {
+              "mm": 60,
+              "basePrice": 23.05
+            },
+            {
+              "mm": 80,
+              "basePrice": 26.55
+            },
+            {
+              "mm": 100,
+              "basePrice": 30.05
+            }
+          ]
+        },
+        {
+          "code": "PIRM",
+          "name": "PIRM",
+          "thicknesses": [
+            {
+              "mm": 35,
+              "basePrice": 20.92
+            },
+            {
+              "mm": 40,
+              "basePrice": 21.61
+            },
+            {
+              "mm": 50,
+              "basePrice": 23.06
+            },
+            {
+              "mm": 60,
+              "basePrice": 24.66
+            },
+            {
+              "mm": 80,
+              "basePrice": 28.41
+            },
+            {
+              "mm": 100,
+              "basePrice": 32.15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "HI-STL",
+      "name": "Panell HI-STL",
+      "application": "facana",
+      "cores": [
+        {
+          "code": "PIR",
+          "name": "PIR",
+          "thicknesses": [
+            {
+              "mm": 35,
+              "basePrice": 22.25
+            },
+            {
+              "mm": 40,
+              "basePrice": 22.9
+            },
+            {
+              "mm": 50,
+              "basePrice": 24.25
+            },
+            {
+              "mm": 60,
+              "basePrice": 25.75
+            },
+            {
+              "mm": 80,
+              "basePrice": 29.25
+            },
+            {
+              "mm": 100,
+              "basePrice": 32.75
+            }
+          ]
+        },
+        {
+          "code": "PIRM",
+          "name": "PIRM",
+          "thicknesses": [
+            {
+              "mm": 35,
+              "basePrice": 23.81
+            },
+            {
+              "mm": 40,
+              "basePrice": 24.5
+            },
+            {
+              "mm": 50,
+              "basePrice": 25.95
+            },
+            {
+              "mm": 60,
+              "basePrice": 27.55
+            },
+            {
+              "mm": 80,
+              "basePrice": 31.3
+            },
+            {
+              "mm": 100,
+              "basePrice": 35.04
             }
           ]
         }

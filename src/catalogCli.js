@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { listCatalogCombinations, createHoldedCombinationPayload } from "./catalogCombinations.js";
-import { calculateQuoteLine, createHoldedProductPayload, listBaseProducts } from "./catalogEngine.js";
+import { listCatalogCombinations, createOdooCombinationPayload } from "./catalogCombinations.js";
+import { calculateQuoteLine, createOdooProductTemplatePayload, listBaseProducts } from "./catalogEngine.js";
 import { readCatalog } from "./catalogStore.js";
 
 const [command, ...args] = process.argv.slice(2);
@@ -14,10 +14,10 @@ try {
       print(listBaseProducts(catalog));
       break;
     case "base:payloads":
-      print(listBaseProducts(catalog).map((product) => createHoldedProductPayload(catalog, product)));
+      print(listBaseProducts(catalog).map((product) => createOdooProductTemplatePayload(catalog, product)));
       break;
     case "quote":
-      print(calculateQuoteLine(catalog, readJson(args[0])));
+      print(calculateQuoteLine(catalog, normalizeQuoteInput(readJson(args[0]))));
       break;
     case "combinations:count": {
       const combinations = listCatalogCombinations(catalog);
@@ -35,7 +35,7 @@ try {
     case "combinations:payloads":
       print(
         filterCombinations(listCatalogCombinations(catalog), parseQueryArgs(args)).map((combination) =>
-          createHoldedCombinationPayload(catalog, combination),
+          createOdooCombinationPayload(catalog, combination),
         ),
       );
       break;
@@ -53,6 +53,10 @@ function readJson(path) {
     throw new Error("Falta el fitxer JSON de configuracio.");
   }
   return JSON.parse(readFileSync(resolve(path), "utf8"));
+}
+
+function normalizeQuoteInput(value) {
+  return value.line || value;
 }
 
 function print(value) {

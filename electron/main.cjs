@@ -4,15 +4,12 @@ const { app, BrowserWindow, dialog, shell } = require("electron");
 let serverHandle;
 let mainWindow;
 
-app.setName("MNLSavior");
+app.setName("MNL Odoo Sync");
 
 async function createWindow() {
   const userDataPath = app.getPath("userData");
-  const legacyUserDataPath = path.join(app.getPath("appData"), "Configurador Huurre");
-  process.env.HOLDED_CONFIG_DIR = userDataPath;
-  process.env.HOLDED_LEGACY_CONFIG_DIR = legacyUserDataPath;
+  process.env.ODOO_CONFIG_DIR = userDataPath;
   process.env.HUURRE_DATA_DIR = userDataPath;
-  process.env.HUURRE_LEGACY_DATA_DIR = legacyUserDataPath;
   process.env.HUURRE_APP_ROOT = path.join(__dirname, "..");
 
   const { startServer } = await import("../src/server.js");
@@ -23,7 +20,7 @@ async function createWindow() {
     height: 920,
     minWidth: 1180,
     minHeight: 760,
-    title: "MNLSavior",
+    title: "MNL Odoo Sync",
     backgroundColor: "#08100f",
     autoHideMenuBar: true,
     webPreferences: {
@@ -43,7 +40,7 @@ async function createWindow() {
 
 app.whenReady().then(createWindow).catch((error) => {
   console.error(error);
-  dialog.showErrorBox("MNLSavior no ha pogut arrencar", error.stack || error.message);
+  dialog.showErrorBox("MNL Odoo Sync no ha pogut arrencar", error.stack || error.message);
   app.quit();
 });
 

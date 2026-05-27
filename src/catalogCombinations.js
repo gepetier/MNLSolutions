@@ -18,26 +18,15 @@ export function listCatalogCombinations(catalog) {
   );
 }
 
-export function createHoldedCombinationPayload(catalog, combination) {
+export function createOdooCombinationPayload(catalog, combination) {
   return {
-    kind: "simple",
     name: combination.name,
-    desc: combination.description,
-    price: combination.unitPrice,
-    cost: combination.unitPrice,
-    purchasePrice: combination.unitPrice,
-    taxes: [catalog.taxKey],
-    sku: combination.sku,
-    hasStock: false,
-    tags: [
-      "huurre",
-      "panell",
-      "cataleg-combinat",
-      combination.productCode,
-      combination.coreCode,
-      `chapa-${combination.sheetCode}`,
-      `recobriment-${combination.coatingCode}`,
-    ],
+    default_code: combination.sku,
+    list_price: combination.unitPrice,
+    standard_price: combination.unitPrice,
+    sale_ok: true,
+    purchase_ok: false,
+    description_sale: combination.description,
   };
 }
 
@@ -59,14 +48,18 @@ function buildCombination(catalog, { product, core, thickness, sheet, coating })
       `${product.name} ${thickness.mm} ${core.name}`,
       `Chapa: ${sheet.name}`,
       `Recobriment: ${coating.name}`,
+      product.application ? `Familia: ${product.application}` : null,
       `Preu base: ${formatNumber(thickness.basePrice)} EUR/m2`,
       `Ajust chapa: ${formatSigned(sheetDelta)} EUR/m2`,
       `Ajust recobriment: ${formatSigned(coatingDelta)} EUR/m2`,
-    ].join("\n"),
+    ]
+      .filter(Boolean)
+      .join("\n"),
     unit: catalog.unit,
     taxKey: catalog.taxKey,
     productCode: product.code,
     productName: product.name,
+    application: product.application || null,
     coreCode: core.code,
     coreName: core.name,
     thicknessMm: Number(thickness.mm),

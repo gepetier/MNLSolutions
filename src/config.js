@@ -9,7 +9,7 @@ function loadDotEnv(path = ".env") {
 
   const content = readFileSync(absolutePath, "utf8").trim();
   if (content && !content.includes("=")) {
-    process.env.HOLDED_API_KEY = process.env.HOLDED_API_KEY || content;
+    process.env.ODOO_API_KEY = process.env.ODOO_API_KEY || content;
     return;
   }
 
@@ -42,24 +42,34 @@ function loadDotEnv(path = ".env") {
 
 loadDotEnv();
 loadDotEnv("pass.env");
-if (process.env.HOLDED_CONFIG_DIR) {
-  loadDotEnv(join(process.env.HOLDED_CONFIG_DIR, ".env"));
-  loadDotEnv(join(process.env.HOLDED_CONFIG_DIR, "pass.env"));
+if (process.env.ODOO_CONFIG_DIR) {
+  loadDotEnv(join(process.env.ODOO_CONFIG_DIR, ".env"));
+  loadDotEnv(join(process.env.ODOO_CONFIG_DIR, "pass.env"));
 }
-if (process.env.HOLDED_LEGACY_CONFIG_DIR) {
-  loadDotEnv(join(process.env.HOLDED_LEGACY_CONFIG_DIR, ".env"));
-  loadDotEnv(join(process.env.HOLDED_LEGACY_CONFIG_DIR, "pass.env"));
+if (process.env.ODOO_LEGACY_CONFIG_DIR) {
+  loadDotEnv(join(process.env.ODOO_LEGACY_CONFIG_DIR, ".env"));
+  loadDotEnv(join(process.env.ODOO_LEGACY_CONFIG_DIR, "pass.env"));
 }
 
 export const config = {
-  apiKey: process.env.HOLDED_API_KEY,
-  baseUrl: process.env.HOLDED_BASE_URL || "https://api.holded.com/api",
+  url: process.env.ODOO_URL,
+  database: process.env.ODOO_DB,
+  username: process.env.ODOO_USERNAME,
+  apiKey: process.env.ODOO_API_KEY || process.env.ODOO_PASSWORD,
+  m2UomName: process.env.ODOO_M2_UOM || "m2",
+  customerTaxId: process.env.ODOO_CUSTOMER_TAX_ID ? Number(process.env.ODOO_CUSTOMER_TAX_ID) : null,
 };
 
 export function requireConfig() {
-  if (!config.apiKey || config.apiKey === "posa_la_teva_api_key_aqui") {
+  const missing = [];
+  if (!config.url) missing.push("ODOO_URL");
+  if (!config.database) missing.push("ODOO_DB");
+  if (!config.username) missing.push("ODOO_USERNAME");
+  if (!config.apiKey || config.apiKey === "posa_la_teva_api_key_aqui") missing.push("ODOO_API_KEY");
+
+  if (missing.length) {
     throw new Error(
-      "Falta HOLDED_API_KEY. Copia .env.example a .env i posa-hi la teva API Key de Holded.",
+      `Falta configuracio Odoo: ${missing.join(", ")}. Copia .env.example a .env i posa-hi les credencials d'Odoo.`,
     );
   }
 

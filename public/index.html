@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MNLSavior</title>
+    <title>MNL Odoo Sync</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="app-shell">
       <div>
         <p class="eyebrow">MNL internal tools</p>
-        <h1>MNLSavior</h1>
+        <h1>MNL Odoo Sync</h1>
       </div>
       <div class="header-actions">
         <label class="switch">
@@ -24,7 +24,7 @@
       <button class="tab active" type="button" data-tab="home">Hub</button>
       <button class="tab" type="button" data-tab="catalog"><span class="tab-symbol catalog-symbol" aria-hidden="true"></span>Cataleg</button>
       <button class="tab" type="button" data-tab="edit">Edicio</button>
-      <button class="tab" type="button" data-tab="sync">Sincronitzacio Holded</button>
+      <button class="tab" type="button" data-tab="sync">Sincronitzacio Odoo</button>
       <button class="tab" type="button" data-tab="budget">Pressupostador</button>
     </nav>
 
@@ -33,16 +33,16 @@
         <section class="home-panel">
           <div class="home-copy">
             <p class="eyebrow">Hub MNL</p>
-            <h2>Eines internes per treballar mes rapid amb Holded</h2>
+            <h2>Cataleg i pressupostos connectats amb Odoo</h2>
             <p>Pricing, pressupostos i operativa comercial en un sol lloc.</p>
           </div>
 
-          <div class="tool-grid" aria-label="Eines MNLSavior">
+          <div class="tool-grid" aria-label="Eines MNL Odoo Sync">
             <button class="tool-card active-tool" type="button" data-open-tab="catalog">
               <span class="tool-icon"><span class="catalog-symbol large" aria-hidden="true"></span></span>
               <span>
                 <strong>Cataleg</strong>
-                <small>Pricing i sincronitzacio amb Holded</small>
+                <small>Pricing i sincronitzacio amb Odoo</small>
               </span>
             </button>
             <button class="tool-card" type="button" data-open-tab="budget">
@@ -89,8 +89,16 @@
                 <select name="coatingCode"></select>
               </label>
               <label>
-                m2
-                <input name="quantity" type="number" min="0.01" step="0.01" value="150" />
+                Amplada
+                <input name="width" type="number" min="0.01" step="0.01" value="1.15" />
+              </label>
+              <label>
+                Llargada
+                <input name="length" type="number" min="0.01" step="0.01" value="6" />
+              </label>
+              <label>
+                Quantitat
+                <input name="panelsQuantity" type="number" min="1" step="1" value="22" />
               </label>
             </form>
 
@@ -174,15 +182,15 @@
         <section class="panel">
           <div class="section-title">
             <div>
-              <h2>Sincronitzacio amb Holded</h2>
-              <p>Preview de la nova versio de preus i diferencies amb el cataleg actual de Holded.</p>
+              <h2>Sincronitzacio amb Odoo</h2>
+              <p>Preview de la nova versio de preus i diferencies amb el cataleg actual d'Odoo.</p>
             </div>
             <div class="sync-actions">
               <div class="segmented" role="tablist" aria-label="Mode sincronitzacio">
                 <button class="segment active" type="button" data-sync-mode="base">Base</button>
                 <button class="segment" type="button" data-sync-mode="combinations">Combinacions</button>
               </div>
-              <button id="refreshSync" type="button">Comparar amb Holded</button>
+              <button id="refreshSync" type="button">Comparar amb Odoo</button>
             </div>
           </div>
 
@@ -204,13 +212,13 @@
               <strong id="syncUnchanged">0</strong>
             </div>
             <div>
-              <span>Nomes Holded</span>
-              <strong id="syncHoldedOnly">0</strong>
+              <span>Nomes Odoo</span>
+              <strong id="syncOdooOnly">0</strong>
             </div>
           </div>
 
           <div class="sync-note">
-            Primer genera el cataleg local. Despres compararem aquests SKU amb Holded i aplicarem canvis de forma controlada.
+            Primer genera el cataleg local. Despres compararem aquests SKU amb Odoo i aplicarem canvis de forma controlada.
           </div>
 
           <div class="sync-step">
@@ -290,17 +298,17 @@
             <div class="section-title">
               <div>
                 <h2>Pressupostador</h2>
-                <p>Construeix linies amb el cataleg actual i prepara el document per Holded.</p>
+                <p>Construeix linies amb el cataleg actual i prepara el document per Odoo.</p>
               </div>
               <span id="budgetStatus">Esborrany local</span>
             </div>
 
             <div class="budget-load">
               <label>
-                Pressupost Holded
-                <input id="holdedQuoteSearch" type="search" placeholder="Numero o ID de Holded" />
+                Pressupost Odoo
+                <input id="odooQuoteSearch" type="search" placeholder="Numero o ID d'Odoo" />
               </label>
-              <button id="loadHoldedQuote" class="ghost" type="button">Carregar</button>
+              <button id="loadOdooQuote" class="ghost" type="button">Carregar</button>
               <button id="newBudget" type="button">Nou</button>
             </div>
 
@@ -326,8 +334,16 @@
                 <select name="coatingCode"></select>
               </label>
               <label>
-                m2
-                <input name="quantity" type="number" min="0.01" step="0.01" value="150" />
+                Amplada
+                <input name="width" type="number" min="0.01" step="0.01" value="1.15" />
+              </label>
+              <label>
+                Llargada
+                <input name="length" type="number" min="0.01" step="0.01" value="6" />
+              </label>
+              <label>
+                Quantitat
+                <input name="panelsQuantity" type="number" min="1" step="1" value="22" />
               </label>
             </form>
 
@@ -354,7 +370,7 @@
             <div class="budget-actions">
               <button class="ghost" type="button" disabled>Comanda proveidor</button>
               <button class="ghost" type="button" disabled>Factura client</button>
-              <button type="button" disabled>Enviar a Holded</button>
+              <button type="button" disabled>Enviar a Odoo</button>
             </div>
           </section>
         </div>

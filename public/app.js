@@ -54,12 +54,12 @@ const els = {
   syncCreate: document.querySelector("#syncCreate"),
   syncUpdate: document.querySelector("#syncUpdate"),
   syncUnchanged: document.querySelector("#syncUnchanged"),
-  syncHoldedOnly: document.querySelector("#syncHoldedOnly"),
+  syncOdooOnly: document.querySelector("#syncOdooOnly"),
   syncTable: document.querySelector("#syncTable"),
   openTabButtons: [...document.querySelectorAll("[data-open-tab]")],
   budgetStatus: document.querySelector("#budgetStatus"),
-  holdedQuoteSearch: document.querySelector("#holdedQuoteSearch"),
-  loadHoldedQuote: document.querySelector("#loadHoldedQuote"),
+  odooQuoteSearch: document.querySelector("#odooQuoteSearch"),
+  loadOdooQuote: document.querySelector("#loadOdooQuote"),
   newBudget: document.querySelector("#newBudget"),
   budgetLineForm: document.querySelector("#budgetLineForm"),
   budgetLinePrice: document.querySelector("#budgetLinePrice"),
@@ -132,8 +132,13 @@ function renderSelectorsFromUrl() {
   renderThicknessOptions(params.get("thicknessMm"));
   setOptions(els.form.sheetCode, catalog.sheetGauge.options, "code", "name", params.get("sheetCode"));
   setOptions(els.form.coatingCode, catalog.coatings, "code", "name", params.get("coatingCode"));
-  if (params.get("quantity")) {
+  if (params.get("quantity") && els.form.quantity) {
     els.form.quantity.value = params.get("quantity");
+  }
+  for (const key of ["width", "length", "panelsQuantity"]) {
+    if (params.get(key) && els.form[key]) {
+      els.form[key].value = params.get(key);
+    }
   }
 
   els.form.productCode.onchange = () => {
@@ -257,6 +262,7 @@ function renderLocalCatalogSummary() {
       return `
         <div class="local-catalog-chip" data-product="${escapeHtml(productCode)}">
           <strong>${escapeHtml(product?.name || productCode)}</strong>
+          <span>${applicationLabel(product?.application)}</span>
           <span>${rows.length} articles · ${money(min)} - ${money(max)}/m2</span>
         </div>
       `;
@@ -277,7 +283,7 @@ function exportLocalCatalog() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `mnlsavior-cataleg-local-${new Date().toISOString().slice(0, 10)}.json`;
+  link.download = `mnl-odoo-sync-cataleg-local-${new Date().toISOString().slice(0, 10)}.json`;
   link.click();
   URL.revokeObjectURL(url);
 }
@@ -292,7 +298,7 @@ function renderCatalog() {
     if (!search) {
       return true;
     }
-    return `${product.sku} ${product.name}`.toLowerCase().includes(search);
+    return `${product.sku} ${product.name} ${product.application || ""}`.toLowerCase().includes(search);
   });
   const groups = groupBy(filtered, (product) => `${product.productCode}-${product.coreCode}`);
 
@@ -311,7 +317,7 @@ function renderCatalog() {
       <div class="catalog-card-head">
         <div>
           <h3>${escapeHtml(first.productName)} · ${escapeHtml(first.coreName)}</h3>
-          <span>${products.length} gruixos disponibles</span>
+          <span>${applicationLabel(first.application)} · ${products.length} gruixos disponibles</span>
         </div>
         <strong>${money(Math.min(...products.map((item) => item.basePrice)))}/m2+</strong>
       </div>
@@ -352,7 +358,7 @@ function renderCombinationPreview() {
     if (sheetCode && item.sheetCode !== sheetCode) return false;
     if (coatingCode && item.coatingCode !== coatingCode) return false;
     if (!search) return true;
-    return `${item.sku} ${item.name}`.toLowerCase().includes(search);
+    return `${item.sku} ${item.name} ${item.application || ""}`.toLowerCase().includes(search);
   });
   const visibleRows = filtered.slice(0, 120);
   els.combinationCount.textContent = `${filtered.length} articles`;
@@ -369,7 +375,7 @@ function renderCombinationPreview() {
         (item) => `
           <div class="sync-row combo-row" data-product="${escapeHtml(item.productCode)}">
             <strong>${escapeHtml(item.sku)}</strong>
-            <span>${escapeHtml(item.name)}</span>
+            <span>${escapeHtml(item.name)} · ${applicationLabel(item.application)}</span>
             <span>${money(item.basePrice)}</span>
             <span>${formatAdjustment(item.sheetDelta + item.coatingDelta)}</span>
             <strong>${money(item.unitPrice)}</strong>
@@ -682,14 +688,14 @@ function setupBudgeter() {
   els.addBudgetLine.addEventListener("click", addBudgetLine);
   els.newBudget.addEventListener("click", () => {
     budgetLines = [];
-    els.holdedQuoteSearch.value = "";
+    els.odooQuoteSearch.value = "";
     els.budgetStatus.textContent = "Esborrany local";
     renderBudgetRows();
   });
-  els.loadHoldedQuote.addEventListener("click", () => {
-    const reference = els.holdedQuoteSearch.value.trim();
+  els.loadOdooQuote.addEventListener("click", () => {
+    const reference = els.odooQuoteSearch.value.trim();
     els.budgetStatus.textContent = reference
-      ? `Carrega Holded pendent: ${reference}`
+      ? `Carrega Odoo pendent: ${reference}`
       : "Indica un numero o ID";
   });
 
@@ -1012,17 +1018,17 @@ async function refreshSyncPreview() {
   }
   if (!apiAvailable) {
     els.syncTable.innerHTML =
-      '<div class="empty-state">La comparacio amb Holded necessita el servidor local. A GitHub Pages pots veure i editar el cataleg, pero no connectar amb Holded.</div>';
+      '<div class="empty-state">La comparacio amb Odoo necessita el servidor local. A GitHub Pages pots veure i editar el cataleg, pero no connectar amb Odoo.</div>';
     return;
   }
-  els.syncTable.innerHTML = '<div class="empty-state">Comparant amb Holded...</div>';
+  els.syncTable.innerHTML = '<div class="empty-state">Comparant amb Odoo...</div>';
   try {
-    const preview = await getJson("/api/holded/sync-preview");
-    els.syncVersion.textContent = preview.version;
+    const preview = await getJson("/api/odoo/sync-preview");
+    els.syncVersion.textContent = preview.generatedAt?.slice(0, 19).replace("T", " ") || "-";
     els.syncCreate.textContent = preview.counts.create || 0;
     els.syncUpdate.textContent = preview.counts.update || 0;
     els.syncUnchanged.textContent = preview.counts.unchanged || 0;
-    els.syncHoldedOnly.textContent = preview.counts["holded-only"] || 0;
+    els.syncOdooOnly.textContent = preview.counts["odoo-only"] || 0;
     renderSyncRows(preview.rows);
   } catch (error) {
     els.syncTable.innerHTML = `<div class="empty-state error">${escapeHtml(error.message)}</div>`;
@@ -1037,7 +1043,7 @@ async function setSyncMode(mode) {
   els.baseSyncSummary.hidden = mode !== "base";
   els.syncTable.hidden = mode !== "base";
   els.combinationPreview.hidden = mode !== "combinations";
-  els.refreshSync.textContent = mode === "base" ? "Comparar amb Holded" : "Generar preview";
+  els.refreshSync.textContent = mode === "base" ? "Comparar amb Odoo" : "Generar preview";
   if (mode === "combinations" && !combinations.length) {
     await refreshCombinations();
   }
@@ -1048,14 +1054,14 @@ function renderSyncRows(rows) {
     create: "Crear",
     update: "Modificar",
     unchanged: "Sense canvis",
-    "holded-only": "Nomes Holded",
+    "odoo-only": "Nomes Odoo",
   };
   els.syncTable.innerHTML = `
     <div class="sync-row sync-head">
       <span>Accio</span>
       <span>SKU</span>
       <span>Preu local</span>
-      <span>Preu Holded</span>
+      <span>Preu Odoo</span>
       <span>Diferencies</span>
     </div>
     ${rows
@@ -1065,7 +1071,7 @@ function renderSyncRows(rows) {
             <span><mark>${actionLabels[row.action] || row.action}</mark></span>
             <strong>${escapeHtml(row.sku || "-")}</strong>
             <span>${row.localPrice === null ? "-" : money(row.localPrice)}</span>
-            <span>${row.holdedPrice === null ? "-" : money(row.holdedPrice)}</span>
+            <span>${row.remotePrice === null ? "-" : money(row.remotePrice)}</span>
             <span>${escapeHtml(row.diffs.join(", ") || "-")}</span>
           </div>
         `,
@@ -1086,6 +1092,9 @@ function updateUrl(body) {
     sheetCode: body.sheetCode,
     coatingCode: body.coatingCode,
     quantity: body.quantity,
+    width: body.width,
+    length: body.length,
+    panelsQuantity: body.panelsQuantity,
   });
   window.history.replaceState(null, "", `?${params.toString()}`);
 }
@@ -1120,6 +1129,7 @@ function buildBaseProductsFromCatalog() {
         name: `${product.name} ${thickness.mm} ${core.name}`,
         productCode: product.code,
         productName: product.name,
+        application: product.application || null,
         coreCode: core.code,
         coreName: core.name,
         thicknessMm: thickness.mm,
@@ -1144,6 +1154,7 @@ function buildCombinationsFromCatalog() {
               name: `${product.name} ${thickness.mm} ${core.name} · Chapa ${sheet.name} · ${coating.name}`,
               productCode: product.code,
               productName: product.name,
+              application: product.application || null,
               coreCode: core.code,
               coreName: core.name,
               thicknessMm: Number(thickness.mm),
@@ -1169,7 +1180,7 @@ function calculateQuoteLineLocal(input) {
   const thickness = core?.thicknesses.find((item) => Number(item.mm) === Number(input.thicknessMm));
   const sheet = catalog.sheetGauge.options.find((item) => item.code === input.sheetCode);
   const coating = catalog.coatings.find((item) => item.code === input.coatingCode) || catalog.coatings[0];
-  const quantity = Number(input.quantity || 1);
+  const quantity = calculateSquareMeters(input);
   if (!product || !core || !thickness || !sheet || !Number.isFinite(quantity)) {
     throw new Error("Configuracio invalida.");
   }
@@ -1198,6 +1209,7 @@ function calculateQuoteLineLocal(input) {
     sku: `${product.code}-${String(thickness.mm).padStart(3, "0")}-${core.code}-${sheet.code}-${coating.code}`,
     name: `${product.name} ${thickness.mm} ${core.name}`,
     description: `Chapa ${sheet.name} · ${coating.name}`,
+    application: product.application || null,
     quantity,
     unitPrice,
     panelSubtotal,
@@ -1205,6 +1217,19 @@ function calculateQuoteLineLocal(input) {
     extrasSubtotal,
     subtotal: roundMoney(panelSubtotal + extrasSubtotal),
   };
+}
+
+function calculateSquareMeters(input) {
+  if (input.width || input.length || input.panelsQuantity) {
+    const width = Number(input.width);
+    const length = Number(input.length);
+    const panelsQuantity = Number(input.panelsQuantity || input.quantity || 1);
+    if (width <= 0 || length <= 0 || panelsQuantity <= 0) {
+      throw new Error("Amplada, llargada i quantitat han de ser positives.");
+    }
+    return roundMoney(width * length * panelsQuantity);
+  }
+  return Number(input.quantity || 1);
 }
 
 function calculateSheetDeltaForSheet(sheet) {
@@ -1308,6 +1333,16 @@ function formatAdjustment(value) {
   const rounded = Math.round((Number(value || 0) + Number.EPSILON) * 100) / 100;
   const formatted = money(rounded);
   return rounded > 0 ? `+${formatted}` : formatted;
+}
+
+function applicationLabel(value) {
+  if (value === "coberta") {
+    return "Coberta";
+  }
+  if (value === "facana") {
+    return "Facana";
+  }
+  return "Sense familia";
 }
 
 function parseLocaleNumber(value) {

@@ -4,7 +4,9 @@
   "thicknessMm": 40,
   "sheetCode": "55",
   "coatingCode": "HDS",
-  "quantity": 150,
+  "width": 1.15,
+  "length": 6,
+  "panelsQuantity": 22,
   "extras": {
     "SOLAPE-FILM": 4,
     "TAPAJUNTAS": 12,

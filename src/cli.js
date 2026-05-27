@@ -1,45 +1,33 @@
 #!/usr/bin/env node
 import { readFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { readCatalog } from "./catalogStore.js";
 import { requireConfig } from "./config.js";
-import { HoldedApiError, HoldedClient } from "./holdedClient.js";
-
-const DOC_TYPES = new Set([
-  "invoice",
-  "salesreceipt",
-  "creditnote",
-  "salesorder",
-  "proform",
-  "waybill",
-  "estimate",
-  "purchase",
-  "purchaseorder",
-  "purchaserefund",
-]);
+import { OdooApiError, OdooClient } from "./odooClient.js";
+import { buildOdooSyncPreview, createTestSaleOrder, rollbackOdooProducts, syncOdooProducts } from "./odooSync.js";
 
 async function main() {
   const [command, ...args] = process.argv.slice(2);
-  const client = new HoldedClient(requireConfig());
+  const client = new OdooClient(requireConfig());
+  const catalog = readCatalog();
 
   switch (command) {
     case "ping":
-      return print(await client.listContacts({ limit: 1 }));
-    case "contacts:list":
-      return print(await client.listContacts());
-    case "contacts:create":
-      return print(await client.createContact(readJsonArg(args[0])));
-    case "products:list":
-      return print(await client.listProducts());
-    case "products:create":
-      return print(await client.createProduct(readJsonArg(args[0])));
-    case "documents:list":
-      return print(await client.listDocuments(requireDocType(args[0]), parseQueryArgs(args.slice(1))));
-    case "documents:create":
-      return print(await client.createDocument(requireDocType(args[0]), readJsonArg(args[1])));
-    case "documents:send":
-      return print(
-        await client.sendDocument(requireDocType(args[0]), requireArg(args[1], "documentId"), readJsonArg(args[2])),
-      );
+      await client.authenticate();
+      return print({ ok: true, uid: client.uid });
+    case "products:preview":
+      return print(await buildOdooSyncPreview(client, catalog));
+    case "products:sync":
+      return print(writeSyncLog(await syncOdooProducts(client, catalog, { dryRun: false })));
+    case "products:dry-run":
+      return print(await syncOdooProducts(client, catalog, { dryRun: true }));
+    case "products:rollback":
+      return print(await rollbackOdooProducts(client, readJsonArg(args[0]), { dryRun: false }));
+    case "products:rollback:dry-run":
+      return print(await rollbackOdooProducts(client, readJsonArg(args[0]), { dryRun: true }));
+    case "quote:create":
+      return print(await createTestSaleOrder(client, catalog, readJsonArg(args[0])));
     default:
       usage();
       process.exitCode = command ? 1 : 0;
@@ -47,58 +35,43 @@ async function main() {
 }
 
 function readJsonArg(filePath) {
-  const value = requireArg(filePath, "fitxer JSON");
-  const absolutePath = resolve(value);
-  return JSON.parse(readFileSync(absolutePath, "utf8"));
-}
-
-function parseQueryArgs(args) {
-  return Object.fromEntries(
-    args.map((arg) => {
-      const separator = arg.indexOf("=");
-      if (separator === -1) {
-        throw new Error(`Parametre invalid: ${arg}. Fes servir clau=valor.`);
-      }
-      return [arg.slice(0, separator), arg.slice(separator + 1)];
-    }),
-  );
-}
-
-function requireDocType(value) {
-  const docType = requireArg(value, "docType");
-  if (!DOC_TYPES.has(docType)) {
-    throw new Error(`docType invalid: ${docType}`);
+  if (!filePath) {
+    throw new Error("Falta el fitxer JSON.");
   }
-  return docType;
-}
-
-function requireArg(value, label) {
-  if (!value) {
-    throw new Error(`Falta ${label}.`);
-  }
-  return value;
+  return JSON.parse(readFileSync(resolve(filePath), "utf8"));
 }
 
 function print(value) {
   console.log(JSON.stringify(value, null, 2));
 }
 
+function writeSyncLog(result) {
+  mkdirSync("logs", { recursive: true });
+  const path = resolve("logs", `odoo-sync-${new Date().toISOString().replace(/[:.]/g, "-")}.json`);
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    rollbackType: "archive-product-templates",
+    ...result,
+  };
+  writeFileSync(path, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  return { ...payload, rollbackFile: path };
+}
+
 function usage() {
   console.log(`
-Comandes:
+Comandes Odoo:
   node src/cli.js ping
-  node src/cli.js contacts:list
-  node src/cli.js contacts:create examples/contact.sample.json
-  node src/cli.js products:list
-  node src/cli.js products:create examples/product.sample.json
-  node src/cli.js documents:list invoice [starttmp=... endtmp=... paid=0]
-  node src/cli.js documents:create invoice examples/invoice.sample.json
-  node src/cli.js documents:send invoice <documentId> examples/send-document.sample.json
+  node src/cli.js products:preview
+  node src/cli.js products:dry-run
+  node src/cli.js products:sync
+  node src/cli.js products:rollback:dry-run logs/odoo-sync-....json
+  node src/cli.js products:rollback logs/odoo-sync-....json
+  node src/cli.js quote:create examples/odoo-quote.sample.json
 `);
 }
 
 main().catch((error) => {
-  if (error instanceof HoldedApiError) {
+  if (error instanceof OdooApiError) {
     console.error(error.message);
     console.error(JSON.stringify(error.body, null, 2));
   } else {

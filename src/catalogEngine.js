@@ -6,6 +6,7 @@ export function listBaseProducts(catalog) {
         name: `${product.name} ${thickness.mm} ${core.name}`,
         productCode: product.code,
         productName: product.name,
+        application: product.application || null,
         coreCode: core.code,
         coreName: core.name,
         thicknessMm: thickness.mm,
@@ -27,7 +28,7 @@ export function calculateQuoteLine(catalog, input) {
 
   const sheet = findByCode(catalog.sheetGauge.options, input.sheetCode, "chapa");
   const coating = findByCode(catalog.coatings, input.coatingCode || "NONE", "recobriment");
-  const quantity = positiveNumber(input.quantity || 1, "m2");
+  const quantity = calculateSquareMeters(input);
   const selectedExtras = normalizeExtras(catalog, input.extras || {});
 
   const sheetDelta = calculateSheetDelta(catalog.sheetGauge, sheet);
@@ -48,6 +49,7 @@ export function calculateQuoteLine(catalog, input) {
     name: `${product.name} ${thickness.mm} ${core.name}`,
     description: `Chapa ${sheet.name} · ${coating.name}`,
     quantity,
+    dimensions: normalizeDimensions(input, quantity),
     unit: catalog.unit,
     basePrice: thickness.basePrice,
     sheetDelta,
@@ -59,6 +61,7 @@ export function calculateQuoteLine(catalog, input) {
     subtotal,
     options: {
       product: product.name,
+      application: product.application || null,
       core: core.name,
       thickness: `${thickness.mm} mm`,
       sheet: sheet.name,
@@ -67,32 +70,54 @@ export function calculateQuoteLine(catalog, input) {
   };
 }
 
-export function createHoldedProductPayload(catalog, baseProduct) {
+export function createOdooProductTemplatePayload(catalog, baseProduct) {
   return {
-    kind: "simple",
     name: baseProduct.name,
-    desc: `${baseProduct.name}. Producte base per configurador extern.`,
-    price: baseProduct.basePrice,
-    cost: baseProduct.basePrice,
-    purchasePrice: baseProduct.basePrice,
-    taxes: [catalog.taxKey],
-    sku: baseProduct.sku,
-    hasStock: false,
-    tags: ["cataleg-huurre", "configurador"],
+    default_code: baseProduct.sku,
+    list_price: baseProduct.basePrice,
+    standard_price: baseProduct.basePrice,
+    sale_ok: true,
+    purchase_ok: false,
+    description_sale: [baseProduct.name, baseProduct.application ? `Familia: ${baseProduct.application}` : null, "Producte base per configurador extern."]
+      .filter(Boolean)
+      .join("\n"),
   };
 }
 
-export function createHoldedDocumentItem(line) {
+export function createOdooSaleOrderLine(line, productId) {
   const extraText = line.extras.length
     ? `\nExtres:\n${line.extras.map((extra) => `- ${extra.name}: ${extra.quantity} ${extra.unit}`).join("\n")}`
     : "";
 
   return {
-    name: line.name,
-    desc: `${line.description}\nSKU configuracio: ${line.sku}${extraText}`,
-    units: line.quantity,
-    subtotal: line.unitPrice,
-    tax: 21,
+    product_id: productId,
+    product_uom_qty: line.quantity,
+    price_unit: line.extrasSubtotal ? roundMoney(line.subtotal / line.quantity, 2) : line.unitPrice,
+    name: `${line.name}\n${line.description}\nSKU configuracio: ${line.sku}${extraText}`,
+  };
+}
+
+function calculateSquareMeters(input) {
+  if (input.width !== undefined || input.length !== undefined || input.panelsQuantity !== undefined) {
+    const width = positiveNumber(input.width, "amplada");
+    const length = positiveNumber(input.length, "llargada");
+    const panelsQuantity = positiveNumber(input.panelsQuantity || input.quantity || 1, "quantitat");
+    return roundMoney(width * length * panelsQuantity, 4);
+  }
+
+  return positiveNumber(input.quantity || 1, "m2");
+}
+
+function normalizeDimensions(input, quantity) {
+  if (input.width === undefined && input.length === undefined && input.panelsQuantity === undefined) {
+    return { squareMeters: quantity };
+  }
+
+  return {
+    width: Number(input.width),
+    length: Number(input.length),
+    panelsQuantity: Number(input.panelsQuantity || input.quantity || 1),
+    squareMeters: quantity,
   };
 }
 

@@ -15,6 +15,8 @@
   --hi-ct: #5bf0c0;
   --tz-cr: #7cc7ff;
   --hi-xt: #f7a8ff;
+  --hi-st: #ffd166;
+  --hi-stl: #ff9f7c;
   --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
 
@@ -488,6 +490,16 @@ input:focus {
 .catalog-card[data-product="HI-XT"],
 .editor-card[data-product="HI-XT"] {
   --product-color: var(--hi-xt);
+}
+
+.catalog-card[data-product="HI-ST"],
+.editor-card[data-product="HI-ST"] {
+  --product-color: var(--hi-st);
+}
+
+.catalog-card[data-product="HI-STL"],
+.editor-card[data-product="HI-STL"] {
+  --product-color: var(--hi-stl);
 }
 
 .catalog-card-head {
@@ -969,6 +981,14 @@ pre {
   --product-color: var(--hi-xt);
 }
 
+.local-catalog-chip[data-product="HI-ST"] {
+  --product-color: var(--hi-st);
+}
+
+.local-catalog-chip[data-product="HI-STL"] {
+  --product-color: var(--hi-stl);
+}
+
 .local-catalog-chip strong,
 .local-catalog-chip span {
   display: block;
@@ -1089,7 +1109,7 @@ mark {
   background: var(--blue);
 }
 
-.sync-row.holded-only mark {
+.sync-row.odoo-only mark {
   color: #fff;
   background: var(--danger);
 }
@@ -1175,6 +1195,14 @@ mark {
 
 .budget-row[data-product="HI-XT"] {
   --product-color: var(--hi-xt);
+}
+
+.budget-row[data-product="HI-ST"] {
+  --product-color: var(--hi-st);
+}
+
+.budget-row[data-product="HI-STL"] {
+  --product-color: var(--hi-stl);
 }
 
 .budget-row strong,

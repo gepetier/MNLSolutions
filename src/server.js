@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import { createServer } from "node:http";
-import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,7 +7,8 @@ import { listCatalogCombinations } from "./catalogCombinations.js";
 import { calculateQuoteLine, listBaseProducts } from "./catalogEngine.js";
 import { readCatalog, writeCatalog } from "./catalogStore.js";
 import { requireConfig } from "./config.js";
-import { HoldedClient } from "./holdedClient.js";
+import { OdooClient } from "./odooClient.js";
+import { buildOdooSyncPreview } from "./odooSync.js";
 
 const PORT = Number(process.env.PORT || 4173);
 const APP_ROOT = process.env.HUURRE_APP_ROOT || resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -45,8 +45,8 @@ export function createAppServer() {
         return json(response, listCatalogCombinations(readCatalog()));
       }
 
-      if (request.method === "GET" && url.pathname === "/api/holded/sync-preview") {
-        return json(response, await buildHoldedSyncPreview());
+      if (request.method === "GET" && url.pathname === "/api/odoo/sync-preview") {
+        return json(response, await buildOdooSyncPreview(new OdooClient(requireConfig()), readCatalog()));
       }
 
       if (request.method === "POST" && url.pathname === "/api/quote/preview") {
@@ -72,7 +72,7 @@ export function startServer({ port = PORT, host = "127.0.0.1" } = {}) {
     server.listen(port, host, () => {
       const address = server.address();
       const actualPort = typeof address === "object" && address ? address.port : port;
-      console.log(`MNLSavior: http://${host}:${actualPort}`);
+      console.log(`MNL Odoo Sync: http://${host}:${actualPort}`);
       resolve({ server, port: actualPort, host, url: `http://${host}:${actualPort}` });
     });
   });
@@ -119,92 +119,4 @@ async function readJsonBody(request) {
 function json(response, value, status = 200) {
   response.writeHead(status, { "content-type": "application/json; charset=utf-8" });
   response.end(JSON.stringify(value, null, 2));
-}
-
-async function buildHoldedSyncPreview() {
-  const catalog = readCatalog();
-  const localProducts = listBaseProducts(catalog);
-  const holded = new HoldedClient(requireConfig());
-  const holdedProducts = await holded.listProducts();
-  const holdedBySku = new Map(holdedProducts.filter((product) => product.sku).map((product) => [product.sku, product]));
-
-  const rows = localProducts.map((local) => {
-    const remote = holdedBySku.get(local.sku);
-    if (!remote) {
-      return {
-        action: "create",
-        sku: local.sku,
-        name: local.name,
-        localPrice: local.basePrice,
-        holdedPrice: null,
-        holdedName: null,
-        holdedId: null,
-        diffs: ["missing-in-holded"],
-      };
-    }
-
-    const diffs = [];
-    if (normalizeMoney(remote.price) !== normalizeMoney(local.basePrice)) {
-      diffs.push("price");
-    }
-    if ((remote.name || "") !== local.name) {
-      diffs.push("name");
-    }
-
-    return {
-      action: diffs.length ? "update" : "unchanged",
-      sku: local.sku,
-      name: local.name,
-      localPrice: local.basePrice,
-      holdedPrice: normalizeMoney(remote.price),
-      holdedName: remote.name,
-      holdedId: remote.id,
-      diffs,
-    };
-  });
-
-  const holdedOnly = holdedProducts
-    .filter((product) => product.sku && !localProducts.some((local) => local.sku === product.sku))
-    .map((product) => ({
-      action: "holded-only",
-      sku: product.sku,
-      name: product.name,
-      localPrice: null,
-      holdedPrice: normalizeMoney(product.price),
-      holdedName: product.name,
-      holdedId: product.id,
-      diffs: ["not-in-local-catalog"],
-    }));
-
-  const allRows = [...rows, ...holdedOnly];
-  const counts = countActions(allRows);
-
-  return {
-    version: createCatalogVersion(catalog),
-    generatedAt: new Date().toISOString(),
-    localCount: localProducts.length,
-    holdedCount: holdedProducts.length,
-    counts,
-    rows: allRows,
-  };
-}
-
-function normalizeMoney(value) {
-  const number = Number(value || 0);
-  return Math.round((number + Number.EPSILON) * 100) / 100;
-}
-
-function countActions(rows) {
-  return rows.reduce(
-    (counts, row) => {
-      counts[row.action] = (counts[row.action] || 0) + 1;
-      return counts;
-    },
-    { create: 0, update: 0, unchanged: 0, "holded-only": 0 },
-  );
-}
-
-function createCatalogVersion(catalog) {
-  const hash = createHash("sha1").update(JSON.stringify(catalog)).digest("hex").slice(0, 8);
-  return `tarifa-${new Date().toISOString().slice(0, 10)}-${hash}`;
 }

@@ -1,24 +1,25 @@
 {
-  "name": "mnlsavior",
+  "name": "mnl-odoo-sync",
   "version": "0.1.0",
   "private": true,
-  "description": "Automatitzacions petites per connectar una empresa amb l'API de Holded.",
+  "description": "Sincronitzacio de cataleg i pressupostos entre el cataleg intern i Odoo.",
   "type": "module",
   "main": "electron/main.cjs",
   "scripts": {
-    "check": "node --check src/holdedClient.js && node --check src/cli.js && node --check src/catalogEngine.js && node --check src/catalogCombinations.js && node --check src/catalogStore.js && node --check src/catalogCli.js && node --check src/server.js",
+    "check": "node --check src/odooClient.js && node --check src/odooSync.js && node --check src/cli.js && node --check src/catalogEngine.js && node --check src/catalogCombinations.js && node --check src/catalogStore.js && node --check src/catalogCli.js && node --check src/server.js",
     "dev": "node src/server.js",
     "electron": "electron .",
     "electron:build": "electron-builder --win nsis portable",
-    "holded": "node src/cli.js",
-    "holded:ping": "node src/cli.js ping",
-    "holded:contacts": "node src/cli.js contacts:list",
-    "holded:products": "node src/cli.js products:list",
-    "holded:invoices": "node src/cli.js documents:list invoice",
-    "prices:preview": "node src/updatePrices.js --dry-run data/prices.example.csv",
-    "prices:apply": "node src/updatePrices.js data/prices.example.csv",
+    "odoo": "node src/cli.js",
+    "odoo:ping": "node src/cli.js ping",
+    "odoo:preview": "node src/cli.js products:preview",
+    "odoo:dry-run": "node src/cli.js products:dry-run",
+    "odoo:sync": "node src/cli.js products:sync",
+    "odoo:rollback:dry-run": "node src/cli.js products:rollback:dry-run",
+    "odoo:rollback": "node src/cli.js products:rollback",
+    "odoo:quote": "node src/cli.js quote:create examples/odoo-quote.sample.json",
     "catalog:base": "node src/catalogCli.js base:list",
-    "catalog:quote": "node src/catalogCli.js quote examples/quote.sample.json",
+    "catalog:quote": "node src/catalogCli.js quote examples/odoo-quote.sample.json",
     "catalog:combinations": "node src/catalogCli.js combinations:count"
   },
   "engines": {
@@ -29,8 +30,8 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.panelyacero.configuradorhuurre",
-  "productName": "MNLSavior",
+    "appId": "com.panelyacero.mnlodoosync",
+    "productName": "MNL Odoo Sync",
     "directories": {
       "output": "dist"
     },
