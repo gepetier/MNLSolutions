@@ -1,0 +1,34 @@
+# Punt de represa — 14/10/2026
+
+Aquest checkpoint prepara la carpeta local per publicar-la amb els canvis pendents de setembre. No s'ha contactat Odoo ni executat cap migració durant aquesta preparació.
+
+## Estat documentat
+
+La fase vigent és productes, clients i pressupostatge. El catàleg local genera 5.220 variants. Els documents del 23/09 registren la importació de 342 contactes, les famílies/subfamílies i la promoció de pagaments, transport, quantitats, informes i nivell de risc a principal. Són evidències històriques; cal una auditoria nova abans de modificar Odoo.
+
+Fonts de represa:
+
+- `PRODUCTION_PROMOTION_2026-09-23.md`: què es va aplicar a principal i diferències pendents.
+- `CONTACTS_IMPORT_2026-09-23.md`: importació de contactes.
+- `PRODUCT_FAMILIES_2026-09-23.md` i `PRODUCT_SUBFAMILIES_2026-09-23.md`: classificació.
+- `PRICE_VERSION_PREUS_2026-09-23.md`: versió congelada de preus a proves.
+- `02_Handoff_Codex_Odoo_MNL_Fase1.md`: decisions funcionals.
+- `TODO.md`: llista de feina; actualitzat el 14/10 amb els resultats de setembre; les comprovacions històriques conserven la seva data.
+
+## Proper treball
+
+1. Configurar la nova màquina amb `DEVELOPMENT_SETUP.md` i comprovar en lectura la còpia de proves vigent.
+2. Verificar la regressió funcional des de la interfície i contrastar l’estat real amb la promoció del 23/09.
+3. Consolidar una plantilla de pressupost i validar un PDF real, amb dimensions, agrupacions, subtotals, clients incomplets i idiomes CA/ES/EN.
+4. Completar les proves de ML/UDS, descomptes i proveïdors reals de transport.
+5. La promoció de `PREUS 23/09/2026` a principal continua pendent segons el registre; no assumir que ja està aplicada.
+
+El script `prepare_historical_invoice_archive.py` prepara JSON a partir d'Excel; la facturació real continua fora de la fase inicial. No s'ha de confondre amb una migració comptable aprovada.
+
+## Portabilitat
+
+S'han declarat les dependències Python, ampliat `npm run check` a tot el JavaScript, substituït la dependència interna de Codex de l'inspector Excel i alineat els extractors amb `MNL_SENSITIVE_DATA_DIR`. S'han retirat de Git les memòries cau Python. La configuració Odoo, les dades privades i els backups de rollback es recuperen separadament.
+
+## Context compartit entre equips
+
+`AGENTS.md` a l’arrel indica la lectura inicial de Codex. `docs/CONTEXT_INDEX.md` agrupa totes les fonts i explica quins recursos privats s’han de recuperar. Les eines històriques abans ignorades a tmp són ara a `scripts/archive/2026-09-23/`; els plans intermedis no substitueixen les decisions finals de setembre.

@@ -1,0 +1,21 @@
+{
+  "reference": "Pressupost de prova panell",
+  "partner": {
+    "name": "Client de prova",
+    "email": "client.prova@example.com"
+  },
+  "line": {
+    "productCode": "HI-CT",
+    "coreCode": "PIR",
+    "thicknessMm": 40,
+    "sheetCode": "55",
+    "coatingCode": "HDS",
+    "width": 1.15,
+    "length": 6,
+    "panelsQuantity": 22,
+    "extras": {
+      "SOLAPE-FILM": 4,
+      "TAPAJUNTAS": 12
+    }
+  }
+}

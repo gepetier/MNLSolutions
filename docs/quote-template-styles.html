@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MNL - Estils de Pressupost</title>
+    <style>
+      :root {
+        --ink: #161b1f;
+        --muted: #68747f;
+        --line: #d9e0e6;
+        --paper: #ffffff;
+        --teal: #00a889;
+        --graphite: #1f252b;
+        --sand: #f2efe7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #e7ebef;
+        color: var(--ink);
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .screen {
+        display: grid;
+        gap: 28px;
+        padding: 28px;
+      }
+
+      .intro {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      .intro h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+
+      .intro p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .sheet {
+        width: min(100%, 980px);
+        min-height: 1280px;
+        margin: 0 auto;
+        overflow: hidden;
+        background: var(--paper);
+        box-shadow: 0 18px 70px rgba(24, 32, 38, 0.22);
+      }
+
+      .label {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .money,
+      .num {
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .totals {
+        width: 310px;
+        margin-left: auto;
+      }
+
+      .totals div {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .totals .grand {
+        margin-top: 10px;
+        padding-top: 12px;
+        border-top: 2px solid currentColor;
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .style-a {
+        color: #edf8f5;
+        background: #101619;
+      }
+
+      .style-a .hero {
+        min-height: 310px;
+        display: grid;
+        grid-template-columns: 1fr 310px;
+        gap: 30px;
+        padding: 44px;
+        background:
+          linear-gradient(135deg, rgba(0, 168, 137, 0.22), transparent 38%),
+          linear-gradient(180deg, #11181b, #1c2528);
+      }
+
+      .style-a .brand {
+        font-size: 48px;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+
+      .style-a .quote-title {
+        margin-top: 72px;
+        font-size: 38px;
+        line-height: 1;
+      }
+
+      .style-a .quote-title small {
+        display: block;
+        margin-top: 12px;
+        color: #8da49e;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .style-a .hero-card {
+        align-self: stretch;
+        display: grid;
+        align-content: space-between;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 8px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .style-a .label {
+        color: #05130f;
+        background: #3ef1c6;
+      }
+
+      .style-a .body {
+        padding: 36px 44px 44px;
+        background: #f7faf8;
+        color: #172022;
+      }
+
+      .style-a .meta-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+        margin-bottom: 30px;
+      }
+
+      .style-a .meta-grid div {
+        border-left: 3px solid var(--teal);
+        padding-left: 12px;
+      }
+
+      .style-a .meta-grid span,
+      .style-a .line-desc,
+      .style-a .foot {
+        color: #66757a;
+      }
+
+      .style-a th {
+        padding: 12px 10px;
+        color: #ffffff;
+        background: #1f2a2e;
+      }
+
+      .style-a td {
+        padding: 14px 10px;
+        border-bottom: 1px solid #dfe7e4;
+      }
+
+      .style-a .totals {
+        margin-top: 28px;
+        color: #172022;
+      }
+
+      .style-a .foot {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #dfe7e4;
+        font-size: 12px;
+      }
+
+      .style-b {
+        padding: 42px;
+        background:
+          linear-gradient(#ffffff 31px, transparent 32px),
+          linear-gradient(90deg, #ffffff 31px, #e9eef2 32px);
+        background-size: 32px 32px;
+      }
+
+      .style-b .frame {
+        min-height: 1196px;
+        border: 2px solid #18232d;
+        background: rgba(255, 255, 255, 0.92);
+      }
+
+      .style-b header {
+        display: grid;
+        grid-template-columns: 1fr 220px;
+        border-bottom: 2px solid #18232d;
+      }
+
+      .style-b .brand-block {
+        padding: 26px 28px;
+      }
+
+      .style-b .brand {
+        font-size: 34px;
+        font-weight: 900;
+      }
+
+      .style-b .doc-number {
+        display: grid;
+        place-items: center;
+        border-left: 2px solid #18232d;
+        background: #f4f7f9;
+      }
+
+      .style-b .doc-number strong {
+        font-size: 24px;
+      }
+
+      .style-b .data-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-bottom: 2px solid #18232d;
+      }
+
+      .style-b .data-strip div {
+        min-height: 76px;
+        padding: 12px;
+        border-right: 2px solid #18232d;
+      }
+
+      .style-b .data-strip div:last-child {
+        border-right: 0;
+      }
+
+      .style-b .data-strip span,
+      .style-b .line-desc,
+      .style-b .conditions {
+        color: #5d6873;
+      }
+
+      .style-b .section-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 24px;
+        border-bottom: 2px solid #18232d;
+      }
+
+      .style-b .label {
+        color: white;
+        background: #18232d;
+      }
+
+      .style-b th {
+        padding: 10px;
+        border-right: 1px solid #18232d;
+        border-bottom: 2px solid #18232d;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .style-b td {
+        padding: 12px 10px;
+        border-right: 1px solid #c8d0d8;
+        border-bottom: 1px solid #c8d0d8;
+      }
+
+      .style-b th:last-child,
+      .style-b td:last-child {
+        border-right: 0;
+      }
+
+      .style-b .totals {
+        margin: 30px 24px 0 auto;
+      }
+
+      .style-b .conditions {
+        margin: 34px 24px 0;
+        columns: 2;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .style-c {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        color: #26231f;
+        background: #fffdf8;
+      }
+
+      .style-c aside {
+        padding: 34px 24px;
+        background: #173d3a;
+        color: #ffffff;
+      }
+
+      .style-c .brand {
+        font-size: 42px;
+        font-weight: 900;
+      }
+
+      .style-c aside .label {
+        margin-top: 28px;
+        color: #173d3a;
+        background: #ffe37a;
+      }
+
+      .style-c aside dl {
+        display: grid;
+        gap: 18px;
+        margin-top: 36px;
+      }
+
+      .style-c aside dt {
+        color: #b9d3cf;
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+
+      .style-c aside dd {
+        margin: 4px 0 0;
+        font-weight: 700;
+      }
+
+      .style-c main {
+        padding: 42px 44px;
+      }
+
+      .style-c h2 {
+        margin: 0;
+        color: #173d3a;
+        font-size: 44px;
+        line-height: 1;
+      }
+
+      .style-c .client {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        margin-top: 34px;
+        padding: 24px 0;
+        border-top: 1px solid #ded5c6;
+        border-bottom: 1px solid #ded5c6;
+      }
+
+      .style-c .client span,
+      .style-c .line-desc,
+      .style-c .note {
+        color: #776f63;
+      }
+
+      .style-c .label {
+        color: #173d3a;
+        background: #ffe37a;
+      }
+
+      .style-c table {
+        margin-top: 32px;
+      }
+
+      .style-c th {
+        padding: 12px 0;
+        border-bottom: 2px solid #173d3a;
+        color: #173d3a;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .style-c td {
+        padding: 18px 0;
+        border-bottom: 1px solid #e4dac8;
+      }
+
+      .style-c .totals {
+        margin-top: 36px;
+        padding: 18px;
+        background: #f5efe2;
+      }
+
+      .style-c .note {
+        margin-top: 44px;
+        padding: 22px;
+        border: 1px solid #ded5c6;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .style-d {
+        position: relative;
+        padding: 38px 38px 34px;
+        color: #111111;
+        background: #ffffff;
+      }
+
+      .style-d::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 184px;
+        width: 34px;
+        height: 100%;
+        background: #d9eef3;
+      }
+
+      .style-d > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .style-d .top {
+        display: grid;
+        grid-template-columns: 270px 1fr 250px;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .style-d .mark {
+        display: inline-grid;
+        place-items: center;
+        width: 120px;
+        height: 88px;
+        border: 8px solid #111111;
+        font-size: 34px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .style-d .company {
+        margin-top: 18px;
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .style-d .company strong {
+        display: block;
+        margin-bottom: 6px;
+        text-decoration: underline;
+      }
+
+      .style-d .partners {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 26px;
+        padding-top: 10px;
+        text-align: center;
+      }
+
+      .style-d .partner-logo {
+        min-height: 74px;
+        display: grid;
+        place-items: center;
+        color: #164d91;
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .style-d .partner-logo span {
+        display: block;
+        color: #576066;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .style-d .quote-box {
+        border-left: 34px solid #d9eef3;
+        padding: 8px 0 0 12px;
+      }
+
+      .style-d .quote-box h2 {
+        margin: 0 0 10px;
+        border-bottom: 3px solid #111111;
+        font-size: 28px;
+        letter-spacing: 8px;
+      }
+
+      .style-d .quote-box dl {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 12px 10px;
+        margin: 0;
+        font-size: 13px;
+      }
+
+      .style-d .quote-box dt {
+        font-weight: 800;
+        text-align: right;
+      }
+
+      .style-d .quote-box dd {
+        margin: 0;
+        color: #2e3438;
+      }
+
+      .style-d .addresses {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 26px 0 12px 296px;
+        border: 2px solid #111111;
+        background: #ffffff;
+      }
+
+      .style-d .addresses h3 {
+        margin: 0;
+        padding: 5px;
+        border-bottom: 2px solid #111111;
+        font-size: 18px;
+        letter-spacing: 9px;
+        text-align: center;
+      }
+
+      .style-d .addresses .block {
+        min-height: 118px;
+      }
+
+      .style-d .addresses .block + .block {
+        border-left: 2px solid #111111;
+      }
+
+      .style-d .addresses p {
+        margin: 9px 18px;
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .style-d .bar {
+        height: 10px;
+        margin-top: 8px;
+        border-bottom: 4px solid #111111;
+        background: #d7e8ec;
+      }
+
+      .style-d table {
+        font-size: 13px;
+      }
+
+      .style-d th {
+        padding: 12px 8px;
+        border-bottom: 2px solid #111111;
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .style-d td {
+        padding: 12px 8px;
+      }
+
+      .style-d tbody tr.spacer td {
+        padding-top: 24px;
+      }
+
+      .style-d .unit-band {
+        width: 44px;
+        background: #d9eef3;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .style-d .article strong {
+        font-weight: 400;
+      }
+
+      .style-d .article span {
+        display: block;
+        margin-top: 12px;
+      }
+
+      .style-d .bottom {
+        display: grid;
+        grid-template-columns: 1fr 395px;
+        gap: 42px;
+        margin-top: 36px;
+        border-top: 6px double #111111;
+        padding-top: 18px;
+      }
+
+      .style-d .payment {
+        font-size: 14px;
+        line-height: 1.85;
+      }
+
+      .style-d .summary h3 {
+        margin: 0 0 18px;
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .style-d .summary-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        margin: 10px 0;
+        border-bottom: 2px dotted #111111;
+      }
+
+      .style-d .summary-row strong {
+        background: #ffffff;
+      }
+
+      .style-d .summary-row.grand {
+        margin-top: 16px;
+        border-bottom: 4px solid #111111;
+        font-size: 17px;
+        font-weight: 800;
+      }
+
+      .style-d .validity {
+        margin-top: 14px;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .style-d footer {
+        position: absolute;
+        left: 38px;
+        right: 38px;
+        bottom: 28px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+      }
+
+      .style-d .page {
+        min-width: 96px;
+        padding: 8px 14px;
+        background: #d9d9d9;
+        text-align: center;
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        .screen {
+          padding: 0;
+        }
+
+        .intro {
+          display: none;
+        }
+
+        .sheet {
+          width: 100%;
+          min-height: 100vh;
+          box-shadow: none;
+          page-break-after: always;
+        }
+
+        .style-d footer {
+          position: fixed;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="screen">
+      <section class="intro">
+        <h1>4 estils radicals per pressupost MNL</h1>
+        <p>Dades ficticies. Pensat per passar despres a QWeb/Odoo quan triem direccio.</p>
+      </section>
+
+      <section class="sheet style-a">
+        <div class="hero">
+          <div>
+            <div class="brand">MNL</div>
+            <div class="quote-title">
+              Pressupost industrial premium
+              <small>Panells, remateria i solucions constructives a mida</small>
+            </div>
+          </div>
+          <div class="hero-card">
+            <span class="label">Proposta A</span>
+            <div>
+              <p>Pressupost</p>
+              <h2>SO-TEST-001</h2>
+            </div>
+            <div>
+              <p>Total proposta</p>
+              <h2>8.246,72 EUR</h2>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="meta-grid">
+            <div><span>Client</span><strong>Client Industrial Demo</strong></div>
+            <div><span>Data</span><strong>08/07/2026</strong></div>
+            <div><span>Validesa</span><strong>30 dies</strong></div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Article</th>
+                <th class="num">Uds</th>
+                <th class="num">Llarg</th>
+                <th class="num">Ample</th>
+                <th class="num">m2</th>
+                <th class="money">Preu</th>
+                <th class="money">Import</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Panell HI-CT 60 PIR</strong><div class="line-desc">Chapa 0,5/0,5 - Blanc Pirineo - Class. 1.01</div></td>
+                <td class="num">22</td>
+                <td class="num">6,00</td>
+                <td class="num">1,15</td>
+                <td class="num">151,80</td>
+                <td class="money">24,35</td>
+                <td class="money">3.696,33</td>
+              </tr>
+              <tr>
+                <td><strong>Remat lateral lacat</strong><div class="line-desc">Desenvolupament 500 mm - color a definir</div></td>
+                <td class="num">48</td>
+                <td class="num">-</td>
+                <td class="num">-</td>
+                <td class="num">48 ml</td>
+                <td class="money">18,40</td>
+                <td class="money">883,20</td>
+              </tr>
+              <tr>
+                <td><strong>Transport i manipulacio</strong><div class="line-desc">Entrega en obra, descarrega no inclosa</div></td>
+                <td class="num">1</td>
+                <td class="num">-</td>
+                <td class="num">-</td>
+                <td class="num">1</td>
+                <td class="money">365,00</td>
+                <td class="money">365,00</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="totals">
+            <div><span>Base imposable</span><strong>6.815,47</strong></div>
+            <div><span>IVA 21%</span><strong>1.431,25</strong></div>
+            <div class="grand"><span>Total</span><strong>8.246,72</strong></div>
+          </div>
+          <div class="foot">
+            <div><strong>Condicions</strong><br />Preus subjectes a validacio tecnica i disponibilitat de material.</div>
+            <div><strong>MNL Solutions</strong><br />Solucions industrials, panell i envolupants metal.liques.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet style-b">
+        <div class="frame">
+          <header>
+            <div class="brand-block">
+              <div class="brand">MNL SOLUTIONS</div>
+              <p>Departament tecnic i pressupostos</p>
+            </div>
+            <div class="doc-number">
+              <div>
+                <span class="label">Proposta B</span>
+                <p>Pressupost</p>
+                <strong>SO-TEST-001</strong>
+              </div>
+            </div>
+          </header>
+          <div class="data-strip">
+            <div><span>Client</span><br /><strong>Client Industrial Demo</strong></div>
+            <div><span>Projecte</span><br /><strong>Coberta panell</strong></div>
+            <div><span>Data</span><br /><strong>08/07/2026</strong></div>
+            <div><span>Comercial</span><br /><strong>MNL</strong></div>
+          </div>
+          <div class="section-title">
+            <strong>Desglossament tecnic</strong>
+            <span class="label">Enginyeria / amidaments</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Class.</th>
+                <th>Descripcio</th>
+                <th class="num">Uds</th>
+                <th class="num">Long</th>
+                <th class="num">Ancho</th>
+                <th class="num">Total</th>
+                <th class="money">P. unit.</th>
+                <th class="money">Import</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.01</td>
+                <td><strong>HI-CT 60 PIR</strong><div class="line-desc">Chapa 56, recobriment poliester</div></td>
+                <td class="num">22</td>
+                <td class="num">6,00</td>
+                <td class="num">1,15</td>
+                <td class="num">151,80</td>
+                <td class="money">24,35</td>
+                <td class="money">3.696,33</td>
+              </tr>
+              <tr>
+                <td>2.01</td>
+                <td><strong>Remat lateral lacat</strong><div class="line-desc">Perfil segons detall constructiu</div></td>
+                <td class="num">48</td>
+                <td class="num">-</td>
+                <td class="num">-</td>
+                <td class="num">48 ml</td>
+                <td class="money">18,40</td>
+                <td class="money">883,20</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="totals">
+            <div><span>Subtotal</span><strong>6.815,47</strong></div>
+            <div><span>IVA 21%</span><strong>1.431,25</strong></div>
+            <div class="grand"><span>Total</span><strong>8.246,72</strong></div>
+          </div>
+          <div class="conditions">
+            <strong>Notes tecniques:</strong> amidaments calculats segons dades facilitades. La fabricacio queda subjecta a revisio de plannols i confirmacio final del client. Transport, descarrega i mitjans auxiliars segons condicions particulars de l'obra.
+          </div>
+        </div>
+      </section>
+
+      <section class="sheet style-c">
+        <aside>
+          <div class="brand">MNL</div>
+          <span class="label">Proposta C</span>
+          <dl>
+            <div><dt>Pressupost</dt><dd>SO-TEST-001</dd></div>
+            <div><dt>Data</dt><dd>08/07/2026</dd></div>
+            <div><dt>Validesa</dt><dd>30 dies</dd></div>
+            <div><dt>Total</dt><dd>8.246,72 EUR</dd></div>
+          </dl>
+        </aside>
+        <main>
+          <h2>Proposta comercial</h2>
+          <div class="client">
+            <div>
+              <span>Preparat per</span>
+              <h3>Client Industrial Demo</h3>
+              <p>Carrer Exemple, 12<br />08000 Barcelona</p>
+            </div>
+            <div>
+              <span>Projecte</span>
+              <h3>Coberta i remateria</h3>
+              <p>Solucio amb panell sandwich, perfileria i transport.</p>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Concepte</th>
+                <th class="num">Quantitat</th>
+                <th class="money">Preu</th>
+                <th class="money">Import</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Panell HI-CT 60 PIR</strong><div class="line-desc">22 panells x 6,00 x 1,15 = 151,80 m2</div></td>
+                <td class="num">151,80 m2</td>
+                <td class="money">24,35</td>
+                <td class="money">3.696,33</td>
+              </tr>
+              <tr>
+                <td><strong>Remat lateral lacat</strong><div class="line-desc">Acabat lacat, color segons carta</div></td>
+                <td class="num">48 ml</td>
+                <td class="money">18,40</td>
+                <td class="money">883,20</td>
+              </tr>
+              <tr>
+                <td><strong>Transport i manipulacio</strong><div class="line-desc">Entrega en obra</div></td>
+                <td class="num">1</td>
+                <td class="money">365,00</td>
+                <td class="money">365,00</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="totals">
+            <div><span>Base</span><strong>6.815,47</strong></div>
+            <div><span>IVA</span><strong>1.431,25</strong></div>
+            <div class="grand"><span>Total</span><strong>8.246,72</strong></div>
+          </div>
+          <div class="note">
+            <strong>Per que aquesta proposta?</strong><br />
+            Format mes comercial i llegible per client final. Redueix soroll tecnic, destaca el valor global i deixa els amidaments com a suport de cada partida.
+          </div>
+        </main>
+      </section>
+
+      <section class="sheet style-d">
+        <div class="top">
+          <div>
+            <div class="mark">MNL</div>
+            <div class="company">
+              <strong>MNL TECHNICAL CONSULTANT SL</strong>
+              C/ Exemple Industrial, 211<br />
+              08470 - Sant Celoni (Barcelona)<br />
+              N.I.F.: B-00000000
+            </div>
+          </div>
+          <div class="partners">
+            <div>
+              <div class="partner-logo"><span>Distribuidor Oficial</span>HUURRE</div>
+            </div>
+            <div>
+              <div class="partner-logo">Induspanel</div>
+              <a href="#">www.induspanel.example</a>
+            </div>
+          </div>
+          <div class="quote-box">
+            <h2>PRESUPUESTO</h2>
+            <dl>
+              <dt>REFERENCIA:</dt><dd>CUBIERTA</dd>
+              <dt>N. DOCUMENTO:</dt><dd>SO-TEST-001</dd>
+              <dt>FECHA:</dt><dd>08/07/2026</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="addresses">
+          <div class="block">
+            <h3>ENVIO</h3>
+            <p><strong>CLIENTE DEMO, S.L.</strong><br />C/ Industria, 44<br />08000 - Barcelona</p>
+          </div>
+          <div class="block">
+            <h3>CLIENTE</h3>
+            <p><strong>CLIENTE DEMO, S.L.</strong><br />C/ Industria, 44<br />NIF: B 00000000<br />Tlf: 600 000 000<br />compras@cliente-demo.example</p>
+          </div>
+        </div>
+
+        <div class="bar"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>ARTICULO</th>
+              <th class="num">UDS</th>
+              <th class="num">LONG.</th>
+              <th class="num">ANCHO</th>
+              <th class="num">CANTIDAD</th>
+              <th class="num">TOTAL</th>
+              <th></th>
+              <th class="money">PRECIO EUR</th>
+              <th class="money">IMPORTE EUR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="article"><strong>1.01.-Perfil grecado TZ-40/0,5 Prelacado</strong><span>Color Blanco Pirineo 1006</span></td>
+              <td class="num">1</td>
+              <td class="num"></td>
+              <td class="num">1,000</td>
+              <td class="num">700,00</td>
+              <td class="num">700,00</td>
+              <td class="unit-band">M2</td>
+              <td class="money">8,76</td>
+              <td class="money">6.132,00</td>
+            </tr>
+            <tr class="spacer">
+              <td class="article"><strong>1.02.-Omega galvanizada de 40 / 0,8 mm de altura</strong></td>
+              <td class="num">1</td>
+              <td class="num"></td>
+              <td class="num"></td>
+              <td class="num">1.400,00</td>
+              <td class="num">1.400,00</td>
+              <td class="unit-band">ML</td>
+              <td class="money">3,51</td>
+              <td class="money">4.914,00</td>
+            </tr>
+            <tr class="spacer">
+              <td class="article"><strong>1.03.-Aislamiento termico de lana de vidrio</strong><span>IBR 80 mm desnudo.</span></td>
+              <td class="num">1</td>
+              <td class="num"></td>
+              <td class="num"></td>
+              <td class="num">700,00</td>
+              <td class="num">700,00</td>
+              <td class="unit-band">M2</td>
+              <td class="money">4,14</td>
+              <td class="money">2.898,00</td>
+            </tr>
+            <tr class="spacer">
+              <td class="article"><strong>PORTES:</strong></td>
+              <td colspan="5"><strong>Transporte combinado</strong></td>
+              <td class="unit-band">PU</td>
+              <td class="money">330,00</td>
+              <td class="money">330,00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="bottom">
+          <div class="payment">
+            <strong>FORMA DE PAGO:</strong> Transferencia bancaria a la confirmacion del pedido<br />
+            <strong>CAIXA BANK:</strong> ES00 0000 0000 0000 0000 0000
+          </div>
+          <div class="summary">
+            <h3>RESUMEN</h3>
+            <div class="summary-row"><span>Base Imponible</span><strong>14.274,00 EUR</strong></div>
+            <div class="summary-row"><span>21% IVA</span><strong>2.997,54 EUR</strong></div>
+            <div class="summary-row grand"><span>TOTAL</span><strong>17.271,54 EUR</strong></div>
+            <div class="validity">Esta oferta tiene una validez de 10 dias</div>
+          </div>
+        </div>
+
+        <footer>
+          <span>MNL TECHNICAL CONSULTANT, S.L. C/ Exemple Industrial, 211. Sant Celoni (BCN).</span>
+          <span class="page">Pag.1</span>
+        </footer>
+      </section>
+    </div>
+    <script>
+      const previewStyle = new URLSearchParams(window.location.search).get("preview");
+      if (previewStyle) {
+        document.body.style.background = "#ffffff";
+        const screen = document.querySelector(".screen");
+        if (screen) {
+          screen.style.padding = "24px";
+        }
+        document.querySelector(".intro")?.remove();
+        document.querySelectorAll(".sheet").forEach((sheet) => {
+          if (!sheet.classList.contains(previewStyle)) {
+            sheet.remove();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

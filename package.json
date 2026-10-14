@@ -1,0 +1,67 @@
+{
+  "name": "mnl-odoo-sync",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sincronitzacio de cataleg i pressupostos entre el cataleg intern i Odoo.",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "check": "node scripts/check.js",
+    "dev": "node src/server.js",
+    "electron": "electron .",
+    "electron:build": "electron-builder --win nsis portable",
+    "odoo": "node src/cli.js",
+    "odoo:ping": "node src/cli.js ping",
+    "odoo:preview": "node src/cli.js products:preview",
+    "odoo:dry-run": "node src/cli.js products:dry-run",
+    "odoo:sync": "node src/cli.js products:sync",
+    "odoo:rollback:dry-run": "node src/cli.js products:rollback:dry-run",
+    "odoo:rollback": "node src/cli.js products:rollback",
+    "odoo:quote": "node src/cli.js quote:create examples/odoo-quote.sample.json",
+    "odoo:invoice-template:kawabunga": "node scripts/install_odoo_invoice_template_kawabunga.js",
+    "odoo:invoice-template:kawabunga:inspect": "node scripts/install_odoo_invoice_template_kawabunga.js --inspect",
+    "odoo:transport:inspect": "node scripts/install_odoo_transport_management.js --inspect",
+    "odoo:transport:install": "node scripts/install_odoo_transport_management.js --apply --test",
+    "odoo:payment-methods:inspect": "node scripts/install_odoo_authorized_payment_methods.js --inspect",
+    "odoo:payment-methods:install": "node scripts/install_odoo_authorized_payment_methods.js --apply --test",
+    "odoo:customer-risk:inspect": "node scripts/install_odoo_customer_risk_level.js",
+    "odoo:customer-risk:install": "node scripts/install_odoo_customer_risk_level.js --apply --test",
+    "catalog:base": "node src/catalogCli.js base:list",
+    "catalog:quote": "node src/catalogCli.js quote examples/odoo-quote.sample.json",
+    "catalog:combinations": "node src/catalogCli.js combinations:count",
+    "contacts:quotes": "python scripts/extract_contacts_from_quotes.py",
+    "contacts:invoices": "python scripts/extract_contacts_from_quotes.py --document-type invoices"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.panelyacero.mnlodoosync",
+    "productName": "MNL Odoo Sync",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "public/**/*",
+      "data/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
