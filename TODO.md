@@ -142,3 +142,9 @@ El document `01` defineix l'estructura base. El document `02` conté decisions p
 ## 9. Criteri per actualitzar aquest fitxer
 
 Cada canvi d'estat ha d'incloure una evidència verificable: fitxer i línia, prova automatitzada, log d'Odoo, captura/PDF revisat o decisió funcional datada. No marcar una tasca com a `FET` només perquè existeixi codi; també ha d'estar validada en l'entorn corresponent.
+
+## Actualització 19/10/2026 — selecció de client
+
+- [x] Herència en viu de contacte, idioma i pagament a `provesmnl1410`, amb dades fiscals relacionades visibles al formulari. Quatre casos RPC verificats i vista combinada comprovada. Evidència: `docs/CUSTOMER_ONCHANGE_2026-10-19.md`.
+- [ ] Validar visualment al navegador autenticat i el desament del pressupost després de seleccionar/canviar client; mantenir separada aquesta comprovació de la regressió RPC.
+- [ ] Recuperar a Git les personalitzacions de marges/descomptes del 14/10; aquesta correcció no les substitueix.

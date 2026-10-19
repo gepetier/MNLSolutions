@@ -174,3 +174,7 @@ http://localhost:4173
 ```
 
 La pantalla inclou catàleg, generació de variants, càlcul de línies, preview d'Odoo i revisió de contactes. Per carregar contactes, `MNL_SENSITIVE_DATA_DIR` ha d'apuntar a una carpeta disponible amb `contacts.json`.
+
+## Dades del client al pressupost (19/10/2026)
+
+Corregida a `provesmnl1410` l’herència en viu de contacte, idioma i pagament en canviar de client. El formulari incorpora dades fiscals relacionades i contacte editable. Regressió RPC sense desar verificada; validació visual i desament pendents. Vegeu [el registre tècnic](docs/CUSTOMER_ONCHANGE_2026-10-19.md).

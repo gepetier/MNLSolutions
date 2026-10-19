@@ -32,3 +32,7 @@ S'han declarat les dependències Python, ampliat `npm run check` a tot el JavaSc
 ## Context compartit entre equips
 
 `AGENTS.md` a l’arrel indica la lectura inicial de Codex. `docs/CONTEXT_INDEX.md` agrupa totes les fonts i explica quins recursos privats s’han de recuperar. Les eines històriques abans ignorades a tmp són ara a `scripts/archive/2026-09-23/`; els plans intermedis no substitueixen les decisions finals de setembre.
+
+## Seguiment 19/10/2026
+
+Accés de lectura i correcció de client realitzats sobre `provesmnl1410`. El canvi de client ja retorna contacte, idioma, pagament i dades fiscals abans de desar en les proves RPC. Vegeu `CUSTOMER_ONCHANGE_2026-10-19.md`; queda pendent la verificació visual i el desament. Les novetats de marges/descomptes posteriors al checkpoint encara s’han de recuperar a Git.
