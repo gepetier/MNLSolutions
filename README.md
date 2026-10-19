@@ -178,3 +178,7 @@ La pantalla inclou catàleg, generació de variants, càlcul de línies, preview
 ## Dades del client al pressupost (19/10/2026)
 
 Corregida a `provesmnl1410` l’herència en viu de contacte, idioma i pagament en canviar de client. El formulari incorpora dades fiscals relacionades i contacte editable. Regressió RPC sense desar verificada; validació visual i desament pendents. Vegeu [el registre tècnic](docs/CUSTOMER_ONCHANGE_2026-10-19.md).
+
+## Descomptes ajornats (19/10/2026)
+
+Per decisió de l’usuari, els descomptes queden en standby. Els controls s’han ocultat al formulari de pressupostos de proves, conservant dades i dependències. Vegeu [el registre i la reversió](docs/DISCOUNTS_STANDBY_2026-10-19.md).

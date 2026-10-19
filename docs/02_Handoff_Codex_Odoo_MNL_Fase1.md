@@ -807,3 +807,7 @@ L'estat conegut és el documentat el 23/09: restauració a proves i promoció a 
 La feina immediata és consolidar una única plantilla de pressupost i revisar un PDF real, resoldre la fitxa estreta que no exposa les dimensions i completar la regressió ML/UDS. La regressió web del 23/09 a proves està documentada; la regressió funcional després de la promoció a principal continua pendent. No s'ha executat una auditoria Odoo nova el 14/10.
 
 Llegeix `DEVELOPMENT_HANDOFF_2026-10-14.md`, `PRODUCTION_PROMOTION_2026-09-23.md` i `../TODO.md` per reprendre. Els registres de juliol/setembre són històrics; no reinstal·lar canvis ja desplegats sense inspecció actual.
+
+## Decisió posterior — 19/10/2026: descomptes en standby
+
+L’usuari ajorna els descomptes i demana amagar-ne totes les referències actuals del pressupostatge. Ocultar camps, columnes, botons, opcions globals i controls fixos del formulari a proves, conservant dades i dependències tècniques. No continuar el desenvolupament ni la validació funcional de descomptes fins que l’usuari els reprengui. Vegeu `DISCOUNTS_STANDBY_2026-10-19.md`; les definicions anteriors són referència històrica.

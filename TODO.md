@@ -148,3 +148,9 @@ Cada canvi d'estat ha d'incloure una evidència verificable: fitxer i línia, pr
 - [x] Herència en viu de contacte, idioma i pagament a `provesmnl1410`, amb dades fiscals relacionades visibles al formulari. Quatre casos RPC verificats i vista combinada comprovada. Evidència: `docs/CUSTOMER_ONCHANGE_2026-10-19.md`.
 - [ ] Validar visualment al navegador autenticat i el desament del pressupost després de seleccionar/canviar client; mantenir separada aquesta comprovació de la regressió RPC.
 - [ ] Recuperar a Git les personalitzacions de marges/descomptes del 14/10; aquesta correcció no les substitueix.
+
+## Decisió 19/10/2026 — descomptes en standby
+
+- [~] Descomptes ajornats per instrucció de l’usuari; la seva implementació i validació deixen de ser prioritats vigents.
+- [x] Ocultació dels controls de descompte del formulari de pressupost a proves, amb verificació de l’arquitectura combinada. Evidència i reversió: `docs/DISCOUNTS_STANDBY_2026-10-19.md`.
+- [ ] Confirmació visual després de recarregar la interfície autenticada.

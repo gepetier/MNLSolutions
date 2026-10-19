@@ -36,3 +36,5 @@ S'han declarat les dependències Python, ampliat `npm run check` a tot el JavaSc
 ## Seguiment 19/10/2026
 
 Accés de lectura i correcció de client realitzats sobre `provesmnl1410`. El canvi de client ja retorna contacte, idioma, pagament i dades fiscals abans de desar en les proves RPC. Vegeu `CUSTOMER_ONCHANGE_2026-10-19.md`; queda pendent la verificació visual i el desament. Les novetats de marges/descomptes posteriors al checkpoint encara s’han de recuperar a Git.
+
+Descomptes: ajornats per decisió de l’usuari el 19/10. Controls ocults al pressupostatge de proves; no reprendre’n el desenvolupament fins a nova instrucció. Vegeu `DISCOUNTS_STANDBY_2026-10-19.md`.
