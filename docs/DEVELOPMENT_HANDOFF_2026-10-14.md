@@ -38,3 +38,9 @@ S'han declarat les dependències Python, ampliat `npm run check` a tot el JavaSc
 Accés de lectura i correcció de client realitzats sobre `provesmnl1410`. El canvi de client ja retorna contacte, idioma, pagament i dades fiscals abans de desar en les proves RPC. Vegeu `CUSTOMER_ONCHANGE_2026-10-19.md`; queda pendent la verificació visual i el desament. Les novetats de marges/descomptes posteriors al checkpoint encara s’han de recuperar a Git.
 
 Descomptes: ajornats per decisió de l’usuari el 19/10. Controls ocults al pressupostatge de proves; no reprendre’n el desenvolupament fins a nova instrucció. Vegeu `DISCOUNTS_STANDBY_2026-10-19.md`.
+
+## Interfície del pressupost — 19/10/2026
+
+Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicació a GitHub pendent: la revisió automàtica ha rebutjat la pujada per manca d’autorització explícita per publicar-hi els fitxers.
+
+PDF: `Pressupost MNL` és la plantilla predeterminada a proves des del 19/10. Mateixes files/columnes que al formulari, sense marges ni descripcions; les propostes A–D deixen de sortir al menú. Vegeu `QUOTATION_STANDARD_2026-10-19.md`. No repetir la tria de plantilla antiga.

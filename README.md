@@ -182,3 +182,11 @@ Corregida a `provesmnl1410` l’herència en viu de contacte, idioma i pagament 
 ## Descomptes ajornats (19/10/2026)
 
 Per decisió de l’usuari, els descomptes queden en standby. Els controls s’han ocultat al formulari de pressupostos de proves, conservant dades i dependències. Vegeu [el registre i la reversió](docs/DISCOUNTS_STANDBY_2026-10-19.md).
+
+## Interfície del pressupost — 19/10/2026
+
+Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicació a GitHub pendent: la revisió automàtica ha rebutjat la pujada per manca d’autorització explícita per publicar-hi els fitxers.
+
+## PDF predeterminat de pressupost (19/10/2026)
+
+`Pressupost MNL` segueix les files i les dotze columnes de la finestra, amb A4 vertical (actualització 20/10), sense marges ni descripcions de producte. Instal·lat i activat a proves; font QWeb i instal·lació reversible versionades. Vegeu [el mapa de camps i les proves](docs/QUOTATION_STANDARD_2026-10-19.md).

@@ -154,3 +154,17 @@ Cada canvi d'estat ha d'incloure una evidència verificable: fitxer i línia, pr
 - [~] Descomptes ajornats per instrucció de l’usuari; la seva implementació i validació deixen de ser prioritats vigents.
 - [x] Ocultació dels controls de descompte del formulari de pressupost a proves, amb verificació de l’arquitectura combinada. Evidència i reversió: `docs/DISCOUNTS_STANDBY_2026-10-19.md`.
 - [ ] Confirmació visual després de recarregar la interfície autenticada.
+
+## Interfície del pressupost — 19/10/2026
+
+Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicació a GitHub pendent: la revisió automàtica ha rebutjat la pujada per manca d’autorització explícita per publicar-hi els fitxers.
+
+## Decisió 19/10/2026 — PDF estàndard
+
+- [x] Plantilla predeterminada `Pressupost MNL` activada a `provesmnl1410`, amb les mateixes files i columnes del formulari, sense marges ni descripcions. Supera la tria pendent entre A–D i el model de sublínies del PDF antic.
+- [x] PDF real de mostra revisat visualment i files/imports contrastats amb la BD. Evidència: `docs/QUOTATION_STANDARD_2026-10-19.md`.
+- [ ] Prova directa del botó Imprimir al navegador autenticat i ampliació de casos ML/multipàgina/idiomes.
+
+## Actualització 20/10/2026 — pressupost en vertical
+
+- [x] Plantilla predeterminada a proves canviada a A4 vertical, mantenint les dotze columnes, sense marges ni descripcions de producte. Vegeu `docs/QUOTATION_STANDARD_2026-10-19.md`.

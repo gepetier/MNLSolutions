@@ -811,3 +811,11 @@ Llegeix `DEVELOPMENT_HANDOFF_2026-10-14.md`, `PRODUCTION_PROMOTION_2026-09-23.md
 ## Decisió posterior — 19/10/2026: descomptes en standby
 
 L’usuari ajorna els descomptes i demana amagar-ne totes les referències actuals del pressupostatge. Ocultar camps, columnes, botons, opcions globals i controls fixos del formulari a proves, conservant dades i dependències tècniques. No continuar el desenvolupament ni la validació funcional de descomptes fins que l’usuari els reprengui. Vegeu `DISCOUNTS_STANDBY_2026-10-19.md`; les definicions anteriors són referència històrica.
+
+## Decisió posterior — 19/10/2026: PDF igual al formulari
+
+El PDF predeterminat conservarà les files i les columnes de la finestra de pressupostatge, excloent camps interns relatius als marges i descripcions de producte. Article = nom de producte i variant, sense descripció de línia. Mateix ordre de seccions i línies, mateixes quantitats, total de variant i imports; no reagrupar les diverses mides en una línia resum nova. Conservar també les dues columnes d’unitat presents a la finestra. Aquesta decisió supera la presentació en sublínies i la descripció comercial visible establertes anteriorment. Font i validació: `QUOTATION_STANDARD_2026-10-19.md`.
+
+## Decisió posterior — 20/10/2026: orientació vertical
+
+El pressupost PDF predeterminat ha de ser A4 vertical. Conservar les dotze columnes de la versió aprovada, amb proporcions i capçaleres adaptades; continuen exclosos els marges interns i les descripcions de producte.
