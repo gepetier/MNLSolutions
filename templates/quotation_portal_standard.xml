@@ -5,7 +5,7 @@
         .mnl_portal_preview { padding:16px; background:white; border:1px solid #dbe6eb; border-radius:8px; }
         .mnl_portal_preview .mnl-offer { font-size:12px; }
         .mnl_portal_preview .mnl-lines-scroll { overflow-x:auto; }
-        .mnl_portal_preview .mnl-offer .lines { min-width:1100px; font-size:11px; }
+        .mnl_portal_preview .mnl-offer .lines { min-width:1000px; font-size:11px; }
         .mnl_portal_preview .mnl-offer .lines th { padding:8px 4px; overflow-wrap:anywhere; border-right:1px solid #487283; }
         .mnl_portal_preview .footer { position:static; margin-top:20px; }
         .mnl_portal_preview .footer > span:last-child { display:none; }

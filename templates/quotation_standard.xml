@@ -10,8 +10,9 @@
   <t t-if="mnl_dimension_check['mnl_valid']">
   <t t-set="language" t-value="doc.x_studio_idioma_document or doc.partner_id.lang or 'es_ES'"/>
   <t t-set="doc" t-value="doc.with_context(lang=language)"/>
-  <t t-set="translations" t-value="{'ca': {'title': 'PRESSUPOST', 'client': 'CLIENT', 'date': 'Data', 'reference': 'Referència', 'contact': 'Persona de contacte', 'vat': 'NIF/CIF', 'phone': 'Telèfon', 'email': 'Correu electrònic', 'address': 'Adreça fiscal', 'class': 'Class.', 'article': 'Article', 'units': 'Unitats', 'length': 'Longitud', 'width': 'Amplada', 'quantity': 'Quantitat', 'total_quantity': 'Total quantitat', 'kind': 'Ud.', 'uom': 'Unitat', 'price': 'Preu unitari final', 'net': 'Import sense IVA', 'gross': 'Import amb IVA', 'base': 'Base imposable', 'tax': 'IVA', 'total': 'TOTAL', 'payment': 'Forma de pagament', 'validity': 'Vàlid fins a', 'acceptance': 'Acceptació i signatura', 'bank': 'Dades bancàries', 'distributor': 'Distribuidor Oficial', 'page': 'Pàgina'}, 'es': {'title': 'PRESUPUESTO', 'client': 'CLIENTE', 'date': 'Fecha', 'reference': 'Referencia', 'contact': 'Persona de contacto', 'vat': 'NIF/CIF', 'phone': 'Teléfono', 'email': 'Correo electrónico', 'address': 'Dirección fiscal', 'class': 'Clas.', 'article': 'Artículo', 'units': 'Unidades', 'length': 'Longitud', 'width': 'Ancho', 'quantity': 'Cantidad', 'total_quantity': 'Cantidad total', 'kind': 'Ud.', 'uom': 'Unidad', 'price': 'Precio unitario final', 'net': 'Importe sin IVA', 'gross': 'Importe con IVA', 'base': 'Base imponible', 'tax': 'IVA', 'total': 'TOTAL', 'payment': 'Forma de pago', 'validity': 'Válido hasta', 'acceptance': 'Aceptación y firma', 'bank': 'Datos bancarios', 'distributor': 'Distribuidor Oficial', 'page': 'Página'}, 'en': {'title': 'QUOTATION', 'client': 'CUSTOMER', 'date': 'Date', 'reference': 'Reference', 'contact': 'Contact person', 'vat': 'Tax ID', 'phone': 'Phone', 'email': 'Email', 'address': 'Billing address', 'class': 'No.', 'article': 'Item', 'units': 'Units', 'length': 'Length', 'width': 'Width', 'quantity': 'Quantity', 'total_quantity': 'Total quantity', 'kind': 'Calc.', 'uom': 'Unit', 'price': 'Final unit price', 'net': 'Amount excl. VAT', 'gross': 'Amount incl. VAT', 'base': 'Subtotal', 'tax': 'VAT', 'total': 'TOTAL', 'payment': 'Payment terms', 'validity': 'Valid until', 'acceptance': 'Acceptance and signature', 'bank': 'Bank details', 'distributor': 'Distribuidor Oficial', 'page': 'Page'}}"/>
+  <t t-set="translations" t-value="{'ca': {'title': 'PRESSUPOST', 'client': 'CLIENT', 'date': 'Data', 'reference': 'Referència', 'contact': 'Persona de contacte', 'vat': 'NIF/CIF', 'phone': 'Telèfon', 'email': 'Correu electrònic', 'address': 'Adreça fiscal', 'class': 'Class.', 'article': 'Article', 'units': 'Unitats', 'length': 'Longitud (m)', 'width': 'Amplada (m)', 'quantity': 'Quantitat', 'total_quantity': 'Total quantitat', 'kind': 'Ud.', 'uom': 'Unitat', 'price': 'Preu unitari', 'net': 'Import s/IVA', 'gross': 'Import amb IVA', 'base': 'Base imposable', 'tax': 'IVA', 'total': 'TOTAL', 'payment': 'Forma de pagament', 'validity': 'Vàlid fins a', 'acceptance': 'Acceptació i signatura', 'bank': 'Dades bancàries', 'distributor': 'Distribuïdor oficial', 'page': 'Pàgina'}, 'es': {'title': 'PRESUPUESTO', 'client': 'CLIENTE', 'date': 'Fecha', 'reference': 'Referencia', 'contact': 'Persona de contacto', 'vat': 'NIF/CIF', 'phone': 'Teléfono', 'email': 'Correo electrónico', 'address': 'Dirección fiscal', 'class': 'Clas.', 'article': 'Artículo', 'units': 'Unidades', 'length': 'Longitud (m)', 'width': 'Ancho (m)', 'quantity': 'Cantidad', 'total_quantity': 'Cantidad total', 'kind': 'Ud.', 'uom': 'Unidad', 'price': 'Precio unitario', 'net': 'Importe s/IVA', 'gross': 'Importe con IVA', 'base': 'Base imponible', 'tax': 'IVA', 'total': 'TOTAL', 'payment': 'Forma de pago', 'validity': 'Válido hasta', 'acceptance': 'Aceptación y firma', 'bank': 'Datos bancarios', 'distributor': 'Distribuidor Oficial', 'page': 'Página'}, 'en': {'title': 'QUOTATION', 'client': 'CUSTOMER', 'date': 'Date', 'reference': 'Reference', 'contact': 'Contact person', 'vat': 'Tax ID', 'phone': 'Phone', 'email': 'Email', 'address': 'Billing address', 'class': 'No.', 'article': 'Item', 'units': 'Units', 'length': 'Length (m)', 'width': 'Width (m)', 'quantity': 'Quantity', 'total_quantity': 'Total quantity', 'kind': 'Calc.', 'uom': 'Unit', 'price': 'Unit price', 'net': 'Amount excl. VAT', 'gross': 'Amount incl. VAT', 'base': 'Subtotal', 'tax': 'VAT', 'total': 'TOTAL', 'payment': 'Payment terms', 'validity': 'Valid until', 'acceptance': 'Acceptance and signature', 'bank': 'Bank details', 'distributor': 'Distribuidor Oficial', 'page': 'Page'}}"/>
   <t t-set="L" t-value="translations.get(language[:2], translations['es'])"/>
+  <t t-set="visual_trial" t-value="doc.env.context.get('mnl_quotation_visual_trial', True)"/>
   <t t-set="customer" t-value="doc.partner_id.commercial_partner_id"/>
   <t t-set="lines" t-value="doc.order_line.sorted(key=lambda row: (row.sequence, row.id))"/>
   <div class="article mnl-offer" t-att-data-oe-model="doc._name" t-att-data-oe-id="doc.id" t-att-data-oe-lang="language">
@@ -29,15 +30,19 @@
       .mnl-offer .document-title { font-size:18px; font-weight:700; letter-spacing:1px; }
       .mnl-offer .number { font-size:12px; font-weight:700; display:block; margin-top:4px; }
       .mnl-offer .meta-label { color:#667c89; font-size:9px; margin-right:6px; }
-      .mnl-offer .lines { width:100%; table-layout:fixed; border-collapse:collapse; font-size:8.6px; }
+      .mnl-offer .lines { width:100%; table-layout:fixed; border-collapse:collapse; font-size:9.4px; }
       .mnl-offer .lines thead { display:table-header-group; }
-      .mnl-offer .lines th { background:#183c4f; color:white; font-weight:700; padding:7px 2px; vertical-align:middle; line-height:1.3; }
+      .mnl-offer .lines th { font-size:9px; background:#183c4f; color:white; font-weight:700; padding:7px 2px; vertical-align:middle; line-height:1.3; }
       .mnl-offer .lines td { border-bottom:1px solid #e1e8ec; padding:6px 2px; vertical-align:top; line-height:1.35; word-wrap:break-word; }
       .mnl-offer .num { text-align:right; white-space:nowrap; }
       .mnl-offer .text-start { text-align:left; }
       .mnl-offer .lines th.num { white-space:normal; }
       .mnl-offer .section td { background:#e9f0f3; font-weight:700; border-top:1px solid #b9ccd5; color:#183c4f; }
       .mnl-offer .note td { color:#607480; font-style:italic; }
+      .mnl-offer .variant-start td { border-top:2px solid #b9ccd5; }
+      .mnl-offer .variant-continuation .product-name { font-weight:400; }
+      .mnl-offer .product-code { margin-top:3px; font-size:8px; font-weight:400; color:#607480; overflow-wrap:break-word; }
+      .mnl-offer .online-acceptance { margin-top:8px; color:#183c4f; }
       .mnl-offer .product-name { font-weight:600; white-space:normal; }
       .mnl-offer .bottom { width:100%; margin-top:18px; border-collapse:collapse; page-break-inside:avoid; }
       .mnl-offer .bottom td { vertical-align:top; }
@@ -73,34 +78,36 @@
       </tr></table>
       <table class="meta"><tr><td style="width:62%"><span class="document-title" t-out="L['title']"/><span class="number" t-field="doc.name"/></td><td style="text-align:right"><span class="meta-label" t-out="L['date']"/><span t-field="doc.date_order" t-options="{'widget':'date'}"/></td></tr></table>
       <div class="mnl-lines-scroll"><table class="lines" name="mnl_standard_quotation_lines" t-att-id="'sales_order_table' if doc.env.context.get('mnl_portal_preview') else None" t-att-data-order-id="doc.id if doc.env.context.get('mnl_portal_preview') else None" t-att-data-token="doc.access_token if doc.env.context.get('mnl_portal_preview') else None">
-        <thead><tr><th style="width:5%" class="text-start"><t t-out="L['class']"/></th><th style="width:20%" class="text-start"><t t-out="L['article']"/></th><th style="width:4%" class="num"><t t-out="L['units']"/></th><th style="width:6%" class="num"><t t-out="L['length']"/></th><th style="width:6%" class="num"><t t-out="L['width']"/></th><th style="width:7%" class="num"><t t-out="L['quantity']"/></th><th style="width:7%" class="num"><t t-out="L['total_quantity']"/></th><th style="width:4%" class="num"><t t-out="L['kind']"/></th><th style="width:5%" class="num"><t t-out="L['uom']"/></th><th style="width:8%" class="num"><t t-out="L['price']"/><br/><small t-out="doc.currency_id.symbol"/></th><th style="width:9%" class="num"><t t-out="L['net']"/><br/><small t-out="doc.currency_id.symbol"/></th><th style="width:9%" class="num"><t t-out="L['gross']"/><br/><small t-out="doc.currency_id.symbol"/></th></tr></thead>
+        <thead><tr><th style="width:5%" class="text-start"><t t-out="L['class']"/></th><th style="width:25%" class="text-start"><t t-out="L['article']"/></th><th style="width:5%" class="num"><t t-out="L['units']"/></th><th style="width:7%" class="num"><t t-out="L['length']"/></th><th style="width:7%" class="num"><t t-out="L['width']"/></th><th style="width:8%" class="num"><t t-out="L['quantity']"/></th><th style="width:4%" class="num"><t t-out="L['kind']"/></th><th style="width:5%" class="num"><t t-out="L['uom']"/></th><th style="width:10%" class="num"><t t-out="L['price']"/><br/><small t-out="doc.currency_id.symbol"/></th><th style="width:12%" class="num"><t t-out="L['net']"/><br/><small t-out="doc.currency_id.symbol"/></th><th style="width:12%" class="num"><t t-out="L['gross']"/><br/><small t-out="doc.currency_id.symbol"/></th></tr></thead>
         <tbody>
           <t t-foreach="lines" t-as="line">
             <t t-if="line.display_type in ['line_section', 'line_subsection']">
               <t t-set="next_sections" t-value="[idx for idx in range(line_index+1,len(lines)) if lines[idx].display_type in ['line_section','line_subsection']]"/>
               <t t-set="section_end" t-value="next_sections[0] if next_sections else len(lines)"/>
-              <tr class="section"><td colspan="10"><span t-field="line.name"/></td><td class="num"><span t-out="sum(row.price_subtotal for row in lines[line_index+1:section_end] if not row.display_type)" t-options="{'widget':'float','precision':2}"/></td><td class="num"><span t-out="sum(row.price_total for row in lines[line_index+1:section_end] if not row.display_type)" t-options="{'widget':'float','precision':2}"/></td></tr>
+              <tr class="section"><td colspan="9"><span t-out="line.name.replace('FACANA', 'FAÇANA') if language[:2] == 'ca' else line.name"/></td><td class="num"><span t-out="sum(row.price_subtotal for row in lines[line_index+1:section_end] if not row.display_type)" t-options="{'widget':'float','precision':2}"/></td><td class="num"><span t-out="sum(row.price_total for row in lines[line_index+1:section_end] if not row.display_type)" t-options="{'widget':'float','precision':2}"/></td></tr>
             </t>
-            <tr t-elif="line.display_type == 'line_note'" class="note"><td colspan="12"><span t-field="line.name"/></td></tr>
-            <tr t-else="" class="product" t-att-data-line-id="line.id">
+            <tr t-elif="line.display_type == 'line_note'" class="note"><td colspan="11"><span t-out="line.name.replace('el total de variant és informatiu i no se suma entre files. ', '')"/></td></tr>
+            <t t-else="">
+            <t t-set="variant_start" t-value="line_index == 0 or lines[line_index-1].display_type or lines[line_index-1].product_id != line.product_id"/>
+            <tr t-att-class="'product ' + ('variant-start' if variant_start else 'variant-continuation') if visual_trial else 'product'" t-att-data-line-id="line.id">
               <td><span t-field="line.x_studio_classificador"/></td>
-              <td class="product-name"><span t-out="line.product_id.with_context(display_default_code=False).display_name"/></td>
+              <td class="product-name"><span t-out="line.product_id.with_context(display_default_code=False).display_name"/><div t-if="visual_trial and variant_start and line.product_id.default_code" class="product-code" t-out="line.product_id.default_code"/></td>
               <td class="num"><span t-field="line.x_studio_uds"/></td>
               <td class="num"><span t-if="line.x_studio_tipus_calcul in ['m2','ml']" t-field="line.x_studio_long" t-options="{'widget':'float','precision':3}"/><t t-else="">-</t></td>
               <td class="num"><span t-if="line.x_studio_tipus_calcul == 'm2'" t-field="line.x_studio_ancho_1" t-options="{'widget':'float','precision':3}"/><t t-else="">-</t></td>
               <td class="num"><span t-field="line.product_uom_qty" t-options="{'widget':'float','precision':2}"/></td>
-              <td class="num"><span t-field="line.x_studio_total" t-options="{'widget':'float','precision':2}"/></td>
               <td class="num"><t t-out="{'m2':'m²','ml':'ml','uds':'uds'}.get(line.x_studio_tipus_calcul,line.x_studio_tipus_calcul or '-')"/></td>
               <td class="num"><span t-field="line.product_uom_id.name"/></td>
               <td class="num"><span t-field="line.price_unit" t-options="{'widget':'float','precision':2}"/></td>
               <td class="num"><span t-field="line.price_subtotal" t-options="{'widget':'float','precision':2}"/></td>
               <td class="num"><span t-field="line.price_total" t-options="{'widget':'float','precision':2}"/></td>
             </tr>
+            </t>
           </t>
         </tbody>
       </table></div>
       <table class="bottom"><tr><td class="conditions">
-        <div><strong t-out="L['payment']"/>: <span t-field="doc.payment_term_id.name"/></div>
+        <div><strong t-out="L['payment']"/>: <span t-out="doc.payment_term_id.name.replace('Bancaria', 'bancària') if language[:2] == 'ca' else doc.payment_term_id.name"/></div>
         <div><strong t-out="L['validity']"/>: <span t-field="doc.validity_date" t-options="{'widget':'date'}"/></div>
         <t t-if="doc.payment_term_id.id == 1 and doc.company_id.partner_id.bank_ids">
           <div style="margin-top:6px"><strong t-out="L['bank']"/>:</div>
@@ -108,10 +115,14 @@
         </t>
       </td><td style="width:36%"><table class="totals">
         <tr><td t-out="L['base']"/><td class="num"><span t-field="doc.amount_untaxed" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></td></tr>
-        <tr><td t-out="L['tax']"/><td class="num"><span t-field="doc.amount_tax" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></td></tr>
+        <t t-foreach="(doc.tax_totals or {}).get('subtotals', [])" t-as="tax_subtotal">
+          <tr t-foreach="tax_subtotal.get('tax_groups', [])" t-as="tax_group"><td t-out="tax_group.get('group_label') or tax_group['group_name']"/><td class="num"><span t-out="tax_group['tax_amount_currency']" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></td></tr>
+        </t>
         <tr class="grand"><td t-out="L['total']"/><td class="num"><span t-field="doc.amount_total" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></td></tr>
       </table></td></tr></table>
       <div class="acceptance"><strong t-out="L['acceptance']"/><div class="acceptance-text" t-field="doc.x_studio_condicions_acceptacio"/>
+        <div t-if="doc.require_signature and not doc.signature" class="online-acceptance" t-out="{'ca':'Podeu acceptar i signar aquest pressupost des del portal de clients.', 'es':'Puede aceptar y firmar este presupuesto desde el portal de clientes.', 'en':'You can accept and sign this quotation in the customer portal.'}.get(language[:2], 'Puede aceptar y firmar este presupuesto desde el portal de clientes.')"/>
+        <div t-if="not doc.require_signature and not doc.signature" style="margin-top:16px;min-height:45px;" t-out="{'ca':'Nom: ____________________    Data: __________    Signatura:', 'es':'Nombre: ____________________    Fecha: __________    Firma:', 'en':'Name: ____________________    Date: __________    Signature:'}.get(language[:2], 'Nombre: ____________________    Fecha: __________    Firma:')"/>
         <img t-if="doc.signature" t-att-src="image_data_uri(doc.signature)" style="max-height:45px;max-width:180px;"/>
         <div t-if="doc.signed_by" t-field="doc.signed_by"/>
       </div>

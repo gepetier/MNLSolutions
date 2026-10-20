@@ -43,9 +43,9 @@ p = Rows()
 p.feed(html)
 expected = [line for line in snapshot['lines'] if not line['display_type']]
 assert [r['id'] for r in p.rows] == [line['id'] for line in expected], 'Row order/grouping changed'
-fields = {2:'x_studio_uds', 5:'x_studio_cantidad', 6:'x_studio_total', 9:'price_unit', 10:'x_studio_importe_mnl', 11:'price_total'}
+fields = {2:'x_studio_uds', 5:'product_uom_qty', 8:'price_unit', 9:'price_subtotal', 10:'price_total'}
 for row, line in zip(p.rows, expected):
-    assert len(row['cells']) == 12, 'Incorrect column count'
+    assert len(row['cells']) == 11, 'Incorrect column count'
     for index, field in fields.items():
         assert abs(number(row['cells'][index]) - Decimal(str(line[field]))) <= Decimal('0.005'), (row['id'], field, row['cells'][index], line[field])
-print(json.dumps({'checkedProductRows':len(expected), 'columns':12, 'sameOrderAndValues':True, 'productDescriptions':False, 'internalMargins':False}))
+print(json.dumps({'checkedProductRows':len(expected), 'columns':11, 'sameOrderAndValues':True, 'productDescriptions':False, 'internalMargins':False}))

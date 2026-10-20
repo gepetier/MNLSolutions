@@ -1,0 +1,27 @@
+<data>
+  <xpath expr="//field[@name='order_line']//list//field[@name='x_studio_total']" position="attributes">
+    <attribute name="column_invisible">True</attribute>
+    <attribute name="optional">hide</attribute>
+  </xpath>
+  <xpath expr="//field[@name='order_line']//form//field[@name='x_studio_total']" position="attributes">
+    <attribute name="invisible">True</attribute>
+  </xpath>
+  <xpath expr="//field[@name='order_line']//field[@name='x_studio_long']" position="attributes">
+    <attribute name="string">Longitud (m)</attribute>
+  </xpath>
+  <xpath expr="//field[@name='order_line']//list//field[@name='x_studio_long']" position="attributes">
+    <attribute name="string">Longitud (m)</attribute>
+  </xpath>
+  <xpath expr="//field[@name='order_line']//field[@name='x_studio_ancho_1']" position="attributes">
+    <attribute name="string">Amplada (m)</attribute>
+  </xpath>
+  <xpath expr="//field[@name='order_line']//list//field[@name='x_studio_ancho_1']" position="attributes">
+    <attribute name="string">Amplada (m)</attribute>
+  </xpath>
+  <xpath expr="//field[@name='order_line']//list//field[@name='price_unit']" position="attributes">
+    <attribute name="string">Preu unitari</attribute>
+  </xpath>
+  <xpath expr="//field[@name='order_line']//list//field[@name='x_studio_importe_mnl']" position="attributes">
+    <attribute name="string">Import s/IVA</attribute>
+  </xpath>
+</data>

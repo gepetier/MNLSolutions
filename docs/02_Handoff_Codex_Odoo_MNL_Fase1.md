@@ -823,3 +823,7 @@ El pressupost PDF predeterminat ha de ser A4 vertical. Conservar les dotze colum
 ## Decisió posterior — 20/10/2026: coherència unificada
 
 Conservar el contacte manual en el mateix desament que el client. Unificar les dades del formulari, portal i PDF amb marges només interns. Sincronitzar bidireccionalment data i frase de validesa sense regenerar la resta de condicions. Permetre esborranys incomplets i exigir dimensions positives en generar PDF: llargada/amplada en m², llargada en ml; UDS sense dimensions obligatòries. Aplicat i provat només a proves; detalls i límits a `QUOTATION_UNIFIED_2026-10-20.md`.
+
+## Revisió visual posterior — 20/10/2026
+
+Total variant amagat: onze columnes externes. Dimensions amb unitat m, lletra ampliada, resum fiscal natiu amb tipus i correccions de català. Separació de variants i SKU en prova provisional, pendents del vistiplau visual de l’usuari. Signatura en línia nativa activada al pressupost de mostra; no s’ha signat. IBAN i arrodoniment ajornats. Detall i evidència: `QUOTATION_READABILITY_2026-10-20.md`. Aquesta decisió supera les referències anteriors a dotze columnes visibles.

@@ -200,3 +200,7 @@ El [banc de proves del 20/10](docs/QUOTATION_TEST_BENCH_2026-10-20.md) contrasta
 ## Correccions de coherència — 20/10/2026
 
 Aplicades a proves: contacte manual conservat en canviar client i contacte en el mateix desament; portal i PDF amb document compartit; validesa bidireccional entre camp i condicions; dimensions obligatòries en generar documents m²/ml, amb excepció UDS. Validació i límits: [QUOTATION_UNIFIED_2026-10-20.md](docs/QUOTATION_UNIFIED_2026-10-20.md). Pressupost restaurat; principal sense canvis.
+
+## Revisió visual posterior — 20/10/2026
+
+Total variant amagat: onze columnes externes. Dimensions amb unitat m, lletra ampliada, resum fiscal natiu amb tipus i correccions de català. Separació de variants i SKU en prova provisional, pendents del vistiplau visual de l’usuari. Signatura en línia nativa activada al pressupost de mostra; no s’ha signat. IBAN i arrodoniment ajornats. Detall i evidència: `docs/QUOTATION_READABILITY_2026-10-20.md`. Aquesta decisió supera les referències anteriors a dotze columnes visibles.
