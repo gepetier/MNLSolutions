@@ -193,3 +193,7 @@ Total variant amagat: onze columnes externes. Dimensions amb unitat m, lletra am
 ## V3 de prova — 20/10/2026
 
 PDF alternatiu de nou columnes, sense Class./Article repetits en les continuacions d’una variant, sense codis SKU ni imports amb IVA per fila, amb capçaleres en una línia, padding i fons suau. La v2 continua predeterminada; la v3 està pendent de valoració. Font, generació temporal i comprovacions a `docs/QUOTATION_V3_TRIAL_2026-10-20.md`.
+
+## Terminologia de transport — 20/10/2026
+
+«Portes» passa a «Transport» en català als noms visibles del producte i controls del pressupost de proves. Es conserven SKU/camps tècnics i càlculs. Les referències funcionals antigues a Portes descriuen el mateix mòdul de transport. Reproducció i reversió a `docs/TRANSPORT_LABEL_2026-10-20.md`.

@@ -1,0 +1,10 @@
+<data>
+  <xpath expr="//label[@for='x_mnl_portes']" position="attributes"><attribute name="string">Transport</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_portes']" position="attributes"><attribute name="string">Transport</attribute></xpath>
+  <xpath expr="//group[@name='mnl_transport_configuration']" position="attributes"><attribute name="string">Configuració de transport</attribute></xpath>
+  <xpath expr="//group[@name='mnl_transport_configuration']/button[1]" position="attributes"><attribute name="string">Aplicar / actualitzar transport</attribute></xpath>
+  <xpath expr="//group[@name='mnl_transport_configuration']/button[2]" position="attributes">
+    <attribute name="string">Treure transport</attribute>
+    <attribute name="confirm">S'eliminarà la línia de transport del pressupost.</attribute>
+  </xpath>
+</data>
