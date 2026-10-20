@@ -204,3 +204,7 @@ Aplicades a proves: contacte manual conservat en canviar client i contacte en el
 ## Revisió visual posterior — 20/10/2026
 
 Total variant amagat: onze columnes externes. Dimensions amb unitat m, lletra ampliada, resum fiscal natiu amb tipus i correccions de català. Separació de variants i SKU en prova provisional, pendents del vistiplau visual de l’usuari. Signatura en línia nativa activada al pressupost de mostra; no s’ha signat. IBAN i arrodoniment ajornats. Detall i evidència: `docs/QUOTATION_READABILITY_2026-10-20.md`. Aquesta decisió supera les referències anteriors a dotze columnes visibles.
+
+## V3 de prova — 20/10/2026
+
+PDF alternatiu de nou columnes, sense Class./Article repetits en les continuacions d’una variant, sense codis SKU ni imports amb IVA per fila, amb capçaleres en una línia, padding i fons suau. La v2 continua predeterminada; la v3 està pendent de valoració. Font, generació temporal i comprovacions a `docs/QUOTATION_V3_TRIAL_2026-10-20.md`.
