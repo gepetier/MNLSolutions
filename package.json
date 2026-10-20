@@ -30,7 +30,10 @@
     "catalog:quote": "node src/catalogCli.js quote examples/odoo-quote.sample.json",
     "catalog:combinations": "node src/catalogCli.js combinations:count",
     "contacts:quotes": "python scripts/extract_contacts_from_quotes.py",
-    "contacts:invoices": "python scripts/extract_contacts_from_quotes.py --document-type invoices"
+    "contacts:invoices": "python scripts/extract_contacts_from_quotes.py --document-type invoices",
+    "test": "node --test tests/*.test.js",
+    "safety:check": "node scripts/check_repo_safety.js",
+    "check:ci": "npm run check && npm test && npm run safety:check && npm run catalog:combinations && npm run catalog:quote"
   },
   "engines": {
     "node": ">=18"

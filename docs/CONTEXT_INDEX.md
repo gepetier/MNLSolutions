@@ -4,6 +4,7 @@ El context necessari per reprendre el desenvolupament és versionat. No cal recu
 
 | Document | Funció i vigència |
 | --- | --- |
+| `QUALITY_WORKFLOW.md` | Protocol vigent de desenvolupament, proves, CI i reducció de consum de Work (20/10/2026). |
 | `../AGENTS.md` | Instruccions de projecte que Codex llegeix al nou clone. |
 | `../README.md` | Visió general, funcionalitats i ordres. |
 | `DEVELOPMENT_SETUP.md` | Instal·lació, arrencada i accés a recursos privats. |

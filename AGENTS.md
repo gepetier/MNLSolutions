@@ -2,6 +2,8 @@
 
 ## Lectura inicial
 
+**Flux de treball per defecte:** consulta també `docs/QUALITY_WORKFLOW.md` abans de modificar codi, Studio o informes. Aquest protocol complementa, sense substituir, les regles d'entorn i la jerarquia funcional.
+
 Abans de continuar, llegeix en aquest ordre:
 
 1. `docs/DEVELOPMENT_HANDOFF_2026-10-14.md`: punt de represa i limitacions.
@@ -36,3 +38,10 @@ El codi de les eines de setembre recuperat de tmp és a `scripts/archive/2026-09
 No versionar claus, `.env`, contactes, factures, pressupostos ni outputs privats. `MNL_SENSITIVE_DATA_DIR` apunta fora del repo. El clone conté el context funcional, però l'accés Odoo i les dades locals es recuperen per un canal privat.
 
 Comprovacions locals: `npm run check`, `npm run catalog:combinations`, `npm run catalog:quote`. Per Python: entorn virtual i `requirements.txt`. Cap comprovació d'aquest tipus requereix escriure a Odoo.
+
+## Validació i consum eficient de Work
+
+- Cada canvi nou es fa en branca/PR, amb una prova de regressió quan el comportament és automatitzable; abans de fusionar, executar `npm run check:ci` i consultar la CI.
+- Reutilitza proves locals i resultats de GitHub Actions. Reserva navegació Work per validar visualment els fluxos modificats, no per repetir passos deterministes.
+- El CI no es connecta a Odoo. Els canvis de Studio/QWeb, quantitats, preus i PDF requereixen proves explícites a una còpia neutralitzada vigent i el protocol de `docs/ENVIRONMENTS.md`.
+- Si hi ha conflicte entre un test local i l'estat real d'Odoo, investiga'l i documenta'l: no donis per correcta una operació remota només perquè un test local passa.
