@@ -819,3 +819,7 @@ El PDF predeterminat conservarà les files i les columnes de la finestra de pres
 ## Decisió posterior — 20/10/2026: orientació vertical
 
 El pressupost PDF predeterminat ha de ser A4 vertical. Conservar les dotze columnes de la versió aprovada, amb proporcions i capçaleres adaptades; continuen exclosos els marges interns i les descripcions de producte.
+
+## Decisió posterior — 20/10/2026: coherència unificada
+
+Conservar el contacte manual en el mateix desament que el client. Unificar les dades del formulari, portal i PDF amb marges només interns. Sincronitzar bidireccionalment data i frase de validesa sense regenerar la resta de condicions. Permetre esborranys incomplets i exigir dimensions positives en generar PDF: llargada/amplada en m², llargada en ml; UDS sense dimensions obligatòries. Aplicat i provat només a proves; detalls i límits a `QUOTATION_UNIFIED_2026-10-20.md`.

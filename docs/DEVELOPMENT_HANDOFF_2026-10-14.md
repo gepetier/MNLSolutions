@@ -52,3 +52,7 @@ Per autorització de l’usuari, eliminats els 20 documents de proves anteriors;
 ## Banc de proves — 20/10/2026
 
 Executades modificacions reals per interfície i contrast de persistència/12 PDF; vegeu `QUOTATION_TEST_BENCH_2026-10-20.md`. Pressupost restaurat als valors de partida. Prioritat: contacte manual perdut quan es canvia client i contacte en el mateix desament. També pendents portal divergent, dates manuals i avís de línies incompletes. No confondre la pèrdua de contacte reproduïda amb les regressions RPC anteriors correctes. No hi ha correcció funcional aplicada durant el banc.
+
+## Correccions de coherència — 20/10/2026
+
+Aplicades a proves: contacte manual conservat en canviar client i contacte en el mateix desament; portal i PDF amb document compartit; validesa bidireccional entre camp i condicions; dimensions obligatòries en generar documents m²/ml, amb excepció UDS. Validació i límits: [QUOTATION_UNIFIED_2026-10-20.md](QUOTATION_UNIFIED_2026-10-20.md). Pressupost restaurat; principal sense canvis.

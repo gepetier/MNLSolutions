@@ -181,3 +181,7 @@ Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/am
 - [ ] Alinear el portal `Vista previa` amb les dades/contingut del PDF aprovat; ara mostra descripcions i resum natiu diferents.
 - [ ] Detectar dates de validesa discordants dins textos manuals i dimensions incompletes abans de generar/enviar. No s’ha provat enviament.
 - [ ] Completar comprovació de contingut de la descàrrega directa d’`Imprimir`: esdeveniment de descàrrega rebut, però fitxer no accessible per comparar-lo. Els renderitzats al servidor sí s’han verificat.
+
+## Correccions de coherència — 20/10/2026
+
+Aplicades a proves: contacte manual conservat en canviar client i contacte en el mateix desament; portal i PDF amb document compartit; validesa bidireccional entre camp i condicions; dimensions obligatòries en generar documents m²/ml, amb excepció UDS. Validació i límits: [QUOTATION_UNIFIED_2026-10-20.md](docs/QUOTATION_UNIFIED_2026-10-20.md). Pressupost restaurat; principal sense canvis.

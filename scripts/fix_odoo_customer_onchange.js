@@ -38,7 +38,7 @@ else:
     values['payment_term_id'] = False
 `;
 const uiCode = `values = {}\nfor order in (record and [record]) or records or []:\n    if order.state in ['draft', 'sent']:\n${body.split('\n').map(l => '        ' + l).join('\n')}\naction = {'value': values}\n`;
-const persistCode = `for order in records:\n    if order.state in ['draft', 'sent'] and not env.context.get('mnl_customer_sync_skip'):\n${body.split('\n').map(l => '        ' + l).join('\n')}\n        # Keep explicitly supplied values on create/API writes. UI customer changes\n        # have already returned the correct values, and later edits do not trigger this rule.\n        if env.context.get('old_values') is None:\n            values = {}\n        if values:\n            order.with_context(mnl_customer_sync_skip=True).write(values)\n`;
+const persistCode = `for order in records:\n    if order.state in ['draft', 'sent'] and not env.context.get('mnl_customer_sync_skip'):\n${body.split('\n').map(l => '        ' + l).join('\n')}\n        old_values = env.context.get('old_values')\n        if old_values is None:\n            values = {}\n        else:\n            # Odoo records exactly the stored fields supplied to this write.\n            # Keep manual selections submitted with the customer, even if unchanged.\n            supplied = old_values.get(order.id, {})\n            for field_name in list(values):\n                if field_name in supplied:\n                    if field_name == 'x_studio_contacte_pressupost_id':\n                        contact = order.x_studio_contacte_pressupost_id\n                        if contact and (not partner or contact.commercial_partner_id != partner.commercial_partner_id):\n                            raise UserError('La persona de contacte ha de pertànyer al client seleccionat.')\n                    values.pop(field_name)\n        if values:\n            order.with_context(mnl_customer_sync_skip=True).write(values)\n`;
 const xml = `<data>
   <xpath expr="//group[@name='partner_details']/field[@name='partner_id']" position="after">
     <field name="x_mnl_customer_commercial_partner_id" invisible="1"/>
@@ -63,9 +63,9 @@ if (process.argv.includes('--rollback')) {
   if (backup.database !== config.database) throw new Error('El backup correspon a una altra base.');
   for (const a of backup.createdAutomations || []) await client.write('base.automation', [a], { active: false });
   for (const v of backup.createdViews || []) await client.write('ir.ui.view', [v], { active: false });
-  for (const a of backup.automations) { const { id, ...v } = a; await client.write('base.automation', [id], v); }
-  for (const a of backup.actions) { const { id, ...v } = a; await client.write('ir.actions.server', [id], v); }
-  for (const a of backup.views) { const { id, ...v } = a; await client.write('ir.ui.view', [id], v); }
+  for (const a of backup.automations) { const { id, ...v } = a; v.model_id=v.model_id?.[0]||false; for(const k of ['on_change_field_ids','trigger_field_ids','action_server_ids'])if(k in v)v[k]=[[6,0,v[k]]]; await client.write('base.automation', [id], v); }
+  for (const a of backup.actions) { const { id, ...v } = a; v.model_id=v.model_id?.[0]||false; await client.write('ir.actions.server', [id], v); }
+  for (const a of backup.views) { const { id, ...v } = a; v.inherit_id=v.inherit_id?.[0]||false; await client.write('ir.ui.view', [id], v); }
   console.log(JSON.stringify({ rolledBack: true, database: config.database, note: 'Els camps relacionats nous es conserven, sense vista ni automatitzacions actives.' }));
   process.exit(0);
 }

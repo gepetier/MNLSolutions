@@ -196,3 +196,7 @@ Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/am
 Eliminats els documents antics de proves per autorització de l’usuari. Hi ha un únic pressupost de treball amb dades fictícies i casos m²/ml/UDS/transport. Vegeu [els casos i les comprovacions](docs/WORKING_QUOTATION_2026-10-20.md), inclosa la diferència d’arrodoniment global de l’IVA.
 
 El [banc de proves del 20/10](docs/QUOTATION_TEST_BENCH_2026-10-20.md) contrasta canvis reals d’interfície, persistència i 12 PDF. Inclou les incidències pendents del contacte, del portal, de les dates manuals i de les dimensions incompletes. Eines: `scripts/snapshot_odoo_quotation_readonly.js` i `scripts/check_quotation_coherence.py`.
+
+## Correccions de coherència — 20/10/2026
+
+Aplicades a proves: contacte manual conservat en canviar client i contacte en el mateix desament; portal i PDF amb document compartit; validesa bidireccional entre camp i condicions; dimensions obligatòries en generar documents m²/ml, amb excepció UDS. Validació i límits: [QUOTATION_UNIFIED_2026-10-20.md](docs/QUOTATION_UNIFIED_2026-10-20.md). Pressupost restaurat; principal sense canvis.

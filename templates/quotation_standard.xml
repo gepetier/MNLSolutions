@@ -1,4 +1,13 @@
 <t t-name="mnl_solutions.report_quotation_standard_document">
+  <t t-set="mnl_dimension_check" t-value="doc.env.ref('mnl_solutions.quotation_dimension_validator').sudo().with_context(active_model='sale.order', active_ids=doc.ids, mnl_raise_dimensions=not doc.env.context.get('mnl_portal_preview')).run()"/>
+  <div t-if="not mnl_dimension_check['mnl_valid']" class="alert alert-warning mnl-dimension-warning" role="alert">
+    <!-- Native portal widgets require the order table even when the document is withheld. -->
+    <table t-if="doc.env.context.get('mnl_portal_preview')" id="sales_order_table" class="d-none" t-att-data-order-id="doc.id" t-att-data-token="doc.access_token"/>
+    <strong>Completa les dimensions abans de generar el pressupost.</strong>
+    <ul><li t-foreach="mnl_dimension_check['mnl_errors']" t-as="dimension_error"><span t-out="dimension_error['label']"/>: <span t-out="dimension_error['message']"/></li></ul>
+    <p>Els articles per unitats no necessiten dimensions.</p>
+  </div>
+  <t t-if="mnl_dimension_check['mnl_valid']">
   <t t-set="language" t-value="doc.x_studio_idioma_document or doc.partner_id.lang or 'es_ES'"/>
   <t t-set="doc" t-value="doc.with_context(lang=language)"/>
   <t t-set="translations" t-value="{'ca': {'title': 'PRESSUPOST', 'client': 'CLIENT', 'date': 'Data', 'reference': 'Referència', 'contact': 'Persona de contacte', 'vat': 'NIF/CIF', 'phone': 'Telèfon', 'email': 'Correu electrònic', 'address': 'Adreça fiscal', 'class': 'Class.', 'article': 'Article', 'units': 'Unitats', 'length': 'Longitud', 'width': 'Amplada', 'quantity': 'Quantitat', 'total_quantity': 'Total quantitat', 'kind': 'Ud.', 'uom': 'Unitat', 'price': 'Preu unitari final', 'net': 'Import sense IVA', 'gross': 'Import amb IVA', 'base': 'Base imposable', 'tax': 'IVA', 'total': 'TOTAL', 'payment': 'Forma de pagament', 'validity': 'Vàlid fins a', 'acceptance': 'Acceptació i signatura', 'bank': 'Dades bancàries', 'distributor': 'Distribuidor Oficial', 'page': 'Pàgina'}, 'es': {'title': 'PRESUPUESTO', 'client': 'CLIENTE', 'date': 'Fecha', 'reference': 'Referencia', 'contact': 'Persona de contacto', 'vat': 'NIF/CIF', 'phone': 'Teléfono', 'email': 'Correo electrónico', 'address': 'Dirección fiscal', 'class': 'Clas.', 'article': 'Artículo', 'units': 'Unidades', 'length': 'Longitud', 'width': 'Ancho', 'quantity': 'Cantidad', 'total_quantity': 'Cantidad total', 'kind': 'Ud.', 'uom': 'Unidad', 'price': 'Precio unitario final', 'net': 'Importe sin IVA', 'gross': 'Importe con IVA', 'base': 'Base imponible', 'tax': 'IVA', 'total': 'TOTAL', 'payment': 'Forma de pago', 'validity': 'Válido hasta', 'acceptance': 'Aceptación y firma', 'bank': 'Datos bancarios', 'distributor': 'Distribuidor Oficial', 'page': 'Página'}, 'en': {'title': 'QUOTATION', 'client': 'CUSTOMER', 'date': 'Date', 'reference': 'Reference', 'contact': 'Contact person', 'vat': 'Tax ID', 'phone': 'Phone', 'email': 'Email', 'address': 'Billing address', 'class': 'No.', 'article': 'Item', 'units': 'Units', 'length': 'Length', 'width': 'Width', 'quantity': 'Quantity', 'total_quantity': 'Total quantity', 'kind': 'Calc.', 'uom': 'Unit', 'price': 'Final unit price', 'net': 'Amount excl. VAT', 'gross': 'Amount incl. VAT', 'base': 'Subtotal', 'tax': 'VAT', 'total': 'TOTAL', 'payment': 'Payment terms', 'validity': 'Valid until', 'acceptance': 'Acceptance and signature', 'bank': 'Bank details', 'distributor': 'Distribuidor Oficial', 'page': 'Page'}}"/>
@@ -63,7 +72,7 @@
         </td>
       </tr></table>
       <table class="meta"><tr><td style="width:62%"><span class="document-title" t-out="L['title']"/><span class="number" t-field="doc.name"/></td><td style="text-align:right"><span class="meta-label" t-out="L['date']"/><span t-field="doc.date_order" t-options="{'widget':'date'}"/></td></tr></table>
-      <table class="lines" name="mnl_standard_quotation_lines">
+      <div class="mnl-lines-scroll"><table class="lines" name="mnl_standard_quotation_lines" t-att-id="'sales_order_table' if doc.env.context.get('mnl_portal_preview') else None" t-att-data-order-id="doc.id if doc.env.context.get('mnl_portal_preview') else None" t-att-data-token="doc.access_token if doc.env.context.get('mnl_portal_preview') else None">
         <thead><tr><th style="width:5%" class="text-start"><t t-out="L['class']"/></th><th style="width:20%" class="text-start"><t t-out="L['article']"/></th><th style="width:4%" class="num"><t t-out="L['units']"/></th><th style="width:6%" class="num"><t t-out="L['length']"/></th><th style="width:6%" class="num"><t t-out="L['width']"/></th><th style="width:7%" class="num"><t t-out="L['quantity']"/></th><th style="width:7%" class="num"><t t-out="L['total_quantity']"/></th><th style="width:4%" class="num"><t t-out="L['kind']"/></th><th style="width:5%" class="num"><t t-out="L['uom']"/></th><th style="width:8%" class="num"><t t-out="L['price']"/><br/><small t-out="doc.currency_id.symbol"/></th><th style="width:9%" class="num"><t t-out="L['net']"/><br/><small t-out="doc.currency_id.symbol"/></th><th style="width:9%" class="num"><t t-out="L['gross']"/><br/><small t-out="doc.currency_id.symbol"/></th></tr></thead>
         <tbody>
           <t t-foreach="lines" t-as="line">
@@ -79,17 +88,17 @@
               <td class="num"><span t-field="line.x_studio_uds"/></td>
               <td class="num"><span t-if="line.x_studio_tipus_calcul in ['m2','ml']" t-field="line.x_studio_long" t-options="{'widget':'float','precision':3}"/><t t-else="">-</t></td>
               <td class="num"><span t-if="line.x_studio_tipus_calcul == 'm2'" t-field="line.x_studio_ancho_1" t-options="{'widget':'float','precision':3}"/><t t-else="">-</t></td>
-              <td class="num"><span t-field="line.x_studio_cantidad" t-options="{'widget':'float','precision':2}"/></td>
+              <td class="num"><span t-field="line.product_uom_qty" t-options="{'widget':'float','precision':2}"/></td>
               <td class="num"><span t-field="line.x_studio_total" t-options="{'widget':'float','precision':2}"/></td>
               <td class="num"><t t-out="{'m2':'m²','ml':'ml','uds':'uds'}.get(line.x_studio_tipus_calcul,line.x_studio_tipus_calcul or '-')"/></td>
               <td class="num"><span t-field="line.product_uom_id.name"/></td>
               <td class="num"><span t-field="line.price_unit" t-options="{'widget':'float','precision':2}"/></td>
-              <td class="num"><span t-field="line.x_studio_importe_mnl" t-options="{'widget':'float','precision':2}"/></td>
+              <td class="num"><span t-field="line.price_subtotal" t-options="{'widget':'float','precision':2}"/></td>
               <td class="num"><span t-field="line.price_total" t-options="{'widget':'float','precision':2}"/></td>
             </tr>
           </t>
         </tbody>
-      </table>
+      </table></div>
       <table class="bottom"><tr><td class="conditions">
         <div><strong t-out="L['payment']"/>: <span t-field="doc.payment_term_id.name"/></div>
         <div><strong t-out="L['validity']"/>: <span t-field="doc.validity_date" t-options="{'widget':'date'}"/></div>
@@ -112,4 +121,5 @@
     <span t-out="L['distributor']"/> · www.induspanel.es
     <span style="float:right"><t t-out="L['page']"/> <span class="page"/> / <span class="topage"/></span>
   </div>
+  </t>
 </t>

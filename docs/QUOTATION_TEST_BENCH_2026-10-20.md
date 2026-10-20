@@ -68,3 +68,7 @@ El comprovador nou s’ha executat sobre les 13 fotografies del banc, sense erro
 ## Estat final
 
 Restaurats client empresa, contacte, català, transferència, validesa de 30 dies, articles, mides, quantitats, classificadors i imports inicials. Un desament independent del contacte resol l’estat del document després de reproduir C19, però no corregeix la regla. La sublínia reposada té un ID intern nou. Continuen existint un únic pressupost en esborrany i les dades fictícies auxiliars autoritzades. Cap dada privada, captura, credencial, JSON de pressupost ni PDF s’ha afegit al repositori.
+
+## Seguiment posterior del mateix dia
+
+Els punts de contacte, portal, validesa i dimensions s’han corregit després del banc inicial. Vegeu `QUOTATION_UNIFIED_2026-10-20.md` per les proves noves i els límits pendents. Les incidències anteriors descriuen el comportament anterior a la correcció.
