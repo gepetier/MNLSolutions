@@ -1,0 +1,37 @@
+<data>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='product_id']" position="before">
+    <field name="x_mnl_class" string="Class." optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+    <field name="x_mnl_article" string="Article acceptat" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+  </xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='quantity']" position="before">
+    <field name="x_mnl_source_line_id" column_invisible="1"/>
+    <field name="x_mnl_units" string="Unitats" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+    <field name="x_mnl_length" string="Longitud (m)" digits="[16,3]" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+    <field name="x_mnl_width" string="Amplada (m)" digits="[16,3]" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+  </xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='quantity']" position="attributes">
+    <attribute name="string">Quantitat</attribute><attribute name="readonly">x_mnl_source_line_id</attribute>
+  </xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_unit']" position="attributes">
+    <attribute name="readonly">x_mnl_source_line_id</attribute>
+  </xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list" position="inside">
+    <field name="x_mnl_kind" string="Unitat" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+    <field name="x_mnl_source_ref" string="Versió acceptada" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+    <field name="x_mnl_source_revision" string="Revisió" optional="hide" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+  </xpath>
+  <xpath expr="//sheet/notebook" position="inside">
+    <page name="mnl_invoice_sources" string="Pressupostos i comandes d'origen" invisible="move_type != 'out_invoice'">
+      <field name="x_mnl_source_order_ids" readonly="1" nolabel="1">
+        <list create="0" edit="0" delete="0">
+          <field name="x_mnl_accepted_ref"/><field name="x_mnl_accepted_revision"/>
+          <field name="x_mnl_issued_at"/><field name="x_mnl_confirmed_at"/><field name="x_mnl_accepted_document_id"/>
+        </list>
+      </field>
+      <group><field name="x_mnl_source_summary" readonly="1"/><field name="x_mnl_customer_block" readonly="1"/>
+        <field name="x_mnl_source_conditions" readonly="1"/><field name="x_mnl_contact" readonly="1"/><field name="x_mnl_document_language" readonly="1"/>
+      </group>
+      <p>Cada comanda conserva la referència i revisió acceptades i el PDF congelat de l'acceptació. Les línies de factura mantenen el vincle natiu a les línies acceptades.</p>
+    </page>
+  </xpath>
+<xpath expr="//field[@name='invoice_line_ids']/list/field[@name='product_id']" position="attributes"><attribute name="column_invisible">parent.x_mnl_source_order_ids</attribute></xpath><xpath expr="//field[@name='invoice_line_ids']/list/field[@name='name']" position="attributes"><attribute name="column_invisible">parent.x_mnl_source_order_ids</attribute></xpath><xpath expr="//field[@name='invoice_line_ids']/list/field[@name='product_uom_id' and not(@column_invisible)]" position="attributes"><attribute name="column_invisible">parent.x_mnl_source_order_ids</attribute></xpath></data>

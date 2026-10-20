@@ -1,6 +1,6 @@
 <data>
   <xpath expr="//div[@id='introduction']" position="before">
-    <div t-if="sale_order.state in ['draft','sent']" class="mnl_portal_preview">
+    <div t-if="(sale_order.state in ['draft','sent'] or ('x_mnl_frozen' in sale_order._fields and sale_order.x_mnl_frozen))" class="mnl_portal_preview">
       <style>
         .mnl_portal_preview { padding:16px; background:white; border:1px solid #dbe6eb; border-radius:8px; }
         .mnl_portal_preview .mnl-offer { font-size:12px; }
@@ -16,9 +16,9 @@
     </div>
   </xpath>
   <xpath expr="//div[@id='introduction']" position="attributes">
-    <attribute name="t-if">sale_order.state not in ['draft','sent']</attribute>
+    <attribute name="t-if">sale_order.state not in ['draft','sent'] and not ('x_mnl_frozen' in sale_order._fields and sale_order.x_mnl_frozen)</attribute>
   </xpath>
   <xpath expr="//div[@id='content']" position="attributes">
-    <attribute name="t-if">sale_order.state not in ['draft','sent']</attribute>
+    <attribute name="t-if">sale_order.state not in ['draft','sent'] and not ('x_mnl_frozen' in sale_order._fields and sale_order.x_mnl_frozen)</attribute>
   </xpath>
 </data>

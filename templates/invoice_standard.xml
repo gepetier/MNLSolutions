@@ -1,0 +1,88 @@
+<t t-name="mnl_solutions.report_invoice_standard_document">
+  <t t-set="doc" t-value="doc.with_context(lang=doc.x_mnl_document_language or doc.partner_id.lang or 'ca_ES')"/>
+  <div class="article mnl-invoice" t-att-data-oe-model="doc._name" t-att-data-oe-id="doc.id">
+    <style>
+      .mnl-invoice { font-family:Arial,sans-serif; font-size:10px; color:#172b3a; }
+      .mnl-invoice table { width:100%; border-collapse:collapse; }
+      .mnl-invoice td,.mnl-invoice th { padding:7px 6px; vertical-align:top; }
+      .mnl-invoice .top td { width:50%; border:1px solid #dbe6eb; line-height:1.5; }
+      .mnl-invoice .customer { white-space:pre-line; }
+      .mnl-invoice .meta { border-top:2px solid #183c4f; border-bottom:1px solid #dbe6eb; margin:14px 0 18px; }
+      .mnl-invoice h2 { margin:0 0 5px; font-size:19px; }
+      .mnl-invoice .lines { table-layout:fixed; font-size:9.4px; background:#f5f8fa; border:1px solid #cad8df; }
+      .mnl-invoice .lines th { background:#183c4f; color:white; font-size:9px; white-space:nowrap; }
+      .mnl-invoice .lines td { border-bottom:1px solid #dbe6eb; }
+      .mnl-invoice .lines thead { display:table-header-group; }
+      .mnl-invoice .section { page-break-after:avoid; }
+      .mnl-invoice .trace { page-break-inside:avoid; }
+      .mnl-invoice .section td { background:#e9f0f3; font-weight:bold; }
+      .mnl-invoice .num { text-align:right; white-space:nowrap; }
+      .mnl-invoice .source { font-size:8px; color:#607480; margin-top:3px; }
+      .mnl-invoice .totals { width:38%; margin-left:auto; margin-top:18px; }
+      .mnl-invoice .totals td { border-bottom:1px solid #dbe6eb; }
+      .mnl-invoice .grand td { background:#183c4f; color:white; font-size:16px; font-weight:bold; }
+      .mnl-invoice .trace { margin-top:20px; font-size:9px; border:1px solid #cad8df; }
+      .mnl-invoice .trace th { background:#e9f0f3; text-align:left; }
+      .mnl-invoice tr { page-break-inside:avoid; }
+    </style>
+    <div class="page">
+      <table class="top"><tr><td>
+        <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height:40px;max-width:165px;margin-bottom:7px;"/>
+        <div><strong t-field="doc.company_id.name"/></div>
+        <div><span t-field="doc.company_id.street"/></div><div><span t-field="doc.company_id.zip"/> <span t-field="doc.company_id.city"/></div>
+        <div>NIF/CIF: <span t-field="doc.company_id.vat"/></div><div t-field="doc.company_id.email"/>
+      </td><td><strong>CLIENT</strong><div class="customer" t-out="doc.x_mnl_customer_block"/>
+        <div t-if="doc.x_mnl_contact">Contacte: <span t-field="doc.x_mnl_contact"/></div>
+      </td></tr></table>
+      <table class="meta"><tr><td><h2>FACTURA <t t-if="doc.state == 'draft'">EN ESBORRANY</t></h2>
+        <strong t-out="doc.name if doc.name and doc.name != '/' else 'Pendent de comptabilitzar'"/>
+      </td><td class="num">Data: <span t-if="doc.invoice_date" t-field="doc.invoice_date"/><span t-else="">Pendent</span></td></tr></table>
+      <table class="lines" name="mnl_invoice_lines"><thead><tr>
+        <th style="width:5%">Class.</th><th style="width:27%">Article</th><th style="width:6%" class="num">Unitats</th>
+        <th style="width:10%" class="num">Longitud (m)</th><th style="width:10%" class="num">Amplada (m)</th>
+        <th style="width:9%" class="num">Quantitat</th><th style="width:5%" class="num">Unitat</th>
+        <th style="width:13%" class="num">Preu unitari (<t t-out="doc.currency_id.symbol"/>)</th>
+        <th style="width:15%" class="num">Import s/IVA (<t t-out="doc.currency_id.symbol"/>)</th>
+      </tr></thead><tbody>
+        <t t-set="invoice_lines" t-value="doc.invoice_line_ids.sorted(key=lambda row:(row.sequence,row.id))"/>
+        <t t-foreach="invoice_lines" t-as="line">
+          <tr t-if="line.display_type in ['line_section','line_subsection']" class="section"><td colspan="9"><span t-out="line.name.replace('FACANA', 'FAÇANA').replace('el total de variant és informatiu i no se suma entre files. ', '')"/></td></tr>
+          <tr t-elif="line.display_type == 'line_note'"><td colspan="9"><span t-out="line.name.replace('FACANA', 'FAÇANA').replace('el total de variant és informatiu i no se suma entre files. ', '')"/></td></tr>
+          <t t-else="">
+            <t t-set="start" t-value="line_index == 0 or invoice_lines[line_index-1].display_type != 'product' or invoice_lines[line_index-1].product_id != line.product_id or invoice_lines[line_index-1].x_mnl_source_ref != line.x_mnl_source_ref"/>
+            <tr t-att-data-invoice-line-id="line.id" t-att-data-sale-line-id="line.x_mnl_source_line_id.id">
+              <td><span t-if="start" t-field="line.x_mnl_class"/></td>
+              <td><strong t-if="start" t-field="line.x_mnl_article"/>
+                <div t-if="start and len(doc.x_mnl_source_order_ids) &gt; 1" class="source" t-field="line.x_mnl_source_ref"/>
+              </td>
+              <td class="num"><span t-field="line.x_mnl_units" t-options="{'widget':'float','precision':0}"/></td>
+              <td class="num"><span t-if="line.x_mnl_kind in ['m2','ml']" t-field="line.x_mnl_length" t-options="{'widget':'float','precision':3}"/><t t-else="">-</t></td>
+              <td class="num"><span t-if="line.x_mnl_kind == 'm2'" t-field="line.x_mnl_width" t-options="{'widget':'float','precision':3}"/><t t-else="">-</t></td>
+              <td class="num"><span t-field="line.quantity" t-options="{'widget':'float','precision':2}"/></td>
+              <td class="num"><span t-out="{'m2':'m²','ml':'ml','uds':'uds'}.get(line.x_mnl_kind,line.x_mnl_kind or '-')"/></td>
+              <td class="num"><span t-field="line.price_unit" t-options="{'widget':'float','precision':2}"/></td>
+              <td class="num"><span t-field="line.price_subtotal" t-options="{'widget':'float','precision':2}"/></td>
+            </tr>
+          </t>
+        </t>
+      </tbody></table>
+      <table class="totals"><tr><td>Base imposable</td><td class="num"><span t-field="doc.amount_untaxed" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></td></tr>
+        <t t-foreach="(doc.tax_totals or {}).get('subtotals',[])" t-as="subtotal"><tr t-foreach="subtotal.get('tax_groups',[])" t-as="group">
+          <td><span t-out="group.get('group_label') or group['group_name']"/></td><td class="num"><span t-out="group['tax_amount_currency']" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></td>
+        </tr></t>
+        <tr class="grand"><td>TOTAL</td><td class="num"><span t-field="doc.amount_total" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></td></tr>
+      </table>
+      <p>Forma de pagament: <span t-field="doc.invoice_payment_term_id.name"/></p>
+      <table class="trace" name="mnl_invoice_trace"><thead><tr><th>Pressupost → Comanda acceptada</th><th>Revisió</th><th>Emissió</th><th>Confirmació</th></tr></thead><tbody>
+        <tr t-foreach="doc.x_mnl_source_order_ids.sorted('id')" t-as="source"><td><span t-field="source.x_mnl_accepted_ref"/></td><td><span t-field="source.x_mnl_accepted_revision"/></td>
+          <td><span t-field="source.x_mnl_issued_at" t-options="{'widget':'date'}"/></td><td><span t-field="source.x_mnl_confirmed_at" t-options="{'widget':'datetime'}"/></td>
+        </tr>
+      </tbody></table>
+      <div t-if="doc.x_mnl_source_conditions" style="margin-top:14px;font-size:9px;"><strong>Condicions dels pressupostos acceptats</strong><div style="white-space:pre-line;margin-top:5px;" t-out="doc.x_mnl_source_conditions"/></div>
+      <p t-if="doc.state == 'draft'" class="source">Document de revisió: pendent de comptabilització manual.</p>
+    </div>
+  </div>
+  <div class="footer" style="font-family:Arial;font-size:9px;color:#607480;border-top:1px solid #cad8df;padding-top:5px;">
+    <span t-field="doc.company_id.name"/><span style="float:right">Pàgina <span class="page"/> / <span class="topage"/></span>
+  </div>
+</t>

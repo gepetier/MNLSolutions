@@ -72,3 +72,8 @@ PDF alternatiu de nou columnes, sense Class./Article repetits en les continuacio
 ## Anàlisi de fase següent — 20/10/2026
 
 L’usuari demana analitzar Pressupost → Comanda → Factura. Auditoria en lectura de proves, sense confirmar, crear ni comptabilitzar documents: `SALES_ORDER_INVOICE_FLOW_AUDIT_2026-10-20.md`. Base nativa existent, facturació per quantitats demanades, bloqueig automàtic desactivat, sense camps dimensionals a factura i sense document de comanda MNL consolidat. Només anàlisi/planificació autoritzades en aquesta petició; la implementació i les operacions comptables continuen pendents.
+
+
+## Actualització del flux comercial — 20/10/2026
+
+Implementat i provat només a proves: pressupost acceptat congelat amb PDF, comanda bloquejada, factura total en esborrany i traçabilitat de totes les revisions. Dates d’emissió i confirmació separades. La comptabilització continua manual; principal no modificada. Vegeu [registre d’implementació](SALES_ORDER_INVOICE_FLOW_IMPLEMENTED_2026-10-20.md). Pendents: prova de signatura real pel portal, altres idiomes de factura i definició de parcials/rectificatives/cancel·lacions.

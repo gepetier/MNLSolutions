@@ -20,7 +20,7 @@ Abans de continuar, llegeix en aquest ordre:
 - Sense bloc d'entrega/obra/ENVIO al pressupost; fase 1 amb revisió A.
 - Pagaments: termes natius Transferència Bancaria, Rebut bancari 30 dies i Confirming 60 dies.
 - Portes és l'excepció aprovada de proveïdor/cost/marge. La lògica genèrica de costos, compres, inventari i facturació real continua ajornada.
-- Prioritat pendent: consolidar i revisar visualment un PDF de pressupost real i completar les regressions.
+- Flux comercial aprovat i provat només a proves: pressupost acceptat congelat amb PDF → comanda bloquejada → factura total en esborrany; comptabilització manual. Vegeu `docs/SALES_ORDER_INVOICE_FLOW_IMPLEMENTED_2026-10-20.md` i el punt de represa adjacent. Bestretes, parcials, rectificatives i cancel·lacions d’acceptats pendents de definir.
 - La versió PREUS 23/09/2026 només consta creada a proves; la promoció a principal continua pendent.
 
 ## Entorns i evidència

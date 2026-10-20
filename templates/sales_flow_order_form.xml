@@ -1,0 +1,34 @@
+<data>
+  <xpath expr="//sheet" position="inside"><field name="x_mnl_frozen" invisible="1"/></xpath>
+  <xpath expr="//field[@name='validity_date']" position="before">
+    <field name="x_mnl_issued_at" string="Data d'emissió" widget="date" readonly="1"/>
+    <field name="x_mnl_confirmed_at" string="Data de confirmació" readonly="1" invisible="not x_mnl_frozen"/>
+  </xpath>
+  <xpath expr="//sheet/notebook" position="inside">
+    <page string="Versió acceptada" name="mnl_accepted_version" invisible="not x_mnl_frozen">
+      <group><field name="x_mnl_accepted_ref" readonly="1"/><field name="x_mnl_accepted_revision" readonly="1"/>
+        <field name="x_mnl_accepted_document_id" readonly="1" options="{'no_create': True}"/>
+        <field name="x_mnl_issued_at" readonly="1"/><field name="x_mnl_confirmed_at" readonly="1"/>
+        <field name="x_mnl_accepted_customer" readonly="1"/><field name="x_mnl_accepted_contact" readonly="1"/>
+      </group>
+    </page>
+  </xpath>
+  <xpath expr="//button[@name='action_unlock']" position="attributes"><attribute name="invisible">x_mnl_frozen or not locked</attribute></xpath>
+  <xpath expr="//field[@name='x_studio_referencia']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_studio_revisio']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="(//field[@name='x_studio_referencia'])[2]" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="(//field[@name='x_studio_revisio'])[2]" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='payment_term_id']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_studio_idioma_document']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_studio_condicions_acceptacio' and not(@invisible)]" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//group[@name='mnl_transport_configuration']/button[1]" position="attributes"><attribute name="invisible">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//group[@name='mnl_transport_configuration']/button[2]" position="attributes"><attribute name="invisible">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_portes']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_transport_provider_id']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_portes_zone']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_portes_combined']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_portes_crane']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_portes_hours']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_portes_vehicle']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+  <xpath expr="//field[@name='x_mnl_portes_tax_ids']" position="attributes"><attribute name="readonly">x_mnl_frozen</attribute></xpath>
+</data>

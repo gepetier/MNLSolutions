@@ -56,10 +56,10 @@ async function upsert(key,name,arch,inherit=false,type='qweb'){const old=views.f
 await upsert(docKey,'MNL Pressupost estàndard - document',source);
 await upsert(reportKey,'MNL Pressupost estàndard - informe',`<t t-name="${reportKey}"><t t-call="web.html_container"><t t-foreach="docs" t-as="doc"><t t-call="${docKey}"/></t></t></t>`);
 const existing=reports.find(r=>r.report_name===reportKey);
-const reportValues={name:'Pressupost MNL',model:'sale.order',report_name:reportKey,report_file:reportKey,report_type:'qweb-pdf',paperformat_id:paperId,print_report_name:"'Pressupost - %s' % object.name",binding_type:'report',binding_model_id:process.argv.includes('--activate')?model.id:false};
+const reportValues={name:'Pressupost / Comanda MNL',model:'sale.order',report_name:reportKey,report_file:reportKey,report_type:'qweb-pdf',paperformat_id:paperId,print_report_name:"(('x_mnl_frozen' in object._fields and object.x_mnl_frozen) and 'Comanda - %s' or 'Pressupost - %s') % object.name",binding_type:'report',binding_model_id:process.argv.includes('--activate')?model.id:false};
 const reportId=existing?.id||await cl.create('ir.actions.report',reportValues);if(existing)await cl.write('ir.actions.report',[existing.id],reportValues);else{b.createdReport=reportId;save();}
 if(process.argv.includes('--activate')){
- const override=`<data><xpath expr="//t[@t-call='web.external_layout']" position="before"><t t-if="doc.state in ['draft','sent'] and not is_proforma"><t t-call="${docKey}"/></t></xpath><xpath expr="//t[@t-call='web.external_layout']" position="attributes"><attribute name="t-if">doc.state not in ['draft','sent'] or is_proforma</attribute></xpath></data>`;
+ const override=`<data><xpath expr="//t[@t-call='web.external_layout']" position="before"><t t-if="(doc.state in ['draft','sent'] or ('x_mnl_frozen' in doc._fields and doc.x_mnl_frozen)) and not is_proforma"><t t-call="${docKey}"/></t></xpath><xpath expr="//t[@t-call='web.external_layout']" position="attributes"><attribute name="t-if">(doc.state not in ['draft','sent'] and not ('x_mnl_frozen' in doc._fields and doc.x_mnl_frozen)) or is_proforma</attribute></xpath></data>`;
  await upsert(false,defaultName,override,baseRef.res_id);
  await upsert('mnl_solutions.quotation_portal_standard',portalName,portalSource,portalRef.res_id);
  await upsert(false,formName,formSource,formRef.res_id,'form');
