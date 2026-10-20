@@ -197,3 +197,7 @@ PDF alternatiu de nou columnes, sense Class./Article repetits en les continuacio
 ## Terminologia de transport — 20/10/2026
 
 «Portes» passa a «Transport» en català als noms visibles del producte i controls del pressupost de proves. Es conserven SKU/camps tècnics i càlculs. Les referències funcionals antigues a Portes descriuen el mateix mòdul de transport. Reproducció i reversió a `docs/TRANSPORT_LABEL_2026-10-20.md`.
+
+## Anàlisi de fase següent — 20/10/2026
+
+L’usuari demana analitzar Pressupost → Comanda → Factura. Auditoria en lectura de proves, sense confirmar, crear ni comptabilitzar documents: `docs/SALES_ORDER_INVOICE_FLOW_AUDIT_2026-10-20.md`. Base nativa existent, facturació per quantitats demanades, bloqueig automàtic desactivat, sense camps dimensionals a factura i sense document de comanda MNL consolidat. Només anàlisi/planificació autoritzades en aquesta petició; la implementació i les operacions comptables continuen pendents.
