@@ -185,8 +185,14 @@ Per decisió de l’usuari, els descomptes queden en standby. Els controls s’h
 
 ## Interfície del pressupost — 19/10/2026
 
-Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicació a GitHub pendent: la revisió automàtica ha rebutjat la pujada per manca d’autorització explícita per publicar-hi els fitxers.
+Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicat a GitHub el 20/10/2026 amb autorització explícita de l’usuari (PR #1).
 
 ## PDF predeterminat de pressupost (19/10/2026)
 
 `Pressupost MNL` segueix les files i les dotze columnes de la finestra, amb A4 vertical (actualització 20/10), sense marges ni descripcions de producte. Instal·lat i activat a proves; font QWeb i instal·lació reversible versionades. Vegeu [el mapa de camps i les proves](docs/QUOTATION_STANDARD_2026-10-19.md).
+
+## Pressupost de treball (20/10/2026)
+
+Eliminats els documents antics de proves per autorització de l’usuari. Hi ha un únic pressupost de treball amb dades fictícies i casos m²/ml/UDS/transport. Vegeu [els casos i les comprovacions](docs/WORKING_QUOTATION_2026-10-20.md), inclosa la diferència d’arrodoniment global de l’IVA.
+
+El [banc de proves del 20/10](docs/QUOTATION_TEST_BENCH_2026-10-20.md) contrasta canvis reals d’interfície, persistència i 12 PDF. Inclou les incidències pendents del contacte, del portal, de les dates manuals i de les dimensions incompletes. Eines: `scripts/snapshot_odoo_quotation_readonly.js` i `scripts/check_quotation_coherence.py`.

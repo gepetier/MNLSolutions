@@ -157,7 +157,7 @@ Cada canvi d'estat ha d'incloure una evidència verificable: fitxer i línia, pr
 
 ## Interfície del pressupost — 19/10/2026
 
-Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicació a GitHub pendent: la revisió automàtica ha rebutjat la pujada per manca d’autorització explícita per publicar-hi els fitxers.
+Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicat a GitHub el 20/10/2026 amb autorització explícita de l’usuari (PR #1).
 
 ## Decisió 19/10/2026 — PDF estàndard
 
@@ -168,3 +168,16 @@ Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/am
 ## Actualització 20/10/2026 — pressupost en vertical
 
 - [x] Plantilla predeterminada a proves canviada a A4 vertical, mantenint les dotze columnes, sense marges ni descripcions de producte. Vegeu `docs/QUOTATION_STANDARD_2026-10-19.md`.
+
+## Actualització 20/10/2026 — pressupost únic de treball
+
+- [x] Eliminats els 20 documents de proves anteriors amb autorització de l’usuari. Conservada la factura vinculada. Creat un únic esborrany amb casos m²/ml/UDS i transport; vegeu `docs/WORKING_QUOTATION_2026-10-20.md`.
+- [ ] Acordar la representació de la diferència entre IVA global i suma d’imports amb IVA per fila. Fer les regressions posteriors sobre el pressupost únic.
+
+## Banc de proves per interfície i PDF — 20/10/2026
+
+- [x] Executats canvis de m²/ml/UDS, marges comercials existents, variant, transport, client/contacte, idioma, pagament, validesa, límits i eliminació/reposició de línia; 12 PDF contrastats amb la BD. Estat inicial restaurat. Evidència: `docs/QUOTATION_TEST_BENCH_2026-10-20.md`.
+- [ ] **Corregir pèrdua del contacte manual** quan es canvia el client empresa i se selecciona el contacte abans del mateix desament (C19).
+- [ ] Alinear el portal `Vista previa` amb les dades/contingut del PDF aprovat; ara mostra descripcions i resum natiu diferents.
+- [ ] Detectar dates de validesa discordants dins textos manuals i dimensions incompletes abans de generar/enviar. No s’ha provat enviament.
+- [ ] Completar comprovació de contingut de la descàrrega directa d’`Imprimir`: esdeveniment de descàrrega rebut, però fitxer no accessible per comparar-lo. Els renderitzats al servidor sí s’han verificat.

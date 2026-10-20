@@ -39,3 +39,7 @@ node scripts/fix_odoo_customer_onchange.js --rollback logs/odoo-customer-onchang
 ```
 
 L'aplicació desa un backup privat abans de cada canvi i registra els IDs creats. La reversió desactiva les regles/vista noves i restaura les anteriors si existien; conserva els camps relacionats nous sense eliminar-los. El backup és a `logs/`, exclòs de Git, i no conté claus.
+
+## Banc per interfície — 20/10/2026
+
+La selecció d’un contacte com a client conserva dades fiscals, contacte i idioma després de desar i al PDF. Però canviar a empresa i seleccionar manualment un contacte **abans del mateix desament** perd la selecció en persistir. Tornar a seleccionar/desar el contacte en una segona operació sí el conserva. Incidència pendent C19 de `QUOTATION_TEST_BENCH_2026-10-20.md`; les proves RPC anteriors no cobreixen aquesta seqüència completa del formulari.

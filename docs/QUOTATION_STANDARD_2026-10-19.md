@@ -62,4 +62,4 @@ PDF A4 horitzontal revisat visualment: capçalera, taula, imports, seccions, acc
 
 Per petició de l’usuari, la plantilla predeterminada passa a A4 vertical (paper ID 13), marges laterals de 8 mm i les mateixes dotze columnes. S’ajusten proporcions, espaiat i capçalera perquè les dades siguin llegibles. Les referències anteriors a horitzontal descriuen la primera versió del 19/10. La font i l’instal·lador generen ara la versió vertical.
 
-L’instal·lador conserva la clau de la vista QWeb heretada quan la reinstal·la, per respectar la validació de claus d’Odoo. Els fitxers de codi/documentació d’aquest lot continuen pendents de publicar a GitHub després del bloqueig de revisió automàtica; no hi ha autorització nova de publicació.
+L’instal·lador conserva la clau de la vista QWeb heretada quan la reinstal·la, per respectar la validació de claus d’Odoo. Els fitxers de codi/documentació d’aquest lot es van publicar a GitHub el 20/10/2026 després de l’autorització explícita de l’usuari (PR #1).

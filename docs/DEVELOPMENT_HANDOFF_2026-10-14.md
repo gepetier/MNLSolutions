@@ -41,6 +41,14 @@ Descomptes: ajornats per decisió de l’usuari el 19/10. Controls ocults al pre
 
 ## Interfície del pressupost — 19/10/2026
 
-Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicació a GitHub pendent: la revisió automàtica ha rebutjat la pujada per manca d’autorització explícita per publicar-hi els fitxers.
+Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicat a GitHub el 20/10/2026 amb autorització explícita de l’usuari (PR #1).
 
 PDF: `Pressupost MNL` és la plantilla predeterminada a proves des del 19/10. Mateixes files/columnes que al formulari, sense marges ni descripcions; les propostes A–D deixen de sortir al menú. Vegeu `QUOTATION_STANDARD_2026-10-19.md`. No repetir la tria de plantilla antiga.
+
+## Pressupost únic de treball — 20/10/2026
+
+Per autorització de l’usuari, eliminats els 20 documents de proves anteriors; la factura vinculada es conserva. Treballar sobre l’únic pressupost en esborrany amb dades fictícies de `provesmnl1410`. Inclou m², ml, UDS, mides repetides i transport. Vegeu `WORKING_QUOTATION_2026-10-20.md`; pendent la representació de l’arrodoniment global de l’IVA. Principal sense canvis.
+
+## Banc de proves — 20/10/2026
+
+Executades modificacions reals per interfície i contrast de persistència/12 PDF; vegeu `QUOTATION_TEST_BENCH_2026-10-20.md`. Pressupost restaurat als valors de partida. Prioritat: contacte manual perdut quan es canvia client i contacte en el mateix desament. També pendents portal divergent, dates manuals i avís de línies incompletes. No confondre la pèrdua de contacte reproduïda amb les regressions RPC anteriors correctes. No hi ha correcció funcional aplicada durant el banc.
