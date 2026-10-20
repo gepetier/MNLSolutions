@@ -174,3 +174,14 @@ http://localhost:4173
 ```
 
 La pantalla inclou catàleg, generació de variants, càlcul de línies, preview d'Odoo i revisió de contactes. Per carregar contactes, `MNL_SENSITIVE_DATA_DIR` ha d'apuntar a una carpeta disponible amb `contacts.json`.
+
+## Circuit de qualitat i desenvolupament
+
+El protocol compartit per Codex, Work i GitHub és [docs/QUALITY_WORKFLOW.md](docs/QUALITY_WORKFLOW.md). Els canvis s'implementen en branques i PRs; GitHub Actions executa proves locals sense accés a Odoo, i la validació real de Studio/portal/PDF es fa per separat en entorn neutralitzat.
+
+```bash
+npm run check:ci    # sintaxi, regressions locals, comprovacions de catàleg i rutes sensibles
+npm test            # proves unitàries i smoke HTTP amb Node.js
+```
+
+Aquesta CI no substitueix el contrast visual entre pressupost, portal de client i PDF ni autoritza escriure a principal.

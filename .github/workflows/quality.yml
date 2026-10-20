@@ -1,0 +1,26 @@
+name: Control de qualitat
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Proves locals i seguretat
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Recuperar codi (sense credencials persistents)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Executar proves locals, sense dependències ni Odoo
+        run: npm run check:ci
