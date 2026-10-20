@@ -221,3 +221,8 @@ L’usuari demana analitzar Pressupost → Comanda → Factura. Auditoria en lec
 ## Actualització del flux comercial — 20/10/2026
 
 Implementat i provat només a proves: pressupost acceptat congelat amb PDF, comanda bloquejada, factura total en esborrany i traçabilitat de totes les revisions. Dates d’emissió i confirmació separades. La comptabilització continua manual; principal no modificada. Vegeu [registre d’implementació](docs/SALES_ORDER_INVOICE_FLOW_IMPLEMENTED_2026-10-20.md). Pendents: prova de signatura real pel portal, altres idiomes de factura i definició de parcials/rectificatives/cancel·lacions.
+
+
+### Interfície de factura revisada — 20/10/2026
+
+Aplicada a proves: títols de secció amb origen recuperats, article ampli, columnes ordenades, dimensions no aplicables amb guió i lateral plegable. Línies acceptades de només lectura al formulari. Sense canviar dades comercials ni comptabilitzar. Vegeu docs/INVOICE_INTERFACE_2026-10-20.md.

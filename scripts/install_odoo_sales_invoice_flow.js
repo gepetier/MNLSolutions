@@ -72,6 +72,7 @@ async function upsertView(name, model, source, inheritId = false, key = false) {
   if (old.length) { await cl.write('ir.ui.view', [old[0].id], values); return old[0].id; }
   const id = await cl.create('ir.ui.view', values); b.createdViews.push(id); save(); return id;
 }
+await import('./install_odoo_invoice_layout.js');
 const ref = async (module, name) => (await read('ir.model.data', [['module', '=', module], ['name', '=', name]], ['res_id']))[0].res_id;
 for (const [model, file, module, name] of [['sale.order', 'sales_flow_order_form.xml', 'sale', 'view_order_form'], ['account.move', 'sales_flow_invoice_form.xml', 'account', 'view_move_form']]) {
   await upsertView(prefix + ' ' + model, model, readFileSync(new URL('../templates/' + file, import.meta.url), 'utf8'), await ref(module, name));

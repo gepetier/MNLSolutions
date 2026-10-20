@@ -7,3 +7,8 @@ Estat, decisions, validació i límits: [registre d’implementació](SALES_ORDE
 Es conserva l’exemple agrupat de dues comandes fictícies acceptades i una factura en esborrany; el pressupost de treball original continua editable. Sense enviaments ni comptabilitzacions.
 
 Pendents funcionals: prova real de signatura de client al portal; traducció de les etiquetes de factura; definició de bestretes, parcials, rectificatives i cancel·lació d’acceptats. Principal no modificada.
+
+
+### Interfície de factura revisada — 20/10/2026
+
+Aplicada a proves: títols de secció amb origen recuperats, article ampli, columnes ordenades, dimensions no aplicables amb guió i lateral plegable. Línies acceptades de només lectura al formulari. Sense canviar dades comercials ni comptabilitzar. Vegeu INVOICE_INTERFACE_2026-10-20.md.

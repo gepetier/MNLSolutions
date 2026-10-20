@@ -1,7 +1,21 @@
 <data>
+  <xpath expr="//div[hasclass('oe_title')]/h1/span" position="replace">
+    <span invisible="name or name_placeholder or document_sequence_editable or x_mnl_source_order_ids">Draft</span>
+    <span invisible="name or name_placeholder or document_sequence_editable or not x_mnl_source_order_ids">Factura en esborrany</span>
+  </xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='tax_ids']" position="attributes"><attribute name="string">Impostos</attribute></xpath>
+
+  <xpath expr="//form" position="attributes"><attribute name="class" add="mnl_invoice_form" separator=" "/></xpath>
+  <xpath expr="//sheet/notebook" position="before">
+    <div class="mnl_invoice_controls" invisible="not x_mnl_source_order_ids"/>
+    <div class="mnl_invoice_notice" invisible="not x_mnl_source_order_ids or state != 'draft'">Factura en esborrany · Revisa les dades fiscals, la data i els imports abans de comptabilitzar. Les dades comercials provenen de les versions acceptades.</div>
+  </xpath>
+  <xpath expr="//field[@name='invoice_line_ids']" position="attributes"><attribute name="widget">mnl_invoice_lines</attribute><attribute name="readonly">state != 'draft' or x_mnl_source_order_ids</attribute></xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='account_id']" position="attributes"><attribute name="optional">hide</attribute></xpath>
+
   <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='product_id']" position="before">
     <field name="x_mnl_class" string="Class." optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
-    <field name="x_mnl_article" string="Article acceptat" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+    <field name="x_mnl_article" string="Article" width="360px" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
   </xpath>
   <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='quantity']" position="before">
     <field name="x_mnl_source_line_id" column_invisible="1"/>
@@ -15,9 +29,13 @@
   <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_unit']" position="attributes">
     <attribute name="readonly">x_mnl_source_line_id</attribute>
   </xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='quantity']" position="after">
+    <field name="x_mnl_kind" string="Unitat" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+  </xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_unit']" position="attributes"><attribute name="string">Preu unitari</attribute></xpath>
+  <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_subtotal']" position="attributes"><attribute name="string">Import sense IVA</attribute></xpath>
   <xpath expr="//field[@name='invoice_line_ids']/list" position="inside">
-    <field name="x_mnl_kind" string="Unitat" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
-    <field name="x_mnl_source_ref" string="Versió acceptada" optional="show" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
+    <field name="x_mnl_source_ref" string="Versió acceptada" optional="hide" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
     <field name="x_mnl_source_revision" string="Revisió" optional="hide" readonly="1" column_invisible="not parent.x_mnl_source_order_ids"/>
   </xpath>
   <xpath expr="//sheet/notebook" position="inside">
