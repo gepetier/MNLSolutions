@@ -63,9 +63,9 @@ def validate(snapshot, quantity_decimals=2):
         if line.get('x_mnl_profit_initialized') and not line.get('x_mnl_is_portes'):
             check(identifier, 'final_price_from_base_and_nominal', line['price_unit'],
                   num(line['x_mnl_profit_base_price']) + num(line['x_mnl_profit_nominal']), money_tolerance)
-            if num(line['price_unit']):
-                check(identifier, 'margin_on_final_price', line['x_mnl_profit_percent'],
-                      num(line['x_mnl_profit_nominal']) / num(line['price_unit']) * 100)
+            if num(line['x_mnl_profit_base_price']):
+                check(identifier, 'markup_on_base_price', line['x_mnl_profit_percent'],
+                      num(line['x_mnl_profit_nominal']) / num(line['x_mnl_profit_base_price']) * 100)
 
     net = sum((num(line['price_subtotal']) for line in lines), Decimal(0))
     gross = sum((num(line['price_total']) for line in lines), Decimal(0))

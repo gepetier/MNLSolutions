@@ -864,3 +864,6 @@ Restaurat a proves el format ja definit MNL-YY·NNNN-A, amb punt volat i quatre 
 
 
 Actualització 21/10/2026: referència i revisió A inicialitzades abans de desar el pressupost, només a proves. Detalls i comprovació: `docs/QUOTE_NUMBER_ON_LOAD_2026-10-21.md`.
+
+
+Decisió i correcció 21/10/2026: marge percentual comercial calculat sobre el preu base (100 € + 20% = 120 €), amb euros i percentatge sincronitzats. Aplicat i provat només a proves; acceptats preservats. Vegeu `docs/PROFIT_MARKUP_2026-10-21.md`.
