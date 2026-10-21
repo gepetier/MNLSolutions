@@ -32,6 +32,9 @@ for order in records:
             errors.append(line.product_id.display_name + ': falta una amplada positiva.')
     if errors:
         raise UserError('No es pot acceptar el pressupost:\n' + '\n'.join(errors))
+    purchase_action_id = env['ir.config_parameter'].sudo().get_param('mnl.purchase_flow_action_id')
+    if purchase_action_id:
+        env['ir.actions.server'].sudo().browse(int(purchase_action_id)).with_context(active_model='sale.order', active_id=order.id, active_ids=order.ids, mnl_purchase_validate_only=True).run()
     issued = order.x_mnl_issued_at or previous.get('date_order') or order.date_order
     confirmed = datetime.datetime.now()
     language = order.x_studio_idioma_document or order.partner_id.lang or 'ca_ES'
@@ -70,4 +73,6 @@ for order in records:
     attachment = env['ir.attachment'].sudo().create({'name': 'Pressupost acceptat - ' + order.x_mnl_accepted_ref + '.pdf',
                   'type': 'binary', 'raw': pdf, 'mimetype': 'application/pdf', 'res_model': 'sale.order', 'res_id': order.id})
     order.with_context(mnl_flow_internal=internal_token).write({'x_mnl_accepted_document_id': attachment.id})
+    if purchase_action_id:
+        env['ir.actions.server'].sudo().browse(int(purchase_action_id)).with_context(active_model='sale.order', active_id=order.id, active_ids=order.ids, mnl_purchase_validate_only=False).run()
 action = {'type': 'ir.actions.act_window_close'}

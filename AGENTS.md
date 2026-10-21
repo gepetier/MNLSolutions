@@ -19,7 +19,7 @@ Abans de continuar, llegeix en aquest ordre:
 - Quantitat: `x_studio_uds` és l'entrada; `product_uom_qty` és el resultat calculat.
 - Sense bloc d'entrega/obra/ENVIO al pressupost; fase 1 amb revisió A.
 - Pagaments: termes natius Transferència Bancaria, Rebut bancari 30 dies i Confirming 60 dies.
-- Portes és l'excepció aprovada de proveïdor/cost/marge. La lògica genèrica de costos, compres, inventari i facturació real continua ajornada.
+- Des del 21/10, compres en esborrany autoritzades i provades només a proves: proveïdor natiu obligatori en crear productes de venda, una RFQ per proveïdor i comanda en confirmar. Vegeu `docs/PURCHASE_FLOW_2026-10-21.md`. Inventari i confirmació/enviament automàtic de compres no autoritzats; la lògica genèrica de marge continua ajornada.
 - Flux comercial aprovat i provat només a proves: pressupost acceptat congelat amb PDF → comanda bloquejada → factura total en esborrany; comptabilització manual. Vegeu `docs/SALES_ORDER_INVOICE_FLOW_IMPLEMENTED_2026-10-20.md` i el punt de represa adjacent. Bestretes, parcials, rectificatives i cancel·lacions d’acceptats pendents de definir.
 - La versió PREUS 23/09/2026 només consta creada a proves; la promoció a principal continua pendent.
 
@@ -36,3 +36,5 @@ El codi de les eines de setembre recuperat de tmp és a `scripts/archive/2026-09
 No versionar claus, `.env`, contactes, factures, pressupostos ni outputs privats. `MNL_SENSITIVE_DATA_DIR` apunta fora del repo. El clone conté el context funcional, però l'accés Odoo i les dades locals es recuperen per un canal privat.
 
 Comprovacions locals: `npm run check`, `npm run catalog:combinations`, `npm run catalog:quote`. Per Python: entorn virtual i `requirements.txt`. Cap comprovació d'aquest tipus requereix escriure a Odoo.
+
+Decisió posterior de facturació: una comanda → diverses factures, cada factura → una sola comanda. Adaptació de les regles de factura total/agrupada pendent; l’exemple antic agrupat no és el model futur aprovat.

@@ -211,3 +211,10 @@ Implementat i provat només a proves: pressupost acceptat congelat amb PDF, coma
 ### Interfície de factura revisada — 20/10/2026
 
 Aplicada a proves: títols de secció amb origen recuperats, article ampli, columnes ordenades, dimensions no aplicables amb guió i lateral plegable. Línies acceptades de només lectura al formulari. Sense canviar dades comercials ni comptabilitzar. Vegeu docs/INVOICE_INTERFACE_2026-10-20.md.
+
+
+## Compres automàtiques en esborrany — 21/10/2026
+
+Implementat i provat només a proves: producte de venda nou amb proveïdor natiu obligatori; confirmació genera una RFQ per proveïdor i comanda, amb dimensions i vincles natius. Sense confirmar ni enviar compres. Els productes antics sense proveïdor queden bloquejats en confirmar fins que es configurin; no s’han inventat dades. Vegeu docs/PURCHASE_FLOW_2026-10-21.md.
+
+Decisió de factura vigent: una comanda pot generar diverses factures, però cada factura prové d’una sola comanda. L’adaptació del flux anterior de factura total/agrupada continua pendent; no confondre-la amb el flux de compres ja provat.
