@@ -7,3 +7,6 @@ Inclou validesa, abast, revisió de mides, modificacions, subministrament, trans
 Aplicació: ODOO_ENV_FILE explícit de proves i node scripts/install_odoo_quotation_terms.js --apply. Sense --apply només preview. Còpia privada de note i arch_db a logs abans d’escriure; per revertir, restaurar aquests camps de la còpia al mateix entorn i només si el pressupost continua editable.
 
 Validació: sintaxi JS/XML, import conservat i PDF generat amb el bloc de condicions.
+
+
+Ajust de padding del 21/10: capçalera d’empresa/client i metadades amb 10 px verticals i 12 px laterals; cel·les de la taula estàndard amb 4 px laterals; condicions de pagament i acceptació amb separació interior. Mateixes columnes, camps i imports. Instal·lació específica sense tocar dades: `scripts/install_odoo_quotation_padding.js --apply`, amb còpia privada prèvia dels arch_db. Per revertir, restaurar els arch_db de la còpia.

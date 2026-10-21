@@ -21,13 +21,13 @@
       .mnl-offer { font-family: Arial, sans-serif; color:#172b3a; font-size:10px; }
       .mnl-offer .brand { font-size:25px; font-weight:800; letter-spacing:1px; color:#183c4f; }
       .mnl-offer .top { width:100%; border-collapse:collapse; margin-bottom:12px; }
-      .mnl-offer .top td { vertical-align:top; padding:8px; }
+      .mnl-offer .top td { vertical-align:top; padding:10px 12px; }
       .mnl-offer .issuer { width:48%; line-height:1.5; }
       .mnl-offer .customer { width:52%; padding-left:14px !important; border-left:2px solid #dbe6eb; }
       .mnl-offer .eyebrow { font-size:9px; font-weight:700; letter-spacing:1.4px; color:#487283; margin-bottom:5px; }
       .mnl-offer .customer-name { font-weight:700; font-size:14px; margin-bottom:5px; }
       .mnl-offer .meta { width:100%; margin:10px 0 16px; border-top:2px solid #183c4f; border-bottom:1px solid #dbe6eb; }
-      .mnl-offer .meta td { padding:9px 8px; vertical-align:middle; }
+      .mnl-offer .meta td { padding:10px 12px; vertical-align:middle; }
       .mnl-offer .document-title { font-size:18px; font-weight:700; letter-spacing:1px; }
       .mnl-offer .number { font-size:12px; font-weight:700; display:block; margin-top:4px; }
       .mnl-offer .meta-label { color:#667c89; font-size:9px; margin-right:6px; }
@@ -48,12 +48,12 @@
       .mnl-offer .online-acceptance { margin-top:8px; color:#183c4f; }
       .mnl-offer .product-name { font-weight:600; white-space:normal; }
       .mnl-offer .bottom { width:100%; margin-top:18px; border-collapse:collapse; page-break-inside:avoid; }
-      .mnl-offer .bottom td { vertical-align:top; padding:8px; }
+      .mnl-offer .bottom td { vertical-align:top; padding:10px 12px; }
       .mnl-offer .conditions { width:64%; padding-right:25px; line-height:1.6; }
       .mnl-offer .totals { width:100%; border-collapse:collapse; }
       .mnl-offer .totals td { padding:6px 9px; border-bottom:1px solid #e1e8ec; }
       .mnl-offer .totals .grand td { background:#183c4f; color:white; font-size:16px; font-weight:700; border:0; }
-      .mnl-offer .acceptance { margin-top:20px; border:1px solid #cad8df; padding:10px; min-height:60px; page-break-inside:avoid; }
+      .mnl-offer .acceptance { margin-top:20px; border:1px solid #cad8df; padding:12px 14px; min-height:60px; page-break-inside:avoid; }
       .mnl-offer .acceptance-text { margin-top:6px; color:#607480; white-space:pre-line; }
       .mnl-offer tr { page-break-inside:avoid; }
     </style>
