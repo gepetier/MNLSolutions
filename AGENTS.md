@@ -38,3 +38,5 @@ No versionar claus, `.env`, contactes, factures, pressupostos ni outputs privats
 Comprovacions locals: `npm run check`, `npm run catalog:combinations`, `npm run catalog:quote`. Per Python: entorn virtual i `requirements.txt`. Cap comprovació d'aquest tipus requereix escriure a Odoo.
 
 Decisió posterior de facturació: una comanda → diverses factures, cada factura → una sola comanda. Adaptació de les regles de factura total/agrupada pendent; l’exemple antic agrupat no és el model futur aprovat.
+
+Numeració obligatòria ja definida: pressupost MNL-YY·NNNN-A; la comanda conserva la versió acceptada. Compres i factures mantenen les seves seqüències natives. No forçar noms MNL-QA als documents de prova: marcar les proves a notes i usar default_get localitzat si cal copiar. Paleta: pressupost blau original, comanda verd, compra ambre, factura violeta. Vegeu `docs/DOCUMENT_IDENTITY_2026-10-21.md`.

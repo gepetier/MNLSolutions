@@ -55,6 +55,13 @@
       .mnl-offer .acceptance-text { margin-top:6px; color:#607480; white-space:pre-line; }
       .mnl-offer tr { page-break-inside:avoid; }
     </style>
+    <style t-if="mnl_frozen and not doc.env.context.get('mnl_render_accepted_quotation')">
+      .mnl-offer .brand,.mnl-offer .eyebrow,.mnl-offer .document-title { color:#236044; }
+      .mnl-offer .meta { border-top-color:#236044; border-bottom-color:#b5d3bd; }
+      .mnl-offer .lines th,.mnl-offer .totals .grand td { background:#236044; }
+      .mnl-offer .section td { background:#eaf4ed; color:#236044; border-top-color:#b5d3bd; }
+      .mnl-offer .variant-start td,.mnl-offer .acceptance { border-color:#b5d3bd; }
+    </style>
     <div class="page">
       <table class="top"><tr>
         <td class="issuer">

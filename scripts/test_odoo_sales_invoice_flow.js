@@ -10,6 +10,7 @@ const cl = new OdooClient({ ...cfg, fetchImpl: (u, o) => fetch(u, { ...o, signal
 const read = (m, d, f) => cl.searchRead(m, d, f, { limit: 5000 });
 const [original] = await read('sale.order', [['id', '=', sourceId]], ['state', 'name', 'amount_total', 'partner_id', 'x_studio_condicions_acceptacio']);
 if (original.state !== 'draft' || !original.x_studio_condicions_acceptacio.includes('SENSE VALIDESA COMERCIAL')) throw new Error('Només es permet partir d’un esborrany fictici marcat sense validesa comercial.');
+const nativeNewName = (await cl.call('sale.order', 'default_get', [['name']])).name;
 const stamp = Date.now(); const prefix = 'MNL-QA-FLOW-' + stamp;
 const result = { database: cfg.database, sourceId, at: new Date().toISOString(), orders: [], invoiceId: null, checks: [] };
 mkdirSync('outputs/sales-invoice-flow', { recursive: true });
@@ -17,7 +18,7 @@ const output = `outputs/sales-invoice-flow/test-${stamp}.json`;
 const save = () => writeFileSync(output, JSON.stringify(result, null, 2));
 const check = name => { result.checks.push(name); save(); console.log(JSON.stringify({ passed: name })); };
 const reject = async (name, task, pattern) => { let e; try { await task(); } catch (error) { e = error; } assert.ok(e, name + ': expected rejection'); if (pattern) assert.match(e.message, pattern); check(name); };
-const copy = async suffix => { const ref = prefix + '-' + suffix; const copied = await cl.call('sale.order', 'copy', [[sourceId], { name: ref + '-A', x_studio_referencia: ref, x_studio_revisio: 'A', date_order: new Date().toISOString().slice(0, 10) + ' 00:00:00' }]); const id = Array.isArray(copied) ? copied[0] : copied; result.orders.push(id); save(); return id; };
+const copy = async suffix => { const ref = prefix + '-' + suffix; const copied = await cl.call('sale.order', 'copy', [[sourceId], { name: nativeNewName, x_studio_referencia: false, note: 'Prova automatitzada sense validesa comercial: ' + ref, x_studio_revisio: 'A', date_order: new Date().toISOString().slice(0, 10) + ' 00:00:00' }]); const id = Array.isArray(copied) ? copied[0] : copied; result.orders.push(id); save(); return id; };
 try {
   const bad = await copy('INVALID');
   const [badLine] = await read('sale.order.line', [['order_id', '=', bad], ['display_type', '=', false], ['x_studio_tipus_calcul', '=', 'm2']], ['id']);
@@ -35,7 +36,7 @@ try {
   const acceptedPdf = orders.find(o => o.id === first).x_mnl_accepted_document_id[0];
   await reject('accepted_pdf_cannot_change', () => cl.call('ir.attachment', 'write', [[acceptedPdf], { name: 'ALTERED.pdf' }], { context: { mnl_flow_internal: true } }), /congelad/i);
   await reject('accepted_pdf_cannot_delete', () => cl.unlink('ir.attachment', [acceptedPdf]), /congelad/i);
-  const revisionCopy = await cl.call('sale.order', 'copy', [[first], { name: prefix + '-REVISION-C', x_studio_revisio: 'C' }]);
+  const revisionCopy = await cl.call('sale.order', 'copy', [[first], { name: nativeNewName, x_studio_referencia: orders.find(o => o.id === first).x_mnl_accepted_ref.replace(/-[A-Z]$/, ''), x_studio_revisio: 'B' }]);
   const revisionId = Array.isArray(revisionCopy) ? revisionCopy[0] : revisionCopy;
   result.orders.push(revisionId); save();
   const [revision] = await read('sale.order', [['id', '=', revisionId]], ['state', 'locked', 'x_mnl_frozen', 'x_mnl_accepted_document_id']);

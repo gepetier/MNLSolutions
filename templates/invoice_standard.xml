@@ -5,24 +5,24 @@
       .mnl-invoice { font-family:Arial,sans-serif; font-size:10px; color:#172b3a; }
       .mnl-invoice table { width:100%; border-collapse:collapse; }
       .mnl-invoice td,.mnl-invoice th { padding:7px 6px; vertical-align:top; }
-      .mnl-invoice .top td { width:50%; border:1px solid #dbe6eb; line-height:1.5; }
+      .mnl-invoice .top td { width:50%; border:1px solid #e5dcef; line-height:1.5; }
       .mnl-invoice .customer { white-space:pre-line; }
-      .mnl-invoice .meta { border-top:2px solid #183c4f; border-bottom:1px solid #dbe6eb; margin:14px 0 18px; }
+      .mnl-invoice .meta { border-top:2px solid #593779; border-bottom:1px solid #e5dcef; margin:14px 0 18px; }
       .mnl-invoice h2 { margin:0 0 5px; font-size:19px; }
-      .mnl-invoice .lines { table-layout:fixed; font-size:9.4px; background:#f5f8fa; border:1px solid #cad8df; }
-      .mnl-invoice .lines th { background:#183c4f; color:white; font-size:9px; white-space:nowrap; }
-      .mnl-invoice .lines td { border-bottom:1px solid #dbe6eb; }
+      .mnl-invoice .lines { table-layout:fixed; font-size:9.4px; background:#faf7fc; border:1px solid #d3c3e2; }
+      .mnl-invoice .lines th { background:#593779; color:white; font-size:9px; white-space:nowrap; }
+      .mnl-invoice .lines td { border-bottom:1px solid #e5dcef; }
       .mnl-invoice .lines thead { display:table-header-group; }
       .mnl-invoice .section { page-break-after:avoid; }
       .mnl-invoice .trace { page-break-inside:avoid; }
-      .mnl-invoice .section td { background:#e9f0f3; font-weight:bold; }
+      .mnl-invoice .section td { background:#f0eaf6; font-weight:bold; }
       .mnl-invoice .num { text-align:right; white-space:nowrap; }
-      .mnl-invoice .source { font-size:8px; color:#607480; margin-top:3px; }
+      .mnl-invoice .source { font-size:8px; color:#78698c; margin-top:3px; }
       .mnl-invoice .totals { width:38%; margin-left:auto; margin-top:18px; }
-      .mnl-invoice .totals td { border-bottom:1px solid #dbe6eb; }
-      .mnl-invoice .grand td { background:#183c4f; color:white; font-size:16px; font-weight:bold; }
-      .mnl-invoice .trace { margin-top:20px; font-size:9px; border:1px solid #cad8df; }
-      .mnl-invoice .trace th { background:#e9f0f3; text-align:left; }
+      .mnl-invoice .totals td { border-bottom:1px solid #e5dcef; }
+      .mnl-invoice .grand td { background:#593779; color:white; font-size:16px; font-weight:bold; }
+      .mnl-invoice .trace { margin-top:20px; font-size:9px; border:1px solid #d3c3e2; }
+      .mnl-invoice .trace th { background:#f0eaf6; text-align:left; }
       .mnl-invoice tr { page-break-inside:avoid; }
     </style>
     <div class="page">
@@ -82,7 +82,7 @@
       <p t-if="doc.state == 'draft'" class="source">Document de revisió: pendent de comptabilització manual.</p>
     </div>
   </div>
-  <div class="footer" style="font-family:Arial;font-size:9px;color:#607480;border-top:1px solid #cad8df;padding-top:5px;">
+  <div class="footer" style="font-family:Arial;font-size:9px;color:#78698c;border-top:1px solid #d3c3e2;padding-top:5px;">
     <span t-field="doc.company_id.name"/><span style="float:right">Pàgina <span class="page"/> / <span class="topage"/></span>
   </div>
 </t>

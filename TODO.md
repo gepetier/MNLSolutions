@@ -218,3 +218,8 @@ Aplicada a proves: títols de secció amb origen recuperats, article ampli, colu
 Implementat i provat només a proves: producte de venda nou amb proveïdor natiu obligatori; confirmació genera una RFQ per proveïdor i comanda, amb dimensions i vincles natius. Sense confirmar ni enviar compres. Els productes antics sense proveïdor queden bloquejats en confirmar fins que es configurin; no s’han inventat dades. Vegeu docs/PURCHASE_FLOW_2026-10-21.md.
 
 Decisió de factura vigent: una comanda pot generar diverses factures, però cada factura prové d’una sola comanda. L’adaptació del flux anterior de factura total/agrupada continua pendent; no confondre-la amb el flux de compres ja provat.
+
+
+## Numeració i colors de documents — 21/10/2026
+
+Restaurat a proves el format ja definit MNL-YY·NNNN-A, amb punt volat i quatre dígits, sense reiniciar comptadors. El pressupost editable conserva el lloc 30; en confirmar es conserva el número. Compres i factures mantenen les seqüències natives, sense formats nous inventats. Els bancs deixen de forçar identificadors MNL-QA als documents. Paleta: pressupost blau original, comanda verda, compra ambre i factura violeta; formularis i PDF MNL coordinats. Les referències i PDF acceptats antics es conserven. Vegeu docs/DOCUMENT_IDENTITY_2026-10-21.md.

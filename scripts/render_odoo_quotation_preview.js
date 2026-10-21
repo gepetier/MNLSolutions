@@ -7,7 +7,7 @@ if(!process.env.ODOO_ENV_FILE||!/^provesmnl\d+$/.test(c.database))throw new Erro
 const orderId=Number(process.argv[2]);if(!Number.isSafeInteger(orderId)||orderId<=0)throw new Error('Indica un pressupost existent per generar-ne la previsualització.');
 const cl=new OdooClient({...c,fetchImpl:(u,o)=>fetch(u,{...o,signal:AbortSignal.timeout(120000)})});await cl.authenticate();
 const model=process.env.MNL_PREVIEW_MODEL||'sale.order';
-if(!['sale.order','account.move'].includes(model))throw new Error('Model de document no admès.');
+if(!['sale.order','account.move','purchase.order'].includes(model))throw new Error('Model de document no admès.');
 const [m]=await cl.searchRead('ir.model',[['model','=',model]],['id']);
 const report=process.env.MNL_PREVIEW_REPORT||'mnl_solutions.report_quotation_standard';
 const output=resolve(process.env.MNL_PREVIEW_OUTPUT||'outputs/quotation-preview');mkdirSync(output,{recursive:true});
