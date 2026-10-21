@@ -100,3 +100,6 @@ Actualització 21/10/2026: referència i revisió A inicialitzades abans de desa
 
 
 Decisió i correcció 21/10/2026: marge percentual comercial calculat sobre el preu base (100 € + 20% = 120 €), amb euros i percentatge sincronitzats. Aplicat i provat només a proves; acceptats preservats. Vegeu `docs/PROFIT_MARKUP_2026-10-21.md`.
+
+
+Actualització 21/10/2026: quatre productes de prova arxivats; Hurre configurat com a proveïdor preferent dels 14 models actuals de panells de façana/coberta (5.220 variants), només a proves. Tarifes pendents, sense imports inventats. Vegeu `docs/CATALOG_CLEANUP_2026-10-21.md`.
