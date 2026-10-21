@@ -42,7 +42,6 @@
       .mnl-offer .note td { color:#607480; font-style:italic; }
       .mnl-offer .variant-start td { border-top:2px solid #b9ccd5; }
       .mnl-offer .variant-continuation .product-name { font-weight:400; }
-      .mnl-offer .product-code { margin-top:3px; font-size:8px; font-weight:400; color:#607480; overflow-wrap:break-word; }
       .mnl-offer .online-acceptance { margin-top:8px; color:#183c4f; }
       .mnl-offer .product-name { font-weight:600; white-space:normal; }
       .mnl-offer .bottom { width:100%; margin-top:18px; border-collapse:collapse; page-break-inside:avoid; }
@@ -101,7 +100,7 @@
             <t t-set="variant_start" t-value="line_index == 0 or lines[line_index-1].display_type or lines[line_index-1].product_id != line.product_id"/>
             <tr t-att-class="'product ' + ('variant-start' if variant_start else 'variant-continuation') if visual_trial else 'product'" t-att-data-line-id="line.id">
               <td><span t-field="line.x_studio_classificador"/></td>
-              <td class="product-name"><span t-out="line.x_mnl_accepted_article if mnl_frozen else line.product_id.with_context(display_default_code=False).display_name"/><div t-if="visual_trial and variant_start and line.product_id.default_code" class="product-code" t-out="line.product_id.default_code"/></td>
+              <td class="product-name"><span t-out="line.x_mnl_accepted_article if mnl_frozen else line.product_id.with_context(display_default_code=False).display_name"/></td>
               <td class="num"><span t-field="line.x_studio_uds"/></td>
               <td class="num"><span t-if="line.x_studio_tipus_calcul in ['m2','ml']" t-field="line.x_studio_long" t-options="{'widget':'float','precision':3}"/><t t-else="">-</t></td>
               <td class="num"><span t-if="line.x_studio_tipus_calcul == 'm2'" t-field="line.x_studio_ancho_1" t-options="{'widget':'float','precision':3}"/><t t-else="">-</t></td>

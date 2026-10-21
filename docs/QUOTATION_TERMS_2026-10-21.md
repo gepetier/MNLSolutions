@@ -10,3 +10,6 @@ Validació: sintaxi JS/XML, import conservat i PDF generat amb el bloc de condic
 
 
 Ajust de padding del 21/10: capçalera d’empresa/client i metadades amb 10 px verticals i 12 px laterals; cel·les de la taula estàndard amb 4 px laterals; condicions de pagament i acceptació amb separació interior. Mateixes columnes, camps i imports. Instal·lació específica sense tocar dades: `scripts/install_odoo_quotation_padding.js --apply`, amb còpia privada prèvia dels arch_db. Per revertir, restaurar els arch_db de la còpia.
+
+
+Presentació d’article, 21/10: la plantilla predeterminada mostra només el nom del producte/variant, sense el codi secundari sota el nom. V3 ja mostrava només el nom. Es conserva la informació del producte a Odoo i els documents acceptats congelats.
