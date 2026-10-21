@@ -1,8 +1,20 @@
 # Context del projecte MNLSolutions
 
+## Ús eficient de tokens i abast de les tasques (21/10/2026)
+
+- Aplicar aquestes regles en totes les sessions del repositori; no dependre del context del xat.
+- Canvis petits de color, text o distribució: editar només els fitxers afectats, fer una comprovació específica i, si afecta la presentació, una única revisió visual. No repetir auditories completes ni crear documents o dades de prova nous sense necessitat.
+- Llegir només el context necessari. La llista de lectura inicial següent és un índex de referència, no una lectura íntegra obligatòria a cada sessió. Consultar els mestres funcionals quan el canvi afecti regles de negoci.
+- Reutilitzar evidència vigent i eines existents. Ampliar proves només davant canvis de lògica, errors o riscos concrets; mantenir les comprovacions necessàries per a imports, congelació, traçabilitat i dades.
+- Fer cerques acotades i agrupar lectures independents. Retornar fragments, resums i metadades útils; evitar volcar fitxers grans, registres complets o catàlegs sencers d'eines.
+- No ampliar l'encàrrec amb refactoritzacions, reauditories o millores no demanades. Aturar-se quan el resultat sol·licitat estigui verificat.
+- Comunicació breu: explicar el canvi, la comprovació i les limitacions materials. No repetir plans, context ni justificacions.
+- Per canvis de documentació o instruccions de treball, actualitzar el document autoritatiu afectat; no replicar el mateix text a README, TODO i handoffs si no canvia l'estat funcional.
+- No afirmar xifres de tokens o estalvi sense una mesura disponible.
+
 ## Lectura inicial
 
-Abans de continuar, llegeix en aquest ordre:
+Consulta segons la tasca, amb aquest ordre de prioritat:
 
 1. `docs/DEVELOPMENT_HANDOFF_2026-10-14.md`: punt de represa i limitacions.
 2. `README.md` i `docs/DEVELOPMENT_SETUP.md`: arrencada i configuració.
