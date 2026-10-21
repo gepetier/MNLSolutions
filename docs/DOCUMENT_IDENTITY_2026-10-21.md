@@ -39,3 +39,8 @@ Requereix els camps i vistes del flux comercial ja presents. Còpia privada a lo
 Verificats: numeració del pressupost editable i imports intactes; creació d'una proposta amb número natiu; mateix número en confirmar; compres amb números natius; referències acceptades anteriors i factura comptabilitzada històrica intactes. Formularis blau/verd/ambre/violeta comprovats al navegador. Generats i revisats visualment quatre PDF de proves; XML i sintaxi JavaScript comprovats. Sense comptabilitzar, confirmar compres ni enviar documents. Principal no modificada.
 
 Per reimprimir des d'altres instal·ladors cal tornar a aplicar aquest instal·lador d'identitat si aquests han substituït vistes de formulari/report. Les plantilles MNL font ja incorporen els colors per evitar perdre'ls en reinstal·lar els informes principals.
+
+
+## Menú de pressupost: Nova versió
+
+21/10/2026, només a proves: «Duplicar» passa a «Nova versió» en formularis sale.order amb estat draft/sent. Es conserva la mateixa acció nativa de còpia; aquest canvi de text no incrementa revisions ni modifica la còpia. Comandes i altres documents conserven el text natiu. Instal·lador: `scripts/install_odoo_quotation_version_label.js --apply`, amb ODOO_ENV_FILE explícit de proves i còpia privada prèvia. Reversió: desactivar l’actiu `MNL - Nova versió al menú de pressupost` o restaurar la còpia. Comprovació focalitzada: etiquetes per estat/model i callback natiu preservat; sintaxi JS correcta. Recarregar el navegador després d’aplicar.
