@@ -3,7 +3,10 @@ import { join } from "node:path";
 import { requireConfig } from "../src/config.js";
 import { OdooClient } from "../src/odooClient.js";
 
-const client = new OdooClient(requireConfig());
+const config = requireConfig();
+config.url = new URL(config.url).origin;
+if (!process.env.ODOO_ENV_FILE || !/^provesmnl\d+$/.test(config.database)) throw new Error("Selecciona explícitament la base de proves.");
+const client = new OdooClient({ ...config, fetchImpl: (url, options) => fetch(url, { ...options, signal: AbortSignal.timeout(30000) }) });
 const ACTION_NAME = "MNL - UI reservar numero en nou pressupost";
 const AUTOMATION_NAME = "MNL - Reservar numero en carregar nou pressupost";
 
@@ -13,7 +16,7 @@ function stamp() {
 
 const ACTION_CODE = `
 values_to_return = {}
-for record in records or []:
+for record in (record and [record]) or records or []:
     current_name = (record.name or '').strip()
     current_reference = (record.x_studio_referencia or '').strip()
     is_new = not current_name or current_name.lower() in ['new', 'nou', 'nuevo']
@@ -36,7 +39,7 @@ async function modelId() {
 
 async function backup(saleOrderModelId) {
   const actions = await client.searchRead("ir.actions.server", [["name", "=", ACTION_NAME], ["model_id", "=", saleOrderModelId]], ["id", "name", "code"], { limit: 5 });
-  const automations = await client.searchRead("base.automation", [["name", "=", AUTOMATION_NAME], ["model_id", "=", saleOrderModelId]], ["id", "name", "active", "trigger", "trigger_field_ids", "action_server_ids"], { limit: 5 });
+  const automations = await client.searchRead("base.automation", [["name", "=", AUTOMATION_NAME], ["model_id", "=", saleOrderModelId]], ["id", "name", "active", "trigger", "on_change_field_ids", "trigger_field_ids", "action_server_ids"], { limit: 5 });
   mkdirSync("logs", { recursive: true });
   const file = join("logs", `odoo-quote-number-on-load-backup-${client.database}-${stamp()}.json`);
   writeFileSync(file, JSON.stringify({ database: client.database, backedUpAt: new Date().toISOString(), actions, automations }, null, 2));
@@ -54,12 +57,15 @@ async function upsertAction(saleOrderModelId) {
 }
 
 async function upsertAutomation(saleOrderModelId, actionId) {
+  const triggers = await client.searchRead("ir.model.fields", [["model", "=", "sale.order"], ["name", "in", ["name", "company_id"]]], ["id", "name"]);
+  if (triggers.length !== 2) throw new Error("Falten els camps de càrrega inicial.");
   const [existing] = await client.searchRead("base.automation", [["name", "=", AUTOMATION_NAME], ["model_id", "=", saleOrderModelId]], ["id"], { limit: 1 });
   const values = {
     name: AUTOMATION_NAME,
     model_id: saleOrderModelId,
     active: true,
     trigger: "on_change",
+    on_change_field_ids: [[6, 0, triggers.map(field => field.id)]],
     trigger_field_ids: [[6, 0, []]],
     action_server_ids: [[6, 0, [actionId]]],
   };

@@ -223,3 +223,6 @@ Decisió de factura vigent: una comanda pot generar diverses factures, però cad
 ## Numeració i colors de documents — 21/10/2026
 
 Restaurat a proves el format ja definit MNL-YY·NNNN-A, amb punt volat i quatre dígits, sense reiniciar comptadors. El pressupost editable conserva el lloc 30; en confirmar es conserva el número. Compres i factures mantenen les seqüències natives, sense formats nous inventats. Els bancs deixen de forçar identificadors MNL-QA als documents. Paleta: pressupost blau original, comanda verda, compra ambre i factura violeta; formularis i PDF MNL coordinats. Les referències i PDF acceptats antics es conserven. Vegeu docs/DOCUMENT_IDENTITY_2026-10-21.md.
+
+
+Actualització 21/10/2026: referència i revisió A inicialitzades abans de desar el pressupost, només a proves. Detalls i comprovació: `docs/QUOTE_NUMBER_ON_LOAD_2026-10-21.md`.
