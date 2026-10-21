@@ -1,0 +1,20 @@
+// Reserves one real sequence number, but never creates or saves a quotation.
+import assert from 'node:assert/strict';
+import { requireConfig } from '../src/config.js';
+import { OdooClient } from '../src/odooClient.js';
+const c = requireConfig(); c.url = new URL(c.url).origin;
+if (!process.env.ODOO_ENV_FILE || !/^provesmnl\d+$/.test(c.database)) throw Error('Selecciona proves explícitament.');
+const api = new OdooClient({ ...c, fetchImpl: (u, o) => fetch(u, { ...o, signal: AbortSignal.timeout(30000) }) });
+const spec = Object.fromEntries(['name', 'x_studio_referencia', 'x_studio_revisio', 'company_id'].map(f => [f, {}]));
+const next = async () => (await api.searchRead('ir.sequence', [['code', '=', 'sale.order']], ['number_next_actual'], { limit: 1 }))[0].number_next_actual;
+const result = await api.call('sale.order', 'onchange', [[], {}, [], spec]);
+const values = result.value;
+assert.match(values.x_studio_referencia, /^MNL-\d{2}·\d{4}$/);
+assert.equal(values.x_studio_revisio, 'A');
+assert.equal(values.name, values.x_studio_referencia + '-A');
+const before = await next();
+const repeat = await api.call('sale.order', 'onchange', [[], values, ['name'], spec]);
+assert.equal(await next(), before, 'No reservar de nou en editar.');
+assert.equal(repeat.value?.name || values.name, values.name);
+console.log(JSON.stringify({ passed: true, database: c.database, unsaved: true, reference: values.x_studio_referencia, revision: values.x_studio_revisio, repeatWithoutReservation: true }));
+process.exit(0);

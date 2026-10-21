@@ -174,3 +174,76 @@ http://localhost:4173
 ```
 
 La pantalla inclou catàleg, generació de variants, càlcul de línies, preview d'Odoo i revisió de contactes. Per carregar contactes, `MNL_SENSITIVE_DATA_DIR` ha d'apuntar a una carpeta disponible amb `contacts.json`.
+
+## Dades del client al pressupost (19/10/2026)
+
+Corregida a `provesmnl1410` l’herència en viu de contacte, idioma i pagament en canviar de client. El formulari incorpora dades fiscals relacionades i contacte editable. Regressió RPC sense desar verificada; validació visual i desament pendents. Vegeu [el registre tècnic](docs/CUSTOMER_ONCHANGE_2026-10-19.md).
+
+## Descomptes ajornats (19/10/2026)
+
+Per decisió de l’usuari, els descomptes queden en standby. Els controls s’han ocultat al formulari de pressupostos de proves, conservant dades i dependències. Vegeu [el registre i la reversió](docs/DISCOUNTS_STANDBY_2026-10-19.md).
+
+## Interfície del pressupost — 19/10/2026
+
+Aplicat a `provesmnl1410`: amplada completa per defecte amb botó per mostrar/amagar l’espai lateral i preferència al navegador; targeta de client amb etiquetes alineades. Vista combinada CA/ES/EN, regressió RPC de client i botó verificats al navegador. Comprovació visual a 1363 px; pendent pantalla gran de l’usuari. Detall i reversió: `docs/QUOTATION_LAYOUT_2026-10-19.md`. Publicat a GitHub el 20/10/2026 amb autorització explícita de l’usuari (PR #1).
+
+## PDF predeterminat de pressupost (19/10/2026)
+
+`Pressupost MNL` segueix les files i les dotze columnes de la finestra, amb A4 vertical (actualització 20/10), sense marges ni descripcions de producte. Instal·lat i activat a proves; font QWeb i instal·lació reversible versionades. Vegeu [el mapa de camps i les proves](docs/QUOTATION_STANDARD_2026-10-19.md).
+
+## Pressupost de treball (20/10/2026)
+
+Eliminats els documents antics de proves per autorització de l’usuari. Hi ha un únic pressupost de treball amb dades fictícies i casos m²/ml/UDS/transport. Vegeu [els casos i les comprovacions](docs/WORKING_QUOTATION_2026-10-20.md), inclosa la diferència d’arrodoniment global de l’IVA.
+
+El [banc de proves del 20/10](docs/QUOTATION_TEST_BENCH_2026-10-20.md) contrasta canvis reals d’interfície, persistència i 12 PDF. Inclou les incidències pendents del contacte, del portal, de les dates manuals i de les dimensions incompletes. Eines: `scripts/snapshot_odoo_quotation_readonly.js` i `scripts/check_quotation_coherence.py`.
+
+## Correccions de coherència — 20/10/2026
+
+Aplicades a proves: contacte manual conservat en canviar client i contacte en el mateix desament; portal i PDF amb document compartit; validesa bidireccional entre camp i condicions; dimensions obligatòries en generar documents m²/ml, amb excepció UDS. Validació i límits: [QUOTATION_UNIFIED_2026-10-20.md](docs/QUOTATION_UNIFIED_2026-10-20.md). Pressupost restaurat; principal sense canvis.
+
+## Revisió visual posterior — 20/10/2026
+
+Total variant amagat: onze columnes externes. Dimensions amb unitat m, lletra ampliada, resum fiscal natiu amb tipus i correccions de català. Separació de variants i SKU en prova provisional, pendents del vistiplau visual de l’usuari. Signatura en línia nativa activada al pressupost de mostra; no s’ha signat. IBAN i arrodoniment ajornats. Detall i evidència: `docs/QUOTATION_READABILITY_2026-10-20.md`. Aquesta decisió supera les referències anteriors a dotze columnes visibles.
+
+## V3 de prova — 20/10/2026
+
+PDF alternatiu de nou columnes, sense Class./Article repetits en les continuacions d’una variant, sense codis SKU ni imports amb IVA per fila, amb capçaleres en una línia, padding i fons suau. La v2 continua predeterminada; la v3 està pendent de valoració. Font, generació temporal i comprovacions a `docs/QUOTATION_V3_TRIAL_2026-10-20.md`.
+
+## Terminologia de transport — 20/10/2026
+
+«Portes» passa a «Transport» en català als noms visibles del producte i controls del pressupost de proves. Es conserven SKU/camps tècnics i càlculs. Les referències funcionals antigues a Portes descriuen el mateix mòdul de transport. Reproducció i reversió a `docs/TRANSPORT_LABEL_2026-10-20.md`.
+
+## Anàlisi de fase següent — 20/10/2026
+
+L’usuari demana analitzar Pressupost → Comanda → Factura. Auditoria en lectura de proves, sense confirmar, crear ni comptabilitzar documents: `docs/SALES_ORDER_INVOICE_FLOW_AUDIT_2026-10-20.md`. Base nativa existent, facturació per quantitats demanades, bloqueig automàtic desactivat, sense camps dimensionals a factura i sense document de comanda MNL consolidat. Només anàlisi/planificació autoritzades en aquesta petició; la implementació i les operacions comptables continuen pendents.
+
+
+## Actualització del flux comercial — 20/10/2026
+
+Implementat i provat només a proves: pressupost acceptat congelat amb PDF, comanda bloquejada, factura total en esborrany i traçabilitat de totes les revisions. Dates d’emissió i confirmació separades. La comptabilització continua manual; principal no modificada. Vegeu [registre d’implementació](docs/SALES_ORDER_INVOICE_FLOW_IMPLEMENTED_2026-10-20.md). Pendents: prova de signatura real pel portal, altres idiomes de factura i definició de parcials/rectificatives/cancel·lacions.
+
+
+### Interfície de factura revisada — 20/10/2026
+
+Aplicada a proves: títols de secció amb origen recuperats, article ampli, columnes ordenades, dimensions no aplicables amb guió i lateral plegable. Línies acceptades de només lectura al formulari. Sense canviar dades comercials ni comptabilitzar. Vegeu docs/INVOICE_INTERFACE_2026-10-20.md.
+
+
+## Compres automàtiques en esborrany — 21/10/2026
+
+Implementat i provat només a proves: producte de venda nou amb proveïdor natiu obligatori; confirmació genera una RFQ per proveïdor i comanda, amb dimensions i vincles natius. Sense confirmar ni enviar compres. Els productes antics sense proveïdor queden bloquejats en confirmar fins que es configurin; no s’han inventat dades. Vegeu docs/PURCHASE_FLOW_2026-10-21.md.
+
+Decisió de factura vigent: una comanda pot generar diverses factures, però cada factura prové d’una sola comanda. L’adaptació del flux anterior de factura total/agrupada continua pendent; no confondre-la amb el flux de compres ja provat.
+
+
+## Numeració i colors de documents — 21/10/2026
+
+Restaurat a proves el format ja definit MNL-YY·NNNN-A, amb punt volat i quatre dígits, sense reiniciar comptadors. El pressupost editable conserva el lloc 30; en confirmar es conserva el número. Compres i factures mantenen les seqüències natives, sense formats nous inventats. Els bancs deixen de forçar identificadors MNL-QA als documents. Paleta: pressupost blau original, comanda verda, compra ambre i factura violeta; formularis i PDF MNL coordinats. Les referències i PDF acceptats antics es conserven. Vegeu docs/DOCUMENT_IDENTITY_2026-10-21.md.
+
+
+Actualització 21/10/2026: referència i revisió A inicialitzades abans de desar el pressupost, només a proves. Detalls i comprovació: `docs/QUOTE_NUMBER_ON_LOAD_2026-10-21.md`.
+
+
+Decisió i correcció 21/10/2026: marge percentual comercial calculat sobre el preu base (100 € + 20% = 120 €), amb euros i percentatge sincronitzats. Aplicat i provat només a proves; acceptats preservats. Vegeu `docs/PROFIT_MARKUP_2026-10-21.md`.
+
+
+Actualització 21/10/2026: quatre productes de prova arxivats; Hurre configurat com a proveïdor preferent dels 14 models actuals de panells de façana/coberta (5.220 variants), només a proves. Tarifes pendents, sense imports inventats. Vegeu `docs/CATALOG_CLEANUP_2026-10-21.md`.
