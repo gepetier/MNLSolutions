@@ -131,6 +131,10 @@
         </t>
         <tr class="grand"><td t-out="L['total']"/><td class="num"><span t-field="doc.amount_total" t-options="{'widget':'monetary','display_currency':doc.currency_id}"/></td></tr>
       </table></td></tr></table>
+      <div t-if="doc.note" class="mnl-general-terms" style="page-break-before:always;padding-top:12px;font-size:11px;line-height:1.5;">
+        <strong t-out="{'ca':'TERMES I CONDICIONS', 'es':'TÉRMINOS Y CONDICIONES', 'en':'TERMS AND CONDITIONS'}.get(language[:2], 'TERMES I CONDICIONS')"/>
+        <div t-field="doc.note"/>
+      </div>
       <div class="acceptance"><strong t-out="L['acceptance']"/><div class="acceptance-text" t-field="doc.x_studio_condicions_acceptacio"/>
         <div t-if="doc.require_signature and not doc.signature and (not mnl_frozen or doc.env.context.get('mnl_render_accepted_quotation'))" class="online-acceptance" t-out="{'ca':'Podeu acceptar i signar aquest pressupost des del portal de clients.', 'es':'Puede aceptar y firmar este presupuesto desde el portal de clientes.', 'en':'You can accept and sign this quotation in the customer portal.'}.get(language[:2], 'Puede aceptar y firmar este presupuesto desde el portal de clientes.')"/>
         <div t-if="not doc.require_signature and not doc.signature and not mnl_frozen and (not mnl_frozen or doc.env.context.get('mnl_render_accepted_quotation'))" style="margin-top:16px;min-height:45px;" t-out="{'ca':'Nom: ____________________    Data: __________    Signatura:', 'es':'Nombre: ____________________    Fecha: __________    Firma:', 'en':'Name: ____________________    Date: __________    Signature:'}.get(language[:2], 'Nombre: ____________________    Fecha: __________    Firma:')"/>
