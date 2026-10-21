@@ -44,3 +44,6 @@ Per reimprimir des d'altres instal·ladors cal tornar a aplicar aquest instal·l
 ## Menú de pressupost: Nova versió
 
 21/10/2026, només a proves: «Duplicar» passa a «Nova versió» en formularis sale.order amb estat draft/sent. Es conserva la mateixa acció nativa de còpia; aquest canvi de text no incrementa revisions ni modifica la còpia. Comandes i altres documents conserven el text natiu. Instal·lador: `scripts/install_odoo_quotation_version_label.js --apply`, amb ODOO_ENV_FILE explícit de proves i còpia privada prèvia. Reversió: desactivar l’actiu `MNL - Nova versió al menú de pressupost` o restaurar la còpia. Comprovació focalitzada: etiquetes per estat/model i callback natiu preservat; sintaxi JS correcta. Recarregar el navegador després d’aplicar.
+
+
+Correcció 21/10/2026: categoria Facana → Façana i etiqueta FACANA → FAÇANA a les seccions i camp de família dels pressupostos editables, només a proves. Script `scripts/fix_odoo_facana_label.js` (preview per defecte, `--apply` amb còpia privada). Imports verificats sense canvis; documents acceptats congelats preservats. L’acció de seccions ja genera FAÇANA; es corregeixen les etiquetes existents i la categoria d’origen. Per revertir, restaurar els noms de la còpia privada.
