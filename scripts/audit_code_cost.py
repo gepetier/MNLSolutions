@@ -82,6 +82,16 @@ def audit(tables):
             a = automations.get(r.get('base_automation_id'))
             excluded = '__cloc_exclude__' in origin
             result.append(dict(model=model, id=r['id'], name=label(r['name']), affected_model=r.get('model') or models.get(r.get('model_id')), state=r['state'], automation_id=r.get('base_automation_id'), automation_name=label(a['name']) if a else None, automation_active=a.get('active') if a else None, binding_model_id=r.get('binding_model_id'), eligible=eligible, excluded=excluded, estimated_cloc=py_count(source) if eligible and not excluded else 0, physical_lines=len(source.splitlines()), source=source, sha256=hashlib.sha256(source.encode()).hexdigest(), xml_ids=[d['module']+'.'+d['name'] for d in ids], depends=r.get('depends'), related=r.get('related'), write_date=r.get('write_date')))
+    for r in result:
+        automation = automations.get(r['automation_id'])
+        if automation:
+            r['automation_trigger'] = automation.get('trigger')
+            r['automation_filter_domain'] = automation.get('filter_domain')
+            r['automation_filter_pre_domain'] = automation.get('filter_pre_domain')
+            for table, key in [('base_automation_ir_model_fields_rel', 'trigger_fields'),
+                               ('base_automation_onchange_fields_rel', 'onchange_fields')]:
+                r[key] = sorted(x['ir_model_fields_id'] for x in tables.get(table, [])
+                                if x['base_automation_id'] == automation['id'])
     return result
 
 def main():
