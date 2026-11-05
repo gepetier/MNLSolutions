@@ -54,8 +54,7 @@ def prepare(rows):
     library = '\n\n'.join(group['source'] for group in groups.values())
     library += '\n\naction = {"helpers": {' + ', '.join(repr(name) + ': ' + name for name in groups) + '}}\n'
     loader = ("_mnl_helpers = env.ref('mnl.optimization_helpers').with_context(\n"
-              "    active_model='sale.order', active_id=False, active_ids=[], onchange_self=False\n"
-              ").run()['helpers']\n")
+              "    active_model='sale.order', active_id=False, active_ids=[], onchange_self=False).run()['helpers']\n")
     changes = []
     originals = {row['id']: row for row in active}
     for row in active:
