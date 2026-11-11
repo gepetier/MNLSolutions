@@ -15,6 +15,10 @@ Fonts de represa:
 - `02_Handoff_Codex_Odoo_MNL_Fase1.md`: decisions funcionals.
 - `TODO.md`: llista de feina; actualitzat el 14/10 amb els resultats de setembre; les comprovacions històriques conserven la seva data.
 
+## Actualització del 05/11/2026 — retirada de Python a principal
+
+A `mnl-technical-consultant` es van retirar els cossos de 26 accions i les fórmules de nou camps. El Count LoC oficial va baixar de 729 a 0. Els apartats del checkpoint del 14/10 descriuen l'estat anterior. Per reprendre el pressupostatge MNL, cal implementar els càlculs a l'app i validar-ne la sincronització. [Canvis exactes, validació i reversió](STUDIO_CODE_COST_20261105.md).
+
 ## Proper treball
 
 1. Configurar la nova màquina amb `DEVELOPMENT_SETUP.md` i comprovar en lectura la còpia de proves vigent.

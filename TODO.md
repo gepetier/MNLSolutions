@@ -20,6 +20,12 @@ El document `01` defineix l'estructura base. El document `02` conté decisions p
 - `[!] BLOQUEJAT`: necessita una decisió, accés o prova externa.
 - `[~] FORA D'ABAST`: ajornat expressament.
 
+## Actualització del 05/11/2026 — codi Studio facturable
+
+- [x] Retirat el Python facturable de `mnl-technical-consultant`. Count LoC oficial **729 → 0**. [Registre de la retirada i reversió](docs/STUDIO_CODE_COST_20261105.md).
+- [ ] Contrastar la factura amb la quota de manteniment de 0 € que ja mostra el portal.
+- [ ] Traslladar els càlculs MNL a l'app i validar la sincronització, els controls visibles i el PDF en una còpia. Les comprovacions de setembre més avall són històriques.
+
 ## 0. Decisions de prevalença entre els mestres
 
 - [x] **Adreça d'entrega al pressupost:** aplicar `02`. No hi haurà camp d'entrega/obra ni bloc `ENVIO` al pressupost o al seu PDF. La previsió contrària de `01` queda superada.

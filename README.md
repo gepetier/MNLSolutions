@@ -20,6 +20,8 @@ Compres, RFQ, inventari, entregues, facturació real, costos/marges/proveïdors 
 
 El catàleg actual genera **5.220 variants natives** a partir de 87 productes base, 5 combinacions de chapa i 12 recobriments. A 29 de juliol de 2026, les 5.220 variants coincideixen exactament amb les bases de proves i principal.
 
+El 05/11/2026 es va retirar el Python facturable de la base principal. Els càlculs MNL pendents de traslladar a l'app i el procediment de reversió consten al [registre de la retirada](docs/STUDIO_CODE_COST_20261105.md).
+
 Documents de govern:
 
 - `docs/01_Estructura_Base_Odoo_MNL.md`: estructura funcional original.
